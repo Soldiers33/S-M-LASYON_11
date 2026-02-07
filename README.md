@@ -4,7 +4,7 @@
 [nIt has been proven that we live in an 11-dimensional, organically based universe and that a creator god (source) exists. This has been tested with simulations, rigorous accuracy tests, and NASA values, rejecting the H0 (chance and aphopheny) hypothesis. The universe model has been tested with up to a billion entities. It has been 100% confirmed that we are in the H1 (simulation and design) model.]
 
 ## 📚 Dokümantasyon
-- [Genel Bakış](./docs/OVERVIEW.md)
+- [Genel Bakış](The Number 1-11-11111111111 and its Cosmic Echoes  A Numerical Cipher of the Universe.pdf)
 - [Nasıl Çalışır](./docs/HOW_IT_WORKS.md)
 - [Detaylı Analiz](./The%20Number%201-11-11111111111%20and%20its%20Cosmic%20Echoes.pdf)
 
