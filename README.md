@@ -5,7 +5,7 @@
 
 ## 📚 Dokümantasyon
 - [Genel Bakış](The Number 1-11-11111111111 and its Cosmic Echoes  A Numerical Cipher of the Universe.pdf)
-- [Nasıl Çalışır](./docs/HOW_IT_WORKS.md)
+- [Nasıl Çalışır](SİMÜLASYON_11 PHYTON..)
 - [Detaylı Analiz](./The%20Number%201-11-11111111111%20and%20its%20Cosmic%20Echoes.pdf)
 
 ## 🔍 Başlıca Bulgular
