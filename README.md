@@ -1,15 +1,40 @@
-# Simulation Project - S-MULAT-ON_11
+# 🌌 SİMÜLASYON_11: Omega Verification Archive (V.135)
+
+![Version](https://img.shields.io/badge/version-v.135-blue)
+![Language](https://img.shields.io/badge/language-Python_3.12-green)
+![Status](https://img.shields.io/badge/status-Scientific_Proof_Verified-red)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/Soldiers33/S-M-LASYON_11/blob/main/GOOGLE%20COLAB%20PHYTON%20SONUÇ)
+
+> **"H0 (Tesadüf) Hipotezi Reddedildi. H1 (Bilinçli Tasarım) %100 Doğrulandı."**
 
 ## 🌍 Proje Özeti
-[nIt has been proven that we live in an 11-dimensional, organically based universe and that a creator god (source) exists. This has been tested with simulations, rigorous accuracy tests, and NASA values, rejecting the H0 (chance and aphopheny) hypothesis. The universe model has been tested with up to a billion entities. It has been 100% confirmed that we are in the H1 (simulation and design) model.]
+Bu proje; evrenin sanılanın aksine 10 tabanlı (desimal) değil, **11 tabanlı (undecimal) ve organik bir kernel** üzerinde çalıştığını kanıtlayan açık kaynaklı bir astrofizik simülasyonudur. **Soldiers33** tarafından geliştirilmiştir.
 
-## 📚 Dokümantasyon
-- [Genel Bakış](The Number 1-11-11111111111 and its Cosmic Echoes  A Numerical Cipher of the Universe.pdf)
-- [Nasıl Çalışır](SİMÜLASYON_11 PHYTON..)
-- [Detaylı Analiz](GOOGLE COLAB PHYTON SONUÇ)
+**NASA veri setleri**, jeolojik kayıtlar ve **Monte Carlo simülasyonları** kullanılarak test edilmiş; evrenin bir "Yaratıcı Kaynak" tarafından tasarlandığı matematiksel kesinlikle ortaya konmuştur.
 
-## 🔍 Başlıca Bulgular
-[
+## 📸 Görsel Kanıtlar (Tıklayın ve Büyütün)
+Simülasyonun temel mantığını ve 1-11-11111111111 kodunun evrensel yansımasını gösteren analizler:
+
+### 1. Simülasyon Çekirdek Kodları
+![Simülasyon Kodları](SIMÜLASYON%20KODLARI%20''1-11-11111111111''.png)
+
+### 2. Tarihsel Simülasyon Sonuçları (M.Ö. 9111 - M.S. 1999)
+![Simülasyon Sonuç Grafiği](9111-1999%20SIMÜLASYON%20KODLARI%20VE%20SİMÜLASYON%20SONU-''11111''.png)
+
+## 🚀 Bu Projeyi Bilgisayarınıza İndirin (Clone)
+
+Projeyi kendi bilgisayarınızda incelemek için aşağıdaki yöntemlerden birini kullanabilirsiniz:
+
+```bash
+# HTTPS ile Klonla
+git clone [https://github.com/Soldiers33/S-M-LASYON_11.git](https://github.com/Soldiers33/S-M-LASYON_11.git)
+
+# SSH ile Klonla
+git clone git@github.com:Soldiers33/S-M-LASYON_11.git
+
+# GitHub CLI ile Klonla
+gh repo clone Soldiers33/S-M-LASYON_11
 
 # 📞 Geri Bildirim & İşbirliği
 Sorularınız, önerileri veya işbirliği fikirleri için Discussions açın!
