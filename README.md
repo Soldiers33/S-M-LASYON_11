@@ -3,8 +3,8 @@
 ![Version](https://img.shields.io/badge/version-v.135-blue)
 ![Language](https://img.shields.io/badge/language-Python_3.12-green)
 ![Status](https://img.shields.io/badge/status-Scientific_Proof_Verified-red)
-![License](https://img.shields.io/badge/license-MIT-lightgrey)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/Soldiers33/S-M-LASYON_11/blob/main/GOOGLE%20COLAB%20PHYTON%20SONUÇ)
+![License](https://img.shields.io/badge/license-Dual_License-orange)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/Soldiers33/S-M-LASYON_11/blob/main/GOOGLE%20COLAB%20PYTHON%20RESULTS%20TXT.)
 
 > **"H0 (Tesadüf) Hipotezi Reddedildi. H1 (Bilinçli Tasarım) %100 Doğrulandı."**
 
@@ -36,7 +36,7 @@ Projeyi indirmek için terminale şu komutu yazmanız yeterlidir:
 
 Kodları indirmeden, Google Colab çıktılarını ve analiz sonuçlarını canlı görmek için butona tıklayın:
 
-[![Analiz Sonuçlarını Gör](https://img.shields.io/badge/Analiz_Sonuçları-Tıkla_ve_Gör-orange)](https://github.com/Soldiers33/S-M-LASYON_11/blob/main/GOOGLE%20COLAB%20PHYTON%20SONUÇ)
+[![Analiz Sonuçlarını Gör](https://img.shields.io/badge/Analiz_Sonuçları-Tıkla_ve_Gör-orange)](https://github.com/Soldiers33/S-M-LASYON_11/blob/main/GOOGLE%20COLAB%20PYTHON%20RESULTS%20TXT.)
 
 ### Yöntem 2: Kendi Bilgisayarınızda Çalıştır
 
@@ -50,18 +50,32 @@ Aşağıdaki Python dosyasını indirip terminalde çalıştırabilirsiniz. Kodu
 ## 📚 Dokümantasyon (Teori ve Makaleler)
 
 Teorinin arkasındaki bilimsel ve felsefi altyapıyı anlamak için aşağıdaki raporlara tıklayarak okuyabilirsiniz.
-*(Not: Dosyalar PDF formatındadır, tıklayınca açılır)*:
+*(Not: Linkler güncellenmiş dosya isimlerine göre ayarlanmıştır)*:
 
-* 🇹🇷 **Ana Teori (Türkçe):** [1-11-11111111111 Sayısı ve Kozmik Yankıları: Evrenin Sayısal Şifresi.pdf](1-11-11111111111%20Sayısı%20ve%20Kozmik%20Yankıları:%20Evrenin%20Sayısal%20Şifresi.pdf)
-* 🇬🇧 **English Report:** [SMILASYON-5 İNGİ.pdf](SMILASYON-5%20İNGİ.pdf)
-* 🌑 **Ay Analizi:** [AYIN GELİŞİ PDFF.pdf](AYIN%20GELİŞİ%20PDFF.pdf)
-* 🧬 **Canvas Detay:** [CANVAS 11-TOLU PDF.pdf](CANVAS%2011-TOLU%20PDF.pdf)
-* ☄️ **Halley Döngüsü:** [halley periyod.docx](halley%20periyod.docx)
+* 📄 **Ana Teori (Original):** [the_number_1_11.pdf](the_number_1_11.pdf)
+* 🇬🇧 **English Report:** [simulation_v5_english.pdf](simulation_v5_english.pdf)
+* 📊 **Detaylı Analiz Çıktısı (TXT):** [GOOGLE COLAB PYTHON RESULTS](GOOGLE%20COLAB%20PYTHON%20RESULTS%20TXT.)
 
-## ⚖️ Lisans
+## ⚖️ Yasal Uyarı ve Lisans (Legal Notice & License)
 
-Bu proje **MIT Lisansı** ile lisanslanmıştır.
-Detaylar için [LİSANS](LİSANS) dosyasına bakabilirsiniz. Açık kaynaklıdır, atıf yapılarak kullanılabilir ve geliştirilebilir.
+Bu proje **Çift Lisans (Dual License)** yapısına sahiptir. Kullanım hakları aşağıdaki gibidir:
+
+### 1. Yazılım ve Kodlar (Software)
+Projenin Python kodları (.py) ve scriptleri **GNU GPL v3.0** lisansı altındadır.
+* ✅ Kodları inceleyebilir, geliştirebilir ve değiştirebilirsiniz.
+* ⚠️ Ancak bu kodları kullanarak yaptığınız dağıtımları da açık kaynak yapmak zorundasınız.
+
+### 2. Teorik Eserler ve Dokümanlar (Documents & Theory)
+PDF raporlar, Word belgeleri, görseller, teorik metinler ve "1-11-11111111111" teorisi **Creative Commons** lisansı ile korunmaktadır.
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">The Number 1-11-11111111111 and its Cosmic Echoes: A Numerical Cipher of the Universe</span> © 2025 by <a xmlns:cc="http://creativecommons.org/ns#" href="https://x.com/Decoder_11" property="cc:attributionName" rel="cc:attributionURL">Hüseyin Avcı</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+
+* ❌ **Ticari Kullanım Yasaktır:** Bu teoriyi veya belgeleri ticari bir üründe satamazsınız.
+* ❌ **Türev Eser Yasaktır:** PDF içeriklerini değiştiremez, kesip biçerek başka bir eser oluşturamazsınız.
+* ✅ **Atıf Zorunludur:** Her kullanımda yazar **Hüseyin Avcı**'ya atıf yapılmalıdır.
+
+📜 **Resmi Kayıt (viXra):** [http://ai.viXra.org/abs/2506.0051](http://ai.viXra.org/abs/2506.0051)
 
 ## 🤝 İletişim ve Katkı
 
