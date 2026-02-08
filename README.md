@@ -13,28 +13,19 @@ Bu proje; evrenin sanılanın aksine 10 tabanlı (desimal) değil, **11 tabanlı
 
 **NASA veri setleri**, jeolojik kayıtlar ve **Monte Carlo simülasyonları** kullanılarak test edilmiş; evrenin bir "Yaratıcı Kaynak" tarafından tasarlandığı matematiksel kesinlikle ortaya konmuştur.
 
-## 📸 Görsel Kanıtlar (Tıklayın ve Büyütün)
+## 📸 Görsel Kanıtlar
 Simülasyonun temel mantığını ve 1-11-11111111111 kodunun evrensel yansımasını gösteren analizler:
 
 ### 1. Simülasyon Çekirdek Kodları
-![Simülasyon Kodları](SIMÜLASYON%20KODLARI%20''1-11-11111111111''.png)
+![Simülasyon Kodları](simulasyon_kodlari.png)
 
 ### 2. Tarihsel Simülasyon Sonuçları (M.Ö. 9111 - M.S. 1999)
-![Simülasyon Sonuç Grafiği](9111-1999%20SIMÜLASYON%20KODLARI%20VE%20SİMÜLASYON%20SONU-''11111''.png)
+![Simülasyon Sonuç Grafiği](simulasyon_sonuc.png)
 
 ## 🚀 Bu Projeyi Bilgisayarınıza İndirin (Clone)
 
-Projeyi kendi bilgisayarınızda incelemek için aşağıdaki yöntemlerden birini kullanabilirsiniz:
-
 ```bash
-# HTTPS ile Klonla
 git clone [https://github.com/Soldiers33/S-M-LASYON_11.git](https://github.com/Soldiers33/S-M-LASYON_11.git)
-
-# SSH ile Klonla
-git clone git@github.com:Soldiers33/S-M-LASYON_11.git
-
-# GitHub CLI ile Klonla
-gh repo clone Soldiers33/S-M-LASYON_11
 
 # 📞 Geri Bildirim & İşbirliği
 Sorularınız, önerileri veya işbirliği fikirleri için Discussions açın!
