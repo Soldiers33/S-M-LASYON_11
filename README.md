@@ -63,6 +63,7 @@ This project operates under a **Dual License** structure. Please read carefully.
 The Python codes, algorithms, and simulation scripts used in this repository are licensed under **GNU GPL v3.0**.
 * ✅ **Allowed:** You may study, run, and modify the code for educational/scientific purposes.
 * ⚠️ **Requirement:** If you distribute a modified version, it MUST also be open-source under GPL. Proprietary closing of this code is strictly prohibited.
+* 🛡️ **Attribution Mandatory:** You CANNOT remove the original copyright notices. Any fork, modification, or usage MUST clearly credit **Hüseyin Avcı** as the original author.
 
 ### 2. Theoretical Works & PDF Documents (CC BY-NC-ND 4.0)
 **WARNING:** All PDF reports, theoretical texts, images, and the specific discovery of the "1-11-11111111111 Cosmic Cipher" are protected by international copyright laws.
