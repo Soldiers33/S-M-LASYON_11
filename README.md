@@ -1,88 +1,88 @@
-# 🌌 SİMÜLASYON_11: Omega Verification Archive (V.135)
+# 🌌 SIMULATION_11: Omega Verification Archive (V.135)
 
 ![Version](https://img.shields.io/badge/version-v.135-blue)
 ![Language](https://img.shields.io/badge/language-Python_3.12-green)
 ![Status](https://img.shields.io/badge/status-Scientific_Proof_Verified-red)
 ![License](https://img.shields.io/badge/license-Dual_License-orange)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/Soldiers33/S-M-LASYON_11/blob/main/GOOGLE%20COLAB%20PYTHON%20RESULTS%20TXT.)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/Soldiers33/S-M-LASYON_11/blob/main/results.txt)
 
-> **"H0 (Tesadüf) Hipotezi Reddedildi. H1 (Bilinçli Tasarım) %100 Doğrulandı."**
+> **"H0 (Coincidence) Hypothesis Rejected. H1 (Conscious Design) Verified 100%."**
 
-## 🌍 Proje Özeti
+## 🌍 Project Summary
 
-Bu proje; evrenin sanılanın aksine 10 tabanlı (desimal) değil, **11 tabanlı (undecimal) ve organik bir kernel** üzerinde çalıştığını kanıtlayan açık kaynaklı bir astrofizik simülasyonudur. **Soldiers33** tarafından geliştirilmiştir.
+This project is an open-source astrophysical simulation proving that the universe operates not on a decimal (base-10) system, but on an **11-based (undecimal) organic kernel**. Developed by **Soldiers33**.
 
-**NASA veri setleri**, jeolojik kayıtlar ve **Monte Carlo simülasyonları** kullanılarak test edilmiş; evrenin bir "Yaratıcı Kaynak" tarafından tasarlandığı matematiksel kesinlikle (p < 0.0001) ortaya konmuştur.
+Tested using **NASA datasets**, geological records, and **Monte Carlo simulations**, it mathematically demonstrates (p < 0.0001) that the universe is designed by a "Creative Source".
 
-## 📸 Görsel Kanıtlar
+## 📸 Visual Proofs
 
-Simülasyonun temel mantığını ve 1-11-11111111111 kodunun evrensel yansımasını gösteren analizler:
+Analysis showing the simulation's core logic and the universal reflection of the code 1-11-11111111111:
 
-### 1. Simülasyon Çekirdek Kodları ve Matris
-![Simülasyon Kodları](simulasyon_kodlari.png)
+### 1. Simulation Core Codes & Matrix
+![Simulation Codes](simulasyon_kodlari.png)
 
-### 2. Tarihsel Simülasyon Sonuçları (M.Ö. 9111 - M.S. 1999)
-![Simülasyon Sonuç Grafiği](simulasyon_sonuc.png)
+### 2. Historical Simulation Results (9111 BC - 1999 AD)
+![Simulation Results](simulasyon_sonuc.png)
 
-## 🚀 Bu Projeyi Bilgisayarınıza İndirin (Clone)
+## 🚀 Clone This Project
 
-Projeyi indirmek için terminale şu komutu yazmanız yeterlidir:
+To download the project to your computer, simply run the following command in your terminal:
 
 `git clone https://github.com/Soldiers33/S-M-LASYON_11.git`
 
-## 💻 Kodu Çalıştırma (Tıkla ve Gör)
+## 💻 How to Run the Code (Click & View)
 
-### Yöntem 1: Tarayıcıda Analiz Sonuçlarını Gör (Kurulumsuz)
+### Method 1: View Analysis Results (No Installation)
 
-Kodları indirmeden, Google Colab çıktılarını ve analiz sonuçlarını canlı görmek için butona tıklayın:
+Click the button below to see the live Google Colab analysis output without downloading codes:
 
-[![Analiz Sonuçlarını Gör](https://img.shields.io/badge/Analiz_Sonuçları-Tıkla_ve_Gör-orange)](https://github.com/Soldiers33/S-M-LASYON_11/blob/main/GOOGLE%20COLAB%20PYTHON%20RESULTS%20TXT.)
+[![View Analysis Results](https://img.shields.io/badge/View_Analysis-Click_Here-orange)](https://github.com/Soldiers33/S-M-LASYON_11/blob/main/results.txt)
 
-### Yöntem 2: Kendi Bilgisayarınızda Çalıştır
+### Method 2: Run Locally
 
-Aşağıdaki Python dosyasını indirip terminalde çalıştırabilirsiniz. Kodun içeriğini görmek için linke tıklayabilirsiniz:
+You can download the Python file below and run it in your terminal:
 
-* 🐍 **Kaynak Kod:** [simulasyon_11.py](simulasyon_11.py)
+* 🐍 **Source Code:** [simulasyon_11.py](simulasyon_11.py)
 
-**Çalıştırma Komutu:**
+**Run Command:**
 `python simulasyon_11.py`
 
-## 📚 Dokümantasyon (Teori ve Makaleler)
+## 📚 Documentation (Theory & Reports)
 
-Teorinin arkasındaki bilimsel ve felsefi altyapıyı anlamak için aşağıdaki raporlara tıklayarak okuyabilirsiniz.
-*(Not: Linkler güncellenmiş dosya isimlerine göre ayarlanmıştır)*:
+Read the detailed scientific and philosophical background of the theory via the reports below:
 
-* 📄 **Ana Teori (Original):** [the_number_1_11.pdf](the_number_1_11.pdf)
+* 📄 **Main Theory (Original):** [the_number_1_11.pdf](the_number_1_11.pdf)
 * 🇬🇧 **English Report:** [simulation_v5_english.pdf](simulation_v5_english.pdf)
-* 📊 **Detaylı Analiz Çıktısı (TXT):** [GOOGLE COLAB PYTHON RESULTS](GOOGLE%20COLAB%20PYTHON%20RESULTS%20TXT.)
+* 📊 **Detailed Analysis Output (TXT):** [Full Analysis Results](results.txt)
 
-## ⚖️ Yasal Uyarı ve Lisans (Legal Notice & License)
+## ⚖️ LEGAL NOTICE & LICENSE (STRICT WARNING)
 
-Bu proje **Çift Lisans (Dual License)** yapısına sahiptir. Kullanım hakları aşağıdaki gibidir:
+This project operates under a **Dual License** structure. Please read carefully.
 
-### 1. Yazılım ve Kodlar (Software)
-Projenin Python kodları (.py) ve scriptleri **GNU GPL v3.0** lisansı altındadır.
-* ✅ Kodları inceleyebilir, geliştirebilir ve değiştirebilirsiniz.
-* ⚠️ Ancak bu kodları kullanarak yaptığınız dağıtımları da açık kaynak yapmak zorundasınız.
+### 1. Software & Codes (GNU GPL v3.0)
+The Python codes, algorithms, and simulation scripts used in this repository are licensed under **GNU GPL v3.0**.
+* ✅ **Allowed:** You may study, run, and modify the code for educational/scientific purposes.
+* ⚠️ **Requirement:** If you distribute a modified version, it MUST also be open-source under GPL. Proprietary closing of this code is strictly prohibited.
 
-### 2. Teorik Eserler ve Dokümanlar (Documents & Theory)
-PDF raporlar, Word belgeleri, görseller, teorik metinler ve "1-11-11111111111" teorisi **Creative Commons** lisansı ile korunmaktadır.
+### 2. Theoretical Works & PDF Documents (CC BY-NC-ND 4.0)
+**WARNING:** All PDF reports, theoretical texts, images, and the specific discovery of the "1-11-11111111111 Cosmic Cipher" are protected by international copyright laws.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />
 <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">The Number 1-11-11111111111 and its Cosmic Echoes: A Numerical Cipher of the Universe</span> © 2025 by <a xmlns:cc="http://creativecommons.org/ns#" href="https://x.com/Decoder_11" property="cc:attributionName" rel="cc:attributionURL">Hüseyin Avcı</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
 
-* ❌ **Ticari Kullanım Yasaktır:** Bu teoriyi veya belgeleri ticari bir üründe satamazsınız.
-* ❌ **Türev Eser Yasaktır:** PDF içeriklerini değiştiremez, kesip biçerek başka bir eser oluşturamazsınız.
-* ✅ **Atıf Zorunludur:** Her kullanımda yazar **Hüseyin Avcı**'ya atıf yapılmalıdır.
+**Strict Prohibitions:**
+* ❌ **Commercial Use Prohibited:** You CANNOT sell this theory, documents, or any part of this repository in a commercial product, book, or service.
+* ❌ **No Derivatives:** You CANNOT alter, remix, transform, or build upon the PDF contents. The theory must be presented as is.
+* ✅ **Attribution Required:** In every use or reference, Author **Hüseyin Avcı** must be clearly credited with a link to the original source.
 
-📜 **Resmi Kayıt (viXra):** [http://ai.viXra.org/abs/2506.0051](http://ai.viXra.org/abs/2506.0051)
+📜 **Official Scientific Registry (viXra):** [http://ai.viXra.org/abs/2506.0051](http://ai.viXra.org/abs/2506.0051)
 
-## 🤝 İletişim ve Katkı
+## 🤝 Contact & Contribution
 
-Bu çalışma, insanlık tarihi için bir "açık çağrı" niteliğindedir.
+This work is an "open call" for human history.
 
-* **Tartışma:** Bir fikriniz mi var? GitHub üzerindeki **Discussions** sekmesini kullanın.
-* **İletişim:** Soldiers33
+* **Discussion:** Have an idea? Use the **Discussions** tab.
+* **Contact:** Soldiers33
 
 ---
 *Created by the Architect using Simule3 Engine.*
