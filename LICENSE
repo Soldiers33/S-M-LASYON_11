@@ -1,4 +1,24 @@
-                    GNU GENERAL PUBLIC LICENSE
+========================================================================
+DUAL LICENSE NOTIFICATION (Hüseyin Avcı - Simulation_11)
+========================================================================
+
+This repository is protected under a DUAL LICENSE structure:
+
+1. SOFTWARE & CODE (e.g., .py files, scripts):
+   Licensed under GNU General Public License v3.0 (GPLv3).
+   See the standard GPL text below.
+   * Requirement: You must keep the author's name (Hüseyin Avcı) and open-source any modifications.
+
+2. THEORY, PDF REPORTS, AND IMAGES (e.g., .pdf, .docx, .png):
+   Licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 (CC BY-NC-ND 4.0).
+   * PROHIBITION: You CANNOT use the theory or documents for commercial purposes.
+   * PROHIBITION: You CANNOT modify, alter, or build upon the PDF contents.
+   * REQUIREMENT: Author attribution (Hüseyin Avcı) is mandatory.
+
+========================================================================
+STANDARD GNU GPL v3 TEXT FOLLOWS BELOW:
+========================================================================
+GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
