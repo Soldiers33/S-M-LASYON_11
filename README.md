@@ -101,4 +101,4 @@ This work is an "open call" for human history.
 * **Contact:** Soldiers33
 
 ---
-*Created by the Architect using Simule3 Engine.*
+*Created by the OBSERVER using Simule3 Engine.*
