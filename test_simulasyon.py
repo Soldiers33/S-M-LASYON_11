@@ -1,5 +1,6 @@
 import unittest
 import sys
+import os
 from unittest.mock import MagicMock
 
 # --- MOCKING DEPENDENCIES BEFORE IMPORT ---
@@ -38,13 +39,12 @@ mock_stats.ttest_1samp.return_value = (1.5, 0.05)
 sys.modules['scipy'] = mock_scipy
 sys.modules['scipy.stats'] = mock_stats
 
+# Ensure the current directory is in sys.path to find simulasyon_11.py
+if os.getcwd() not in sys.path:
+    sys.path.append(os.getcwd())
+
 # Now import the module under test
-try:
-    import simulasyon_11
-except ImportError as e:
-    # If import fails due to other missing deps, fail the test setup
-    print(f"Failed to import simulasyon_11: {e}")
-    sys.exit(1)
+import simulasyon_11
 
 class TestSimulasyon(unittest.TestCase):
 
