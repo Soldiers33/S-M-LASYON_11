@@ -1,4 +1,20 @@
+import os
+import sys
+import unittest
+from unittest.mock import MagicMock
 
+def setup_and_run():
+    print("--- Test Ortamı Hazırlanıyor ---")
+
+    # Check if simulasyon_11.py exists
+    if not os.path.exists("simulasyon_11.py"):
+        print("\n[HATA] 'simulasyon_11.py' dosyası bulunamadı!")
+        print("Lütfen 'simulasyon_11.py' dosyasını bu kodun çalıştığı dizine yükleyin veya kopyalayın.")
+        print("Dizindeki dosyalar: ", os.listdir("."))
+        return
+
+    # Create/Overwrite test_simulasyon.py with the robust content
+    test_content = """
 import unittest
 import sys
 import os
@@ -79,3 +95,18 @@ class TestSimulasyon(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main(argv=['first-arg-is-ignored'], exit=False)
+"""
+
+    with open("test_simulasyon.py", "w") as f:
+        f.write(test_content)
+
+    print("test_simulasyon.py oluşturuldu/güncellendi.")
+    print("\n--- Testler Başlatılıyor ---\n")
+
+    # Run the test file
+    # Instead of subprocess, we can import it directly if we want, or execute it via python
+    # Executing via python is safer to reset context
+    os.system("python3 test_simulasyon.py")
+
+if __name__ == "__main__":
+    setup_and_run()
