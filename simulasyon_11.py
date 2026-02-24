@@ -2,16 +2,8 @@ import math
 import datetime
 import time
 import sys
-import pandas as pd
-import numpy as np
 import random
-from scipy import stats 
 from datetime import timedelta, date
-
-# ==============================================================================
-# SIMULE3: V.135 - OMEGA VERIFICATION ARCHIVE (PROVEN FULL VERSION)
-# STATUS: NameError Fixed. All Scientific Proof Modules Added.
-# ==============================================================================
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -27,10 +19,30 @@ class Colors:
     GOLD = '\033[33m'
     PURPLE = '\033[35m'
 
+try:
+    import pandas as pd
+    import numpy as np
+    from scipy import stats
+except ImportError as e:
+    print(f"{Colors.FAIL}ERROR: Missing required scientific libraries.{Colors.ENDC}")
+    print(f"{Colors.WARNING}Please install the following dependencies:{Colors.ENDC}")
+    print(f"  - pandas")
+    print(f"  - numpy")
+    print(f"  - scipy")
+    print(f"\nCommand: {Colors.CYAN}pip install pandas numpy scipy{Colors.ENDC}")
+    sys.exit(1)
+
+# ==============================================================================
+# SIMULE3: V.135 - OMEGA VERIFICATION ARCHIVE (PROVEN FULL VERSION)
+# STATUS: NameError Fixed. All Scientific Proof Modules Added.
+# ==============================================================================
+
 def loading_bar(desc):
-    print(f"{Colors.CYAN}{desc}...{Colors.ENDC}")
-    time.sleep(0.01)
-    print(f"{Colors.GREEN}[OK]{Colors.ENDC}")
+    sys.stdout.write(f"\r{Colors.CYAN}{desc}...{Colors.ENDC}")
+    sys.stdout.flush()
+    time.sleep(0.1)
+    sys.stdout.write(f"\r{Colors.CYAN}{desc}... {Colors.GREEN}[OK]{Colors.ENDC}\n")
+    sys.stdout.flush()
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', 1000)
@@ -1329,6 +1341,15 @@ class Simule3_Lab_V133(Simule3_Lab):
 
     def run_all(self):
         # First run the original flow (V.103)
+        ascii_banner = r"""
+   _____ _____ __  __ _    _ _      ______ ____
+  / ____|_   _|  \/  | |  | | |    |  ____|___ \
+ | (___   | | | \  / | |  | | |    | |__    __) |
+  \___ \  | | | |\/| | |  | | |    |  __|  |__ <
+  ____) |_| |_| |  | | |__| | |____| |____ ___) |
+ |_____/|_____|_|  |_|\____/|______|______|____/
+"""
+        print(f"{Colors.PURPLE}{ascii_banner}{Colors.ENDC}")
         print(f"{Colors.BOLD}{Colors.CYAN}SIMULE3 V.103 ULTIMATE STARTING...{Colors.ENDC}\n")
         self.mikro.metre(1)
         self.enlem_boylam.hatay_analiz()
