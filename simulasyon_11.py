@@ -2,16 +2,8 @@ import math
 import datetime
 import time
 import sys
-import pandas as pd
-import numpy as np
 import random
-from scipy import stats 
 from datetime import timedelta, date
-
-# ==============================================================================
-# SIMULE3: V.135 - OMEGA VERIFICATION ARCHIVE (PROVEN FULL VERSION)
-# STATUS: NameError Fixed. All Scientific Proof Modules Added.
-# ==============================================================================
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -26,6 +18,21 @@ class Colors:
     RED = '\033[91m'
     GOLD = '\033[33m'
     PURPLE = '\033[35m'
+
+try:
+    import pandas as pd
+    import numpy as np
+    from scipy import stats
+except ImportError:
+    print(f"{Colors.FAIL}CRITICAL ERROR: Missing Scientific Libraries!{Colors.ENDC}")
+    print(f"{Colors.WARNING}This simulation requires pandas, numpy, and scipy.{Colors.ENDC}")
+    print(f"Please run: {Colors.GREEN}pip install pandas numpy scipy{Colors.ENDC}")
+    sys.exit(1)
+
+# ==============================================================================
+# SIMULE3: V.135 - OMEGA VERIFICATION ARCHIVE (PROVEN FULL VERSION)
+# STATUS: NameError Fixed. All Scientific Proof Modules Added.
+# ==============================================================================
 
 def loading_bar(desc):
     print(f"{Colors.CYAN}{desc}...{Colors.ENDC}")
