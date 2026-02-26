@@ -2,16 +2,8 @@ import math
 import datetime
 import time
 import sys
-import pandas as pd
-import numpy as np
 import random
-from scipy import stats 
 from datetime import timedelta, date
-
-# ==============================================================================
-# SIMULE3: V.135 - OMEGA VERIFICATION ARCHIVE (PROVEN FULL VERSION)
-# STATUS: NameError Fixed. All Scientific Proof Modules Added.
-# ==============================================================================
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -26,6 +18,25 @@ class Colors:
     RED = '\033[91m'
     GOLD = '\033[33m'
     PURPLE = '\033[35m'
+
+try:
+    import pandas as pd
+    import numpy as np
+    from scipy import stats
+except ImportError:
+    print(f"\n{Colors.FAIL}{Colors.BOLD}MISSING DEPENDENCIES ERROR{Colors.ENDC}")
+    print(f"{Colors.FAIL}--------------------------------------------------{Colors.ENDC}")
+    print(f"It looks like some required libraries are missing.")
+    print(f"The simulation needs {Colors.BOLD}pandas{Colors.ENDC}, {Colors.BOLD}numpy{Colors.ENDC}, and {Colors.BOLD}scipy{Colors.ENDC} to run.\n")
+    print(f"{Colors.CYAN}To install them, run this command in your terminal:{Colors.ENDC}")
+    print(f"{Colors.BOLD}pip install -r requirements.txt{Colors.ENDC}")
+    print(f"\n{Colors.FAIL}--------------------------------------------------{Colors.ENDC}\n")
+    sys.exit(1)
+
+# ==============================================================================
+# SIMULE3: V.135 - OMEGA VERIFICATION ARCHIVE (PROVEN FULL VERSION)
+# STATUS: NameError Fixed. All Scientific Proof Modules Added.
+# ==============================================================================
 
 def loading_bar(desc):
     print(f"{Colors.CYAN}{desc}...{Colors.ENDC}")
