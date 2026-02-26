@@ -32,9 +32,6 @@ def loading_bar(desc):
     time.sleep(0.01)
     print(f"{Colors.GREEN}[OK]{Colors.ENDC}")
 
-pd.set_option('display.max_columns', None)
-pd.set_option('display.width', 1000)
-pd.set_option('display.colheader_justify', 'left')
 
 # ------------------------------------------------------------------------------
 # 1. UNIVERSAL CONSTANTS (FULL SET + STATISTICS PARAMETERS)
@@ -1388,5 +1385,9 @@ class Simule3_Lab_V133(Simule3_Lab):
 
 # LAUNCH
 if __name__ == "__main__":
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.width', 1000)
+    pd.set_option('display.colheader_justify', 'left')
+
     lab = Simule3_Lab_V133()
     lab.run_all()
