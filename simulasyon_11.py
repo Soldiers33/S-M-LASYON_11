@@ -35,9 +35,14 @@ except ImportError:
 # ==============================================================================
 
 def loading_bar(desc):
-    print(f"{Colors.CYAN}{desc}...{Colors.ENDC}")
-    time.sleep(0.01)
-    print(f"{Colors.GREEN}[OK]{Colors.ENDC}")
+    print(f"{Colors.CYAN}{desc}{Colors.ENDC}")
+    total = 20
+    for i in range(total + 1):
+        time.sleep(0.02)
+        percent = int(100 * (i / total))
+        bar = '█' * i + '-' * (total - i)
+        print(f"\r{Colors.CYAN}|{bar}| {percent}%{Colors.ENDC}", end="", flush=True)
+    print(f" {Colors.GREEN}[OK]{Colors.ENDC}")
 
 
 # ------------------------------------------------------------------------------
