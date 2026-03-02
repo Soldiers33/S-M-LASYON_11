@@ -1,0 +1,223 @@
+{
+  "system_info": {
+    "active_date": "2026-03-02",
+    "current_phase": "PREPARATION",
+    "data_points_collected": 13,
+    "alerts_generated": 1
+  },
+  "baseline_metrics": {
+    "world_population": 8200000000,
+    "global_gdp_usd": 104200000000000,
+    "average_life_expectancy": 73.4,
+    "global_birth_rate": 17.7,
+    "global_death_rate": 8.2,
+    "global_fertility_rate": 2.3,
+    "pandemic_risk_index": 0.35,
+    "regional_conflict_count": 52,
+    "climate_temp_rise": 1.1,
+    "air_quality_index_avg": 78
+  },
+  "monthly_data": [
+    {
+      "date": "2026-01",
+      "population_estimated": 8200000000,
+      "death_rate_per_1000": 8.2,
+      "fertility_rate": 2.3,
+      "life_expectancy": 73.4,
+      "pandemic_index": 0.35,
+      "active_conflicts": 52,
+      "gdp_growth_percent": 2.5,
+      "avg_temp_anomaly": 1.1,
+      "data_quality_score": 0.95
+    },
+    {
+      "date": "2026-02",
+      "population_estimated": 8200000000,
+      "death_rate_per_1000": 8.2,
+      "fertility_rate": 2.3,
+      "life_expectancy": 73.4,
+      "pandemic_index": 0.35,
+      "active_conflicts": 52,
+      "gdp_growth_percent": 2.5,
+      "avg_temp_anomaly": 1.1,
+      "data_quality_score": 0.95
+    },
+    {
+      "date": "2026-03",
+      "population_estimated": 8200000000,
+      "death_rate_per_1000": 8.2,
+      "fertility_rate": 2.3,
+      "life_expectancy": 73.4,
+      "pandemic_index": 0.35,
+      "active_conflicts": 52,
+      "gdp_growth_percent": 2.5,
+      "avg_temp_anomaly": 1.1,
+      "data_quality_score": 0.95
+    },
+    {
+      "date": "2026-04",
+      "population_estimated": 8200000000,
+      "death_rate_per_1000": 8.2,
+      "fertility_rate": 2.3,
+      "life_expectancy": 73.4,
+      "pandemic_index": 0.35,
+      "active_conflicts": 52,
+      "gdp_growth_percent": 2.5,
+      "avg_temp_anomaly": 1.1,
+      "data_quality_score": 0.95
+    },
+    {
+      "date": "2026-05",
+      "population_estimated": 8200000000,
+      "death_rate_per_1000": 8.2,
+      "fertility_rate": 2.3,
+      "life_expectancy": 73.4,
+      "pandemic_index": 0.35,
+      "active_conflicts": 52,
+      "gdp_growth_percent": 2.5,
+      "avg_temp_anomaly": 1.1,
+      "data_quality_score": 0.95
+    },
+    {
+      "date": "2026-06",
+      "population_estimated": 8200000000,
+      "death_rate_per_1000": 8.2,
+      "fertility_rate": 2.3,
+      "life_expectancy": 73.4,
+      "pandemic_index": 0.35,
+      "active_conflicts": 52,
+      "gdp_growth_percent": 2.5,
+      "avg_temp_anomaly": 1.1,
+      "data_quality_score": 0.95
+    },
+    {
+      "date": "2026-07",
+      "population_estimated": 8200000000,
+      "death_rate_per_1000": 8.2,
+      "fertility_rate": 2.3,
+      "life_expectancy": 73.4,
+      "pandemic_index": 0.35,
+      "active_conflicts": 52,
+      "gdp_growth_percent": 2.5,
+      "avg_temp_anomaly": 1.1,
+      "data_quality_score": 0.95
+    },
+    {
+      "date": "2026-08",
+      "population_estimated": 8200000000,
+      "death_rate_per_1000": 8.2,
+      "fertility_rate": 2.3,
+      "life_expectancy": 73.4,
+      "pandemic_index": 0.35,
+      "active_conflicts": 52,
+      "gdp_growth_percent": 2.5,
+      "avg_temp_anomaly": 1.1,
+      "data_quality_score": 0.95
+    },
+    {
+      "date": "2026-09",
+      "population_estimated": 8200000000,
+      "death_rate_per_1000": 8.2,
+      "fertility_rate": 2.3,
+      "life_expectancy": 73.4,
+      "pandemic_index": 0.35,
+      "active_conflicts": 52,
+      "gdp_growth_percent": 2.5,
+      "avg_temp_anomaly": 1.1,
+      "data_quality_score": 0.95
+    },
+    {
+      "date": "2026-10",
+      "population_estimated": 8200000000,
+      "death_rate_per_1000": 8.2,
+      "fertility_rate": 2.3,
+      "life_expectancy": 73.4,
+      "pandemic_index": 0.35,
+      "active_conflicts": 52,
+      "gdp_growth_percent": 2.5,
+      "avg_temp_anomaly": 1.1,
+      "data_quality_score": 0.95
+    },
+    {
+      "date": "2026-11",
+      "population_estimated": 8200000000,
+      "death_rate_per_1000": 8.2,
+      "fertility_rate": 2.3,
+      "life_expectancy": 73.4,
+      "pandemic_index": 0.35,
+      "active_conflicts": 52,
+      "gdp_growth_percent": 2.5,
+      "avg_temp_anomaly": 1.1,
+      "data_quality_score": 0.95
+    },
+    {
+      "date": "2026-12",
+      "population_estimated": 8200000000,
+      "death_rate_per_1000": 8.2,
+      "fertility_rate": 2.3,
+      "life_expectancy": 73.4,
+      "pandemic_index": 0.35,
+      "active_conflicts": 52,
+      "gdp_growth_percent": 2.5,
+      "avg_temp_anomaly": 1.1,
+      "data_quality_score": 0.95
+    },
+    {
+      "date": "2033-01-01",
+      "population_estimated": 8185000000,
+      "death_rate_per_1000": 12.5,
+      "fertility_rate": 2.1,
+      "life_expectancy": 72.8,
+      "pandemic_index": 0.65,
+      "active_conflicts": 68,
+      "gdp_growth_percent": -2.1,
+      "avg_temp_anomaly": 1.3,
+      "data_quality_score": 0.92
+    }
+  ],
+  "alerts": [
+    {
+      "detected_date": "2033-01-01",
+      "metric_name": "population_annual_loss",
+      "current_value": 180000000.0,
+      "threshold_value": 50000000,
+      "severity": "CRITICAL",
+      "deviation_percent": 260.0,
+      "confidence": 0.85,
+      "description": "Projected annual loss: 180,000,000",
+      "phase_prediction": "EARLY_CRISIS or CRISIS_PEAK",
+      "recommendation": "Activate national emergency protocols"
+    }
+  ],
+  "latest_report": {
+    "report_date": "2026-03-02",
+    "phase_name": "EARLY_CRISIS",
+    "phase_expected_duration": "2033-2035",
+    "anomalies_detected": [
+      {
+        "detected_date": "2033-01-01",
+        "metric_name": "population_annual_loss",
+        "current_value": 180000000.0,
+        "threshold_value": 50000000,
+        "severity": "CRITICAL",
+        "deviation_percent": 260.0,
+        "confidence": 0.85,
+        "description": "Projected annual loss: 180,000,000",
+        "phase_prediction": "EARLY_CRISIS or CRISIS_PEAK",
+        "recommendation": "Activate national emergency protocols"
+      }
+    ],
+    "overall_risk_score": 0.65,
+    "phase_probability": 0.6,
+    "data_confidence": 0.92,
+    "next_milestone_date": "2033-01-01",
+    "recommended_actions": [
+      "🚨 1 CRITICAL ALERTS DETECTED",
+      "Maintain continuous data collection from WHO, UN, World Bank",
+      "Monitor real-time population statistics monthly",
+      "Flag any CRITICAL alerts immediately to research teams",
+      "Cross-reference anomalies with model predictions",
+      "Prepare scenario response plans for each identified anomaly"
+    ]
+  }
+}
