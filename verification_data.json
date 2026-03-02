@@ -1,0 +1,98 @@
+{
+  "Constant": [
+    "Moon Perigee",
+    "Moon Diameter",
+    "Speed of Light",
+    "Giza Latitude",
+    "Mount Kailash",
+    "Earth-Sun Distance",
+    "Hatay Latitude",
+    "Halley's Period",
+    "Earth Axial Tilt",
+    "Earth Radius (Ideal)"
+  ],
+  "Code Value": [
+    "363,000 km",
+    "3,474 km",
+    "299,792 km/s",
+    "29.9792458\u00b0N",
+    "31.0675\u00b0N, 81.3119\u00b0E",
+    "149,597,870\u2013149,600,000 km",
+    "36.3\u00b0N",
+    "74 years",
+    "23.4\u00b0",
+    "6,666 km"
+  ],
+  "Actual Scientific Value": [
+    "363,228 km (avg)",
+    "3,474.8 km",
+    "299,792.458 km/s",
+    "29.9792\u00b0N",
+    "31.0675\u00b0N, 81.3119\u00b0E",
+    "149,597,870.7 km (IAU)",
+    "36.2028\u00b0N",
+    "76 years (recent)",
+    "23.4393\u00b0",
+    "6,371 km"
+  ],
+  "Deviation": [
+    "\u2212228 km",
+    "\u22120.8 km",
+    "\u22120.458 km/s",
+    "\u00b10.00005\u00b0",
+    "0 km",
+    "+2,129.3 km or 0 km",
+    "+0.0972\u00b0",
+    "\u22122 years",
+    "\u22120.0393\u00b0",
+    "+295 km"
+  ],
+  "Error %": [
+    "-0.06%",
+    "-0.02%",
+    "-0.00015%",
+    "<0.0001%",
+    "0%",
+    "+0.0014% or 0%",
+    "+0.27%",
+    "-2.6%",
+    "-0.17%",
+    "+4.63%"
+  ],
+  "Accuracy Rating": [
+    "\u2705 EXCELLENT",
+    "\u2705 EXCELLENT",
+    "\u2705 EXCELLENT",
+    "\u2705 EXCELLENT",
+    "\u2705 PERFECT",
+    "\u2705 EXCELLENT",
+    "\u26a0\ufe0f APPROXIMATE",
+    "\u26a0\ufe0f REASONABLE",
+    "\u2705 EXCELLENT",
+    "\u274c SYMBOLIC"
+  ],
+  "Source": [
+    "NASA JPL, NOAA",
+    "NASA Moon Fact Sheet",
+    "CODATA, NIST",
+    "USGS, UNESCO",
+    "Wikipedia, Google",
+    "IAU Definition",
+    "Turkish Geography Inst.",
+    "IAU Comet Database",
+    "NOAA, NASA",
+    "USGS, WGS84"
+  ],
+  "Assessment": [
+    "Nearly perfect match to perigee average",
+    "Precise from NASA reference",
+    "Standard rounding of exact constant",
+    "Exact - *Interesting digit correlation with speed of light!*",
+    "Exact geographic coordinates",
+    "Multiple correct formats provided",
+    "Simplified/rounded, within \u00b10.1\u00b0",
+    "Within historical range, slightly below recent",
+    "Matches current obliquity",
+    "Clearly numerological choice, not scientific"
+  ]
+}

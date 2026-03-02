@@ -1,0 +1,11 @@
+Constant,Code Value,Actual Scientific Value,Deviation,Error %,Accuracy Rating,Source,Assessment
+Moon Perigee,"363,000 km","363,228 km (avg)",−228 km,-0.06%,✅ EXCELLENT,"NASA JPL, NOAA",Nearly perfect match to perigee average
+Moon Diameter,"3,474 km","3,474.8 km",−0.8 km,-0.02%,✅ EXCELLENT,NASA Moon Fact Sheet,Precise from NASA reference
+Speed of Light,"299,792 km/s","299,792.458 km/s",−0.458 km/s,-0.00015%,✅ EXCELLENT,"CODATA, NIST",Standard rounding of exact constant
+Giza Latitude,29.9792458°N,29.9792°N,±0.00005°,<0.0001%,✅ EXCELLENT,"USGS, UNESCO",Exact - *Interesting digit correlation with speed of light!*
+Mount Kailash,"31.0675°N, 81.3119°E","31.0675°N, 81.3119°E",0 km,0%,✅ PERFECT,"Wikipedia, Google",Exact geographic coordinates
+Earth-Sun Distance,"149,597,870–149,600,000 km","149,597,870.7 km (IAU)","+2,129.3 km or 0 km",+0.0014% or 0%,✅ EXCELLENT,IAU Definition,Multiple correct formats provided
+Hatay Latitude,36.3°N,36.2028°N,+0.0972°,+0.27%,⚠️ APPROXIMATE,Turkish Geography Inst.,"Simplified/rounded, within ±0.1°"
+Halley's Period,74 years,76 years (recent),−2 years,-2.6%,⚠️ REASONABLE,IAU Comet Database,"Within historical range, slightly below recent"
+Earth Axial Tilt,23.4°,23.4393°,−0.0393°,-0.17%,✅ EXCELLENT,"NOAA, NASA",Matches current obliquity
+Earth Radius (Ideal),"6,666 km","6,371 km",+295 km,+4.63%,❌ SYMBOLIC,"USGS, WGS84","Clearly numerological choice, not scientific"
