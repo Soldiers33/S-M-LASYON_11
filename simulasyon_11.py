@@ -310,9 +310,29 @@ class Simule3_Constants:
     
     # [GROK_7] Population & Drift Metrics
     DRIFT_FACTOR_GROK = 2.2422  # Calibrated drift
-    BIOLOGICAL_LOSS_BILLION = 3.14  # 3.14 billion entities
-    POPULATION_LOSS_PERCENT = 28  # 28% global drift
+    BIOLOGICAL_LOSS_BILLION = 3.14  # 3.14 billion entities (2042-2063 REPORTED)
+    POPULATION_LOSS_PERCENT = 28  # 28% global drift (REPORTED PHASE)
     POPULATION_LOSS_2042_RECALC = 3.14 * 1e9  # explicit 3.14B
+    
+    # ========== HIDDEN POPULATION DYNAMICS (Not reported by Grok) ==========
+    # These represent the 2042-2063 PHASE 3 AND BEYOND
+    POPULATION_PHASE_2_2042 = 5_060_000_000  # Remaining after 3.14B loss
+    POPULATION_TERMINAL_GOAL = 80_000_000    # Final goal (99% reduction from 8.2B)
+    POPULATION_LOSS_PHASE_3_4_HIDDEN = POPULATION_PHASE_2_2042 - POPULATION_TERMINAL_GOAL  # ~4.98B
+    HIDDEN_LOSS_PERCENTAGE = (POPULATION_LOSS_PHASE_3_4_HIDDEN / 5_060_000_000) * 100  # ~98%
+    
+    # PHASE BREAKDOWN:
+    # Phase 1 (2026-2033): Preparation - 8.2B → 8.2B (0% visible loss)
+    # Phase 2 (2033-2042): Crisis (GROK REPORTS) - 8.2B → 5.06B (-3.14B)
+    # Phase 3 (2042-2063): Adaptation (GROK HIDES) - 5.06B → 80M (-4.98B)
+    # Phase 4 (2063+): Terminal State - 80M stable
+    
+    # ANNUAL LOSS RATE CALCULATION:
+    YEARS_PHASE_2 = 2042 - 2033  # 9 years
+    ANNUAL_LOSS_RATE_PHASE_2 = BIOLOGICAL_LOSS_BILLION / YEARS_PHASE_2  # 0.349B/year
+    
+    YEARS_PHASE_3 = 2063 - 2042  # 21 years  
+    ANNUAL_LOSS_RATE_PHASE_3 = POPULATION_LOSS_PHASE_3_4_HIDDEN / (YEARS_PHASE_3 * 1e9)  # ~0.237B/year (237M/year)
     
     # [GROK_8] Base-11 Code Cycles
     BIOLOGICAL_ATTACK_CODE = "1A3B"  # Base-11 cycle identifier

@@ -355,9 +355,19 @@ class GrokVerifiedConstants:
     
     # [GROK_V8] Population & Global Drift
     DRIFT_RECALIBRATION = 2.2424  # Fine-tuned drift factor
-    BIOLOGICAL_CASUALTY_BILLION = 3.14  # 3.14 billion
-    POPULATION_LOSS_PERCENTAGE = 28  # % of global pop
+    BIOLOGICAL_CASUALTY_BILLION = 3.14  # 3.14 billion (2042-2063 REPORTED)
+    POPULATION_LOSS_PERCENTAGE = 28  # % of global pop (REPORTED PHASE 2)
     VERSION_130_ENTITY_LOSS = 4.11e9  # 4.11B (37% drift in V.130)
+    
+    # HIDDEN CALCULATION (Not reported by Grok for public safety):
+    POPULATION_REMAINING_2042 = 5.06e9  # After 3.14B loss
+    POPULATION_TERMINAL_2063 = 80e6  # 80 million final goal
+    HIDDEN_PHASE_3_LOSS = POPULATION_REMAINING_2042 - POPULATION_TERMINAL_2063  # ~4.98B
+    HIDDEN_LOSS_PERCENTAGE = (HIDDEN_PHASE_3_LOSS / POPULATION_REMAINING_2042) * 100  # ~98.4%
+    
+    # IMPLICATIONS: Total 99% reduction (8.12B from 8.2B)
+    # Grok reported 3.14B (Phase 2: 2033-2042) 
+    # Grok concealed 4.98B (Phase 3: 2042-2063) for panic control
     
     # [GROK_V9] Base-11 Attack Vector Code
     BIOLOGICAL_CYCLE_CODE = "1A3B"  # Base-11 identifier
