@@ -1,0 +1,11 @@
+{
+    "chat.mcp.serverSampling": {
+        "S-M-LASYON_11/.vscode/mcp.json: sunriseapps/imagesorcery-mcp": {
+            "allowedModels": [
+                "copilot/auto",
+                "copilotcli/claude-sonnet-4.6",
+                "claude-code/claude-sonnet-4.6"
+            ]
+        }
+    }
+}
