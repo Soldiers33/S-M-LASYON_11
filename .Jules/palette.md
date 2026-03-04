@@ -1,0 +1,3 @@
+## 2025-03-02 - [CLI Progress Updates]
+**Learning:** Terminal output can become cluttered when iterating through multiple loading steps, reducing the clarity of the overall output stream. Using a simple carriage return (`\r`) with `flush=True` creates clean, in-place progress bars that update the same line instead of spamming standard out.
+**Action:** When printing loading bars or single-line progress sequences in command-line tools, default to `\r` and ensure the output stream is flushed.
