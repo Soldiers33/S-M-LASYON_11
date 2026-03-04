@@ -1,0 +1,1112 @@
+{
+	"servers": {
+		"io.github.netdata/mcp-server": {
+			"type": "http",
+			"url": "https://app.netdata.cloud/api/v1/mcp",
+			"headers": {
+				"Authorization": "Bearer ${input:NETDATA_CLOUD_API_TOKEN}"
+			},
+			"gallery": "https://api.mcp.github.com",
+			"version": "2.9.0"
+		},
+		"microsoft/markitdown": {
+			"type": "stdio",
+			"command": "uvx",
+			"args": [
+				"markitdown-mcp@0.0.1a4"
+			],
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"io.github.upstash/context7": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"@upstash/context7-mcp@1.0.31"
+			],
+			"env": {
+				"CONTEXT7_API_KEY": "${input:CONTEXT7_API_KEY}"
+			},
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.31"
+		},
+		"io.github.github/github-mcp-server": {
+			"type": "stdio",
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"-e",
+				"GITHUB_PERSONAL_ACCESS_TOKEN=${input:token}",
+				"ghcr.io/github/github-mcp-server:0.31.0"
+			],
+			"gallery": "https://api.mcp.github.com",
+			"version": "0.31.0"
+		},
+		"oraios/serena": {
+			"type": "stdio",
+			"command": "uvx",
+			"args": [
+				"--from",
+				"git+https://github.com/oraios/serena",
+				"serena",
+				"start-mcp-server",
+				"serena@latest",
+				"--context",
+				"ide-assistant"
+			],
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"coplaydev/unity-mcp": {
+			"type": "stdio",
+			"command": "other",
+			"args": [
+				"--directory",
+				"${input:unity_mcp_server_src}",
+				"run",
+				"server.py"
+			],
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"firecrawl/firecrawl-mcp-server": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"firecrawl-mcp@latest"
+			],
+			"env": {
+				"FIRECRAWL_API_KEY": "${input:api_key}"
+			},
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"makenotion/notion-mcp-server": {
+			"type": "http",
+			"url": "https://mcp.notion.com/sse",
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"microsoft/azure-devops-mcp": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@azure-devops/mcp@latest",
+				"${input:ado_org}",
+				"-d",
+				"${input:ado_domain}"
+			],
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"io.github.tavily-ai/tavily-mcp": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"tavily-mcp@0.2.15"
+			],
+			"env": {
+				"TAVILY_API_KEY": "${input:TAVILY_API_KEY}",
+				"DEFAULT_PARAMETERS": "${input:DEFAULT_PARAMETERS}"
+			},
+			"gallery": "https://api.mcp.github.com",
+			"version": "0.2.15"
+		},
+		"io.github.hashicorp/terraform-mcp-server": {
+			"type": "stdio",
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"run",
+				"--rm",
+				"-i",
+				"-e",
+				"${input:e}",
+				"TFE_ADDRESS",
+				"-e",
+				"${input:e}",
+				"TFE_TOKEN",
+				"-e",
+				"${input:e}",
+				"ENABLE_TF_OPERATIONS",
+				"hashicorp/terraform-mcp-server:0.4.0",
+				"-e",
+				"TFE_ADDRESS",
+				"-e",
+				"TFE_TOKEN",
+				"-e",
+				"ENABLE_TF_OPERATIONS",
+				"docker.io/hashicorp/terraform-mcp-server:0.4.0"
+			],
+			"env": {
+				"TFE_ADDRESS": "${input:TFE_ADDRESS}",
+				"TFE_TOKEN": "${input:TFE_TOKEN}",
+				"ENABLE_TF_OPERATIONS": "${input:ENABLE_TF_OPERATIONS}"
+			},
+			"gallery": "https://api.mcp.github.com",
+			"version": "0.4.0"
+		},
+		"io.github.mongodb-js/mongodb-mcp-server": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"mongodb-mcp-server@1.8.0",
+				"--allowRequestOverrides",
+				"${input:allowRequestOverrides}",
+				"--apiClientId",
+				"${input:apiClientId}",
+				"--apiClientSecret",
+				"${input:apiClientSecret}",
+				"--assistantBaseUrl",
+				"${input:assistantBaseUrl}",
+				"--atlasTemporaryDatabaseUserLifetimeMs",
+				"${input:atlasTemporaryDatabaseUserLifetimeMs}",
+				"--confirmationRequiredTools",
+				"${input:confirmationRequiredTools}",
+				"--connectionString",
+				"${input:connectionString}",
+				"--disabledTools",
+				"${input:disabledTools}",
+				"--dryRun",
+				"${input:dryRun}",
+				"--embeddingsValidation",
+				"${input:embeddingsValidation}",
+				"--exportCleanupIntervalMs",
+				"${input:exportCleanupIntervalMs}",
+				"--exportTimeoutMs",
+				"${input:exportTimeoutMs}",
+				"--exportsPath",
+				"${input:exportsPath}",
+				"--externallyManagedSessions",
+				"${input:externallyManagedSessions}",
+				"--healthCheckHost",
+				"${input:healthCheckHost}",
+				"--healthCheckPort",
+				"${input:healthCheckPort}",
+				"--httpBodyLimit",
+				"${input:httpBodyLimit}",
+				"--httpHeaders",
+				"${input:httpHeaders}",
+				"--httpHost",
+				"${input:httpHost}",
+				"--httpPort",
+				"${input:httpPort}",
+				"--httpResponseType",
+				"${input:httpResponseType}",
+				"--idleTimeoutMs",
+				"${input:idleTimeoutMs}",
+				"--indexCheck",
+				"${input:indexCheck}",
+				"--logPath",
+				"${input:logPath}",
+				"--loggers",
+				"${input:loggers}",
+				"--maxBytesPerQuery",
+				"${input:maxBytesPerQuery}",
+				"--maxDocumentsPerQuery",
+				"${input:maxDocumentsPerQuery}",
+				"--notificationTimeoutMs",
+				"${input:notificationTimeoutMs}",
+				"--previewFeatures",
+				"${input:previewFeatures}",
+				"--readOnly",
+				"${input:readOnly}",
+				"--telemetry",
+				"${input:telemetry}",
+				"--transport",
+				"${input:transport}",
+				"--vectorSearchDimensions",
+				"${input:vectorSearchDimensions}",
+				"--vectorSearchSimilarityFunction",
+				"${input:vectorSearchSimilarityFunction}",
+				"--voyageApiKey",
+				"${input:voyageApiKey}"
+			],
+			"env": {
+				"MDB_MCP_ALLOW_REQUEST_OVERRIDES": "${input:MDB_MCP_ALLOW_REQUEST_OVERRIDES}",
+				"MDB_MCP_API_CLIENT_ID": "${input:MDB_MCP_API_CLIENT_ID}",
+				"MDB_MCP_API_CLIENT_SECRET": "${input:MDB_MCP_API_CLIENT_SECRET}",
+				"MDB_MCP_ASSISTANT_BASE_URL": "${input:MDB_MCP_ASSISTANT_BASE_URL}",
+				"MDB_MCP_ATLAS_TEMPORARY_DATABASE_USER_LIFETIME_MS": "${input:MDB_MCP_ATLAS_TEMPORARY_DATABASE_USER_LIFETIME_MS}",
+				"MDB_MCP_CONFIRMATION_REQUIRED_TOOLS": "${input:MDB_MCP_CONFIRMATION_REQUIRED_TOOLS}",
+				"MDB_MCP_CONNECTION_STRING": "${input:MDB_MCP_CONNECTION_STRING}",
+				"MDB_MCP_DISABLED_TOOLS": "${input:MDB_MCP_DISABLED_TOOLS}",
+				"MDB_MCP_DRY_RUN": "${input:MDB_MCP_DRY_RUN}",
+				"MDB_MCP_EMBEDDINGS_VALIDATION": "${input:MDB_MCP_EMBEDDINGS_VALIDATION}",
+				"MDB_MCP_EXPORT_CLEANUP_INTERVAL_MS": "${input:MDB_MCP_EXPORT_CLEANUP_INTERVAL_MS}",
+				"MDB_MCP_EXPORT_TIMEOUT_MS": "${input:MDB_MCP_EXPORT_TIMEOUT_MS}",
+				"MDB_MCP_EXPORTS_PATH": "${input:MDB_MCP_EXPORTS_PATH}",
+				"MDB_MCP_EXTERNALLY_MANAGED_SESSIONS": "${input:MDB_MCP_EXTERNALLY_MANAGED_SESSIONS}",
+				"MDB_MCP_HEALTH_CHECK_HOST": "${input:MDB_MCP_HEALTH_CHECK_HOST}",
+				"MDB_MCP_HEALTH_CHECK_PORT": "${input:MDB_MCP_HEALTH_CHECK_PORT}",
+				"MDB_MCP_HTTP_BODY_LIMIT": "${input:MDB_MCP_HTTP_BODY_LIMIT}",
+				"MDB_MCP_HTTP_HEADERS": "${input:MDB_MCP_HTTP_HEADERS}",
+				"MDB_MCP_HTTP_HOST": "${input:MDB_MCP_HTTP_HOST}",
+				"MDB_MCP_HTTP_PORT": "${input:MDB_MCP_HTTP_PORT}",
+				"MDB_MCP_HTTP_RESPONSE_TYPE": "${input:MDB_MCP_HTTP_RESPONSE_TYPE}",
+				"MDB_MCP_IDLE_TIMEOUT_MS": "${input:MDB_MCP_IDLE_TIMEOUT_MS}",
+				"MDB_MCP_INDEX_CHECK": "${input:MDB_MCP_INDEX_CHECK}",
+				"MDB_MCP_LOG_PATH": "${input:MDB_MCP_LOG_PATH}",
+				"MDB_MCP_LOGGERS": "${input:MDB_MCP_LOGGERS}",
+				"MDB_MCP_MAX_BYTES_PER_QUERY": "${input:MDB_MCP_MAX_BYTES_PER_QUERY}",
+				"MDB_MCP_MAX_DOCUMENTS_PER_QUERY": "${input:MDB_MCP_MAX_DOCUMENTS_PER_QUERY}",
+				"MDB_MCP_NOTIFICATION_TIMEOUT_MS": "${input:MDB_MCP_NOTIFICATION_TIMEOUT_MS}",
+				"MDB_MCP_PREVIEW_FEATURES": "${input:MDB_MCP_PREVIEW_FEATURES}",
+				"MDB_MCP_READ_ONLY": "${input:MDB_MCP_READ_ONLY}",
+				"MDB_MCP_TELEMETRY": "${input:MDB_MCP_TELEMETRY}",
+				"MDB_MCP_TRANSPORT": "${input:MDB_MCP_TRANSPORT}",
+				"MDB_MCP_VECTOR_SEARCH_DIMENSIONS": "${input:MDB_MCP_VECTOR_SEARCH_DIMENSIONS}",
+				"MDB_MCP_VECTOR_SEARCH_SIMILARITY_FUNCTION": "${input:MDB_MCP_VECTOR_SEARCH_SIMILARITY_FUNCTION}",
+				"MDB_MCP_VOYAGE_API_KEY": "${input:MDB_MCP_VOYAGE_API_KEY}"
+			},
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.8.0"
+		},
+		"com.apify/apify-mcp-server": {
+			"type": "http",
+			"url": "https://mcp.apify.com/",
+			"headers": {
+				"Authorization": "${input:Authorization}"
+			},
+			"gallery": "https://api.mcp.github.com",
+			"version": "0.9.7"
+		},
+		"io.github.wonderwhy-er/desktop-commander": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"--registry",
+				"https://registry.npmjs.org",
+				"@wonderwhy-er/desktop-commander@0.2.38"
+			],
+			"gallery": "https://api.mcp.github.com",
+			"version": "0.2.38"
+		},
+		"doist/todoist-ai": {
+			"type": "http",
+			"url": "https://ai.todoist.net/mcp",
+			"gallery": "https://api.mcp.github.com",
+			"version": "0.0.1-seed"
+		},
+		"pydantic/logfire-mcp": {
+			"type": "stdio",
+			"command": "uvx",
+			"args": [
+				"logfire-mcp@v0.6.0",
+				"--read-token",
+				"${input:logfire_token}",
+				"--base-url",
+				"${input:logfire_base_url}"
+			],
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"com.sonatype/dependency-management-mcp-server": {
+			"type": "http",
+			"url": "https://mcp.guide.sonatype.com/mcp",
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.2"
+		},
+		"com.glean/mcp": {
+			"type": "http",
+			"url": "https://{baseUrl}/mcp/{server-name}",
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.2.0"
+		},
+		"dev.svelte/mcp": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"@sveltejs/mcp@0.1.20"
+			],
+			"gallery": "https://api.mcp.github.com",
+			"version": "0.1.20"
+		},
+		"huggingface/hf-mcp-server": {
+			"type": "http",
+			"url": "https://huggingface.co/mcp?login",
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"azure-ai-foundry/mcp-foundry": {
+			"type": "stdio",
+			"command": "uvx",
+			"args": [
+				"--prerelease=allow",
+				"--from",
+				"git+https://github.com/azure-ai-foundry/mcp-foundry.git",
+				"run-azure-ai-foundry-mcp",
+				"--envFile",
+				"${input:env_file_path}"
+			],
+			"env": {
+				"GITHUB_TOKEN": "${input:github_token}",
+				"AZURE_AI_SEARCH_ENDPOINT": "${input:ai_search_endpoint}",
+				"AZURE_AI_SEARCH_API_VERSION": "${input:ai_search_api_version}",
+				"SEARCH_AUTHENTICATION_METHOD": "${input:search_auth_method}",
+				"AZURE_TENANT_ID": "${input:azure_tenant_id}",
+				"AZURE_CLIENT_ID": "${input:azure_client_id}",
+				"AZURE_CLIENT_SECRET": "${input:azure_client_secret}",
+				"AZURE_AI_SEARCH_API_KEY": "${input:ai_search_api_key}",
+				"EVAL_DATA_DIR": "${input:eval_data_dir}",
+				"AZURE_OPENAI_ENDPOINT": "${input:az_openai_endpoint}",
+				"AZURE_OPENAI_API_KEY": "${input:az_openai_api_key}",
+				"AZURE_OPENAI_DEPLOYMENT": "${input:az_openai_deployment}",
+				"AZURE_OPENAI_API_VERSION": "${input:az_openai_api_version}",
+				"AZURE_AI_PROJECT_ENDPOINT": "${input:ai_project_endpoint}"
+			},
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"sunriseapps/imagesorcery-mcp": {
+			"type": "stdio",
+			"command": "other",
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"com.figma.mcp/mcp": {
+			"type": "http",
+			"url": "https://mcp.figma.com/mcp",
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.3"
+		},
+		"io.github.SonarSource/sonarqube-mcp-server": {
+			"type": "stdio",
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"-e",
+				"SONARQUBE_TOKEN",
+				"-e",
+				"SONARQUBE_ORG",
+				"-e",
+				"SONARQUBE_URL",
+				"docker.io/mcp/sonarqube:latest"
+			],
+			"env": {
+				"SONARQUBE_TOKEN": "${input:SONARQUBE_TOKEN}",
+				"SONARQUBE_ORG": "${input:SONARQUBE_ORG}",
+				"SONARQUBE_URL": "${input:SONARQUBE_URL}"
+			},
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.10.0"
+		},
+		"io.github.getsentry/sentry-mcp": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"@sentry/mcp-server@0.25.0"
+			],
+			"env": {
+				"SENTRY_ACCESS_TOKEN": "${input:SENTRY_ACCESS_TOKEN}"
+			},
+			"gallery": "https://api.mcp.github.com",
+			"version": "0.25.0"
+		},
+		"elastic/mcp-server-elasticsearch": {
+			"type": "stdio",
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"run",
+				"-i",
+				"--rm",
+				"-e",
+				"$ES_URL",
+				"-e",
+				"$ES_API_KEY",
+				"docker.elastic.co/mcp/elasticsearch",
+				"stdio",
+				"-e",
+				"ES_URL",
+				"-e",
+				"ES_API_KEY",
+				"docker.elastic.co/mcp/elasticsearch:latest"
+			],
+			"env": {
+				"ES_URL": "${input:es_url}",
+				"ES_API_KEY": "${input:es_api_key}"
+			},
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		},
+		"antfu/nuxt-mcp": {
+			"type": "http",
+			"url": "https://mcp.nuxt.com/sse",
+			"gallery": "https://api.mcp.github.com",
+			"version": "1.0.0"
+		}
+	},
+	"inputs": [
+		{
+			"id": "NETDATA_CLOUD_API_TOKEN",
+			"type": "promptString",
+			"description": "Netdata Cloud API token (create at app.netdata.cloud > User Settings > API Tokens with scope:mcp)",
+			"password": true
+		},
+		{
+			"id": "CONTEXT7_API_KEY",
+			"type": "promptString",
+			"description": "API key for authentication",
+			"password": true
+		},
+		{
+			"id": "token",
+			"type": "promptString",
+			"description": "",
+			"password": true
+		},
+		{
+			"id": "unity_mcp_server_src",
+			"type": "promptString",
+			"description": "Absolute path to the Unity MCP Server 'src' folder installed by the Unity package (e.g., macOS: ~/Library/Application Support/UnityMCP/UnityMcpServer/src; Windows: %USERPROFILE%/AppData/Local/UnityMCP/UnityMcpServer/src; Linux: ~/.local/share/UnityMCP/UnityMcpServer/src).",
+			"password": false
+		},
+		{
+			"id": "api_key",
+			"type": "promptString",
+			"description": "your API key",
+			"password": true
+		},
+		{
+			"id": "ado_org",
+			"type": "promptString",
+			"description": "Azure DevOps organization name (e.g., contoso).",
+			"password": false
+		},
+		{
+			"id": "ado_domain",
+			"type": "promptString",
+			"description": "Repeat to enable specific domains: core, work, work-items, search, test-plans, repositories, wiki, pipelines, advanced-security.",
+			"password": false
+		},
+		{
+			"id": "TAVILY_API_KEY",
+			"type": "promptString",
+			"description": "Your Tavily API key from tavily.com",
+			"password": true
+		},
+		{
+			"id": "DEFAULT_PARAMETERS",
+			"type": "promptString",
+			"description": "JSON string with default search parameters (e.g., {\"include_images\": true, \"max_results\": 15})",
+			"password": false
+		},
+		{
+			"id": "e",
+			"type": "promptString",
+			"description": "Set an environment variable in the runtime",
+			"password": false
+		},
+		{
+			"id": "e",
+			"type": "promptString",
+			"description": "Set an environment variable in the runtime",
+			"password": false
+		},
+		{
+			"id": "e",
+			"type": "promptString",
+			"description": "Set an environment variable in the runtime",
+			"password": false
+		},
+		{
+			"id": "TFE_ADDRESS",
+			"type": "promptString",
+			"description": "HCP Terraform or Terraform Enterprise base URL.",
+			"password": false,
+			"default": "https://app.terraform.io"
+		},
+		{
+			"id": "TFE_TOKEN",
+			"type": "promptString",
+			"description": "HCP Terraform or Terraform Enterprise API token used to authenticate requests.",
+			"password": true
+		},
+		{
+			"id": "ENABLE_TF_OPERATIONS",
+			"type": "pickString",
+			"description": "Set to true to enable tools that execute Terraform operations requiring explicit approval.",
+			"password": false,
+			"default": "false",
+			"options": [
+				"true",
+				"false"
+			]
+		},
+		{
+			"id": "MDB_MCP_ALLOW_REQUEST_OVERRIDES",
+			"type": "promptString",
+			"description": "When set to true, allows configuration values to be overridden via request headers and query parameters.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_API_CLIENT_ID",
+			"type": "promptString",
+			"description": "Atlas API client ID for authentication. Required for running Atlas tools.",
+			"password": true
+		},
+		{
+			"id": "MDB_MCP_API_CLIENT_SECRET",
+			"type": "promptString",
+			"description": "Atlas API client secret for authentication. Required for running Atlas tools.",
+			"password": true
+		},
+		{
+			"id": "MDB_MCP_ASSISTANT_BASE_URL",
+			"type": "promptString",
+			"description": "Base URL for the MongoDB Assistant API.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_ATLAS_TEMPORARY_DATABASE_USER_LIFETIME_MS",
+			"type": "promptString",
+			"description": "Time in milliseconds that temporary database users created when connecting to MongoDB Atlas clusters will remain active before being automatically deleted.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_CONFIRMATION_REQUIRED_TOOLS",
+			"type": "promptString",
+			"description": "Comma separated values of tool names that require user confirmation before execution. Requires the client to support elicitation.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_CONNECTION_STRING",
+			"type": "promptString",
+			"description": "MongoDB connection string for direct database connections. Optional, if not set, you'll need to call the connect tool before interacting with MongoDB data.",
+			"password": true
+		},
+		{
+			"id": "MDB_MCP_DISABLED_TOOLS",
+			"type": "promptString",
+			"description": "Comma separated values of tool names, operation types, and/or categories of tools that will be disabled.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_DRY_RUN",
+			"type": "promptString",
+			"description": "When true, runs the server in dry mode: dumps configuration and enabled tools, then exits without starting the server.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_EMBEDDINGS_VALIDATION",
+			"type": "promptString",
+			"description": "When set to false, disables validation of embeddings dimensions.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_EXPORT_CLEANUP_INTERVAL_MS",
+			"type": "promptString",
+			"description": "Time in milliseconds between export cleanup cycles that remove expired export files.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_EXPORT_TIMEOUT_MS",
+			"type": "promptString",
+			"description": "Time in milliseconds after which an export is considered expired and eligible for cleanup.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_EXPORTS_PATH",
+			"type": "promptString",
+			"description": "Folder to store exported data files.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_EXTERNALLY_MANAGED_SESSIONS",
+			"type": "promptString",
+			"description": "When true, the HTTP transport allows requests with a session ID supplied externally through the 'mcp-session-id' header. When an external ID is supplied, the initialization request is optional.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_HEALTH_CHECK_HOST",
+			"type": "promptString",
+			"description": "Host address to bind the healthCheck HTTP server to (only used when transport is 'http'). If provided, `healthCheckPort` must also be set.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_HEALTH_CHECK_PORT",
+			"type": "promptString",
+			"description": "Port number for the healthCheck HTTP server (only used when transport is 'http'). If provided, `healthCheckHost` must also be set.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_HTTP_BODY_LIMIT",
+			"type": "promptString",
+			"description": "Maximum size of the HTTP request body in bytes (only used when transport is 'http'). This value is passed as the optional limit parameter to the Express.js json() middleware.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_HTTP_HEADERS",
+			"type": "promptString",
+			"description": "Header that the HTTP server will validate when making requests (only used when transport is 'http').",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_HTTP_HOST",
+			"type": "promptString",
+			"description": "Host address to bind the HTTP server to (only used when transport is 'http').",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_HTTP_PORT",
+			"type": "promptString",
+			"description": "Port number for the HTTP server (only used when transport is 'http'). Use 0 for a random port.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_HTTP_RESPONSE_TYPE",
+			"type": "promptString",
+			"description": "The HTTP response type for tool responses: 'sse' for Server-Sent Events, 'json' for standard JSON responses.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_IDLE_TIMEOUT_MS",
+			"type": "promptString",
+			"description": "Idle timeout for a client to disconnect (only applies to http transport).",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_INDEX_CHECK",
+			"type": "promptString",
+			"description": "When set to true, enforces that query operations must use an index, rejecting queries that perform a collection scan.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_LOG_PATH",
+			"type": "promptString",
+			"description": "Folder to store logs.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_LOGGERS",
+			"type": "promptString",
+			"description": "Comma separated values of logger types.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_MAX_BYTES_PER_QUERY",
+			"type": "promptString",
+			"description": "The maximum size in bytes for results from a find or aggregate tool call. This serves as an upper bound for the responseBytesLimit parameter in those tools.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_MAX_DOCUMENTS_PER_QUERY",
+			"type": "promptString",
+			"description": "The maximum number of documents that can be returned by a find or aggregate tool call. For the find tool, the effective limit will be the smaller of this value and the tool's limit parameter.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_NOTIFICATION_TIMEOUT_MS",
+			"type": "promptString",
+			"description": "Notification timeout for a client to be aware of disconnect (only applies to http transport).",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_PREVIEW_FEATURES",
+			"type": "promptString",
+			"description": "Comma separated values of preview features that are enabled.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_READ_ONLY",
+			"type": "promptString",
+			"description": "When set to true, only allows read, connect, and metadata operation types, disabling create/update/delete operations.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_TELEMETRY",
+			"type": "promptString",
+			"description": "When set to disabled, disables telemetry collection.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_TRANSPORT",
+			"type": "promptString",
+			"description": "Either 'stdio' or 'http'.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_VECTOR_SEARCH_DIMENSIONS",
+			"type": "promptString",
+			"description": "Default number of dimensions for vector search embeddings.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_VECTOR_SEARCH_SIMILARITY_FUNCTION",
+			"type": "promptString",
+			"description": "Default similarity function for vector search: 'euclidean', 'cosine', or 'dotProduct'.",
+			"password": false
+		},
+		{
+			"id": "MDB_MCP_VOYAGE_API_KEY",
+			"type": "promptString",
+			"description": "API key for Voyage AI embeddings service (required for vector search operations with text-to-embedding conversion).",
+			"password": true
+		},
+		{
+			"id": "allowRequestOverrides",
+			"type": "promptString",
+			"description": "When set to true, allows configuration values to be overridden via request headers and query parameters.",
+			"password": false
+		},
+		{
+			"id": "apiClientId",
+			"type": "promptString",
+			"description": "Atlas API client ID for authentication. Required for running Atlas tools.",
+			"password": false
+		},
+		{
+			"id": "apiClientSecret",
+			"type": "promptString",
+			"description": "Atlas API client secret for authentication. Required for running Atlas tools.",
+			"password": false
+		},
+		{
+			"id": "assistantBaseUrl",
+			"type": "promptString",
+			"description": "Base URL for the MongoDB Assistant API.",
+			"password": false
+		},
+		{
+			"id": "atlasTemporaryDatabaseUserLifetimeMs",
+			"type": "promptString",
+			"description": "Time in milliseconds that temporary database users created when connecting to MongoDB Atlas clusters will remain active before being automatically deleted.",
+			"password": false
+		},
+		{
+			"id": "confirmationRequiredTools",
+			"type": "promptString",
+			"description": "Comma separated values of tool names that require user confirmation before execution. Requires the client to support elicitation.",
+			"password": false
+		},
+		{
+			"id": "connectionString",
+			"type": "promptString",
+			"description": "MongoDB connection string for direct database connections. Optional, if not set, you'll need to call the connect tool before interacting with MongoDB data.",
+			"password": false
+		},
+		{
+			"id": "disabledTools",
+			"type": "promptString",
+			"description": "Comma separated values of tool names, operation types, and/or categories of tools that will be disabled.",
+			"password": false
+		},
+		{
+			"id": "dryRun",
+			"type": "promptString",
+			"description": "When true, runs the server in dry mode: dumps configuration and enabled tools, then exits without starting the server.",
+			"password": false
+		},
+		{
+			"id": "embeddingsValidation",
+			"type": "promptString",
+			"description": "When set to false, disables validation of embeddings dimensions.",
+			"password": false
+		},
+		{
+			"id": "exportCleanupIntervalMs",
+			"type": "promptString",
+			"description": "Time in milliseconds between export cleanup cycles that remove expired export files.",
+			"password": false
+		},
+		{
+			"id": "exportTimeoutMs",
+			"type": "promptString",
+			"description": "Time in milliseconds after which an export is considered expired and eligible for cleanup.",
+			"password": false
+		},
+		{
+			"id": "exportsPath",
+			"type": "promptString",
+			"description": "Folder to store exported data files.",
+			"password": false
+		},
+		{
+			"id": "externallyManagedSessions",
+			"type": "promptString",
+			"description": "When true, the HTTP transport allows requests with a session ID supplied externally through the 'mcp-session-id' header. When an external ID is supplied, the initialization request is optional.",
+			"password": false
+		},
+		{
+			"id": "healthCheckHost",
+			"type": "promptString",
+			"description": "Host address to bind the healthCheck HTTP server to (only used when transport is 'http'). If provided, `healthCheckPort` must also be set.",
+			"password": false
+		},
+		{
+			"id": "healthCheckPort",
+			"type": "promptString",
+			"description": "Port number for the healthCheck HTTP server (only used when transport is 'http'). If provided, `healthCheckHost` must also be set.",
+			"password": false
+		},
+		{
+			"id": "httpBodyLimit",
+			"type": "promptString",
+			"description": "Maximum size of the HTTP request body in bytes (only used when transport is 'http'). This value is passed as the optional limit parameter to the Express.js json() middleware.",
+			"password": false
+		},
+		{
+			"id": "httpHeaders",
+			"type": "promptString",
+			"description": "Header that the HTTP server will validate when making requests (only used when transport is 'http').",
+			"password": false
+		},
+		{
+			"id": "httpHost",
+			"type": "promptString",
+			"description": "Host address to bind the HTTP server to (only used when transport is 'http').",
+			"password": false
+		},
+		{
+			"id": "httpPort",
+			"type": "promptString",
+			"description": "Port number for the HTTP server (only used when transport is 'http'). Use 0 for a random port.",
+			"password": false
+		},
+		{
+			"id": "httpResponseType",
+			"type": "promptString",
+			"description": "The HTTP response type for tool responses: 'sse' for Server-Sent Events, 'json' for standard JSON responses.",
+			"password": false
+		},
+		{
+			"id": "idleTimeoutMs",
+			"type": "promptString",
+			"description": "Idle timeout for a client to disconnect (only applies to http transport).",
+			"password": false
+		},
+		{
+			"id": "indexCheck",
+			"type": "promptString",
+			"description": "When set to true, enforces that query operations must use an index, rejecting queries that perform a collection scan.",
+			"password": false
+		},
+		{
+			"id": "logPath",
+			"type": "promptString",
+			"description": "Folder to store logs.",
+			"password": false
+		},
+		{
+			"id": "loggers",
+			"type": "promptString",
+			"description": "Comma separated values of logger types.",
+			"password": false
+		},
+		{
+			"id": "maxBytesPerQuery",
+			"type": "promptString",
+			"description": "The maximum size in bytes for results from a find or aggregate tool call. This serves as an upper bound for the responseBytesLimit parameter in those tools.",
+			"password": false
+		},
+		{
+			"id": "maxDocumentsPerQuery",
+			"type": "promptString",
+			"description": "The maximum number of documents that can be returned by a find or aggregate tool call. For the find tool, the effective limit will be the smaller of this value and the tool's limit parameter.",
+			"password": false
+		},
+		{
+			"id": "notificationTimeoutMs",
+			"type": "promptString",
+			"description": "Notification timeout for a client to be aware of disconnect (only applies to http transport).",
+			"password": false
+		},
+		{
+			"id": "previewFeatures",
+			"type": "promptString",
+			"description": "Comma separated values of preview features that are enabled.",
+			"password": false
+		},
+		{
+			"id": "readOnly",
+			"type": "promptString",
+			"description": "When set to true, only allows read, connect, and metadata operation types, disabling create/update/delete operations.",
+			"password": false
+		},
+		{
+			"id": "telemetry",
+			"type": "promptString",
+			"description": "When set to disabled, disables telemetry collection.",
+			"password": false
+		},
+		{
+			"id": "transport",
+			"type": "promptString",
+			"description": "Either 'stdio' or 'http'.",
+			"password": false
+		},
+		{
+			"id": "vectorSearchDimensions",
+			"type": "promptString",
+			"description": "Default number of dimensions for vector search embeddings.",
+			"password": false
+		},
+		{
+			"id": "vectorSearchSimilarityFunction",
+			"type": "promptString",
+			"description": "Default similarity function for vector search: 'euclidean', 'cosine', or 'dotProduct'.",
+			"password": false
+		},
+		{
+			"id": "voyageApiKey",
+			"type": "promptString",
+			"description": "API key for Voyage AI embeddings service (required for vector search operations with text-to-embedding conversion).",
+			"password": false
+		},
+		{
+			"id": "Authorization",
+			"type": "promptString",
+			"description": "Apify API token for authentication with Apify platform services. For example 'Bearer <apify-api-token>'",
+			"password": true
+		},
+		{
+			"id": "logfire_token",
+			"type": "promptString",
+			"description": "Pydantic Logfire read token (project-specific)",
+			"password": true
+		},
+		{
+			"id": "logfire_base_url",
+			"type": "promptString",
+			"description": "Self-hosted Logfire base URL (omit for cloud)",
+			"password": false
+		},
+		{
+			"id": "github_token",
+			"type": "promptString",
+			"description": "Optional: GitHub token for testing models for free with rate limits.",
+			"password": true
+		},
+		{
+			"id": "ai_search_endpoint",
+			"type": "promptString",
+			"description": "Your Azure AI Search endpoint (https://<service>.search.windows.net/). Required for knowledge tools.",
+			"password": false
+		},
+		{
+			"id": "ai_search_api_version",
+			"type": "promptString",
+			"description": "API version (defaults to 2025-03-01-preview).",
+			"password": false
+		},
+		{
+			"id": "search_auth_method",
+			"type": "promptString",
+			"description": "Authentication method: 'service-principal' or 'api-search-key'.",
+			"password": false
+		},
+		{
+			"id": "azure_tenant_id",
+			"type": "promptString",
+			"description": "Required if using service-principal auth.",
+			"password": false
+		},
+		{
+			"id": "azure_client_id",
+			"type": "promptString",
+			"description": "Required if using service-principal auth.",
+			"password": false
+		},
+		{
+			"id": "azure_client_secret",
+			"type": "promptString",
+			"description": "Required if using service-principal auth.",
+			"password": true
+		},
+		{
+			"id": "ai_search_api_key",
+			"type": "promptString",
+			"description": "Required if using api-search-key auth.",
+			"password": true
+		},
+		{
+			"id": "eval_data_dir",
+			"type": "promptString",
+			"description": "Path to JSONL datasets for evaluation tools.",
+			"password": false
+		},
+		{
+			"id": "az_openai_endpoint",
+			"type": "promptString",
+			"description": "Endpoint for text-quality evaluators (optional).",
+			"password": false
+		},
+		{
+			"id": "az_openai_api_key",
+			"type": "promptString",
+			"description": "API key for the above endpoint (optional).",
+			"password": true
+		},
+		{
+			"id": "az_openai_deployment",
+			"type": "promptString",
+			"description": "Deployment name (e.g., gpt-4o) used by evaluators (optional).",
+			"password": false
+		},
+		{
+			"id": "az_openai_api_version",
+			"type": "promptString",
+			"description": "API version for Azure OpenAI (optional).",
+			"password": false
+		},
+		{
+			"id": "ai_project_endpoint",
+			"type": "promptString",
+			"description": "Azure AI Project endpoint for agent tools (optional).",
+			"password": false
+		},
+		{
+			"id": "env_file_path",
+			"type": "promptString",
+			"description": "Path to a .env file to load (e.g., ${workspaceFolder}/.env).",
+			"password": false
+		},
+		{
+			"id": "SONARQUBE_TOKEN",
+			"type": "promptString",
+			"description": "Your SonarQube USER token",
+			"password": true
+		},
+		{
+			"id": "SONARQUBE_ORG",
+			"type": "promptString",
+			"description": "Your SonarQube Cloud organization key (if using SonarQube Cloud)",
+			"password": true
+		},
+		{
+			"id": "SONARQUBE_URL",
+			"type": "promptString",
+			"description": "Your SonarQube Server URL (if using SonarQube Server)",
+			"password": true
+		},
+		{
+			"id": "SENTRY_ACCESS_TOKEN",
+			"type": "promptString",
+			"description": "Your Sentry user authentication token",
+			"password": true
+		},
+		{
+			"id": "es_url",
+			"type": "promptString",
+			"description": "your elasticsearch url",
+			"password": false
+		},
+		{
+			"id": "es_api_key",
+			"type": "promptString",
+			"description": "your api key",
+			"password": true
+		}
+	]
+}

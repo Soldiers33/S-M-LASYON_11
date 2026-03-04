@@ -1,0 +1,15 @@
+[project]
+name = "s-m-lasyon-11"
+version = "2.0.0"
+description = "11-Dimensional Universe Simulation System"
+requires-python = ">= 3.11"
+
+dependencies = [
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "scipy>=1.10.0",
+    "flask>=2.3.0",
+    "requests>=2.31.0",
+    "matplotlib>=3.7.0",
+    "jupyter>=1.0.0",
+]

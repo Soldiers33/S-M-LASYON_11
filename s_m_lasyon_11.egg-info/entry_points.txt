@@ -1,0 +1,5 @@
+[console_scripts]
+dashboard = dashboard_11:main
+lasyon11 = simulasyon_11:main
+monte-carlo = uv_monte_carlo_runner:main
+verify = verify_constants:main
