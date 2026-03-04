@@ -101,6 +101,19 @@ class Simule3_Constants:
     EARTH_MOON_DIST = 384400    
     SPEED_LIGHT_INT = 299792458
      
+    # ========== NEW DISCOVERIES FROM KAR TOPU V5 ==========
+    SIRIUS_FREQUENCY_IHLAL = 1330.99803           # Anti-gravity frequency violation
+    ENOCH_11D_LOCK = 10.92111                     # 11th dimension consciousness lock
+    GIZA_INTEGRAL_VERIFICATION = 11.08831         # Pyramid anti-gravity verification
+    ANTIGRAVITY_MASTER_FORMULA = 0.00827105       # Master anti-gravity calculation
+    COSMIC_HARMONY_CONSTANT = 151.993             # φ × π × e × 11
+    CONSCIOUSNESS_QUANTUM_CONSTANT = 1.70e-35     # Consciousness quantum weight
+    LEVHI_MAHFUZ_QUANTUM_CONSTANT = 7.12e-34      # Divine knowledge quantum weight
+    MACRO_COSMIC_CYCLE = 12442                    # 9048 + 2063 + 1331
+    GRAND_STAR_CYCLE = 27225                      # Halley × Year_11T
+    LATITUDE_MASTER_HARMONY = 27.0235             # Geographic harmony center
+    PHI_LATITUDE_CORRECTION = 43.7250             # Golden ratio latitude correction
+     
     KAILASH_LAT = 31.0675    
     KAILASA_LAT = 20.0239    
     GIZA_LAT = 29.9792458    

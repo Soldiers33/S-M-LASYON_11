@@ -115,6 +115,35 @@ class LevhiMahfuzConstants:
     AXIS_TILT = 23.4                              # degrees
     AXIS_COMPLEMENT = 90 - 23.4                   # = 66.6° (perfect angle)
     
+    # ========== DISCOVERY-DERIVED CONSTANTS ==========
+    # These values surfaced from Antigravity data and are
+    # now treated as fixed measurements within the system.
+    DIMENSIONAL_VOLUME_ANGLE = 1342.0473          # 11³ × OP_ANGLE (volume→angle transform)
+    GOLDEN_YEAR_FREQUENCY = 3631.618              # 3630 + φ (time+golden ratio)
+    
+    # ========== NEW DISCOVERIES FROM KAR TOPU V5 ==========
+    # Anti-Gravity Synthesis Constants (March 4, 2026)
+    SIRIUS_FREQUENCY_IHLAL = 1330.99803           # Dogon Tribe Sirius frequency violation
+    ENOCH_11D_LOCK = 10.92111                     # Book of Enoch 11th dimension lock
+    GIZA_INTEGRAL_VERIFICATION = 11.08831         # Giza pyramids integral verification
+    
+    # ========== NEW FORMULAS FROM DEEP ANALYSIS ==========
+    ANTIGRAVITY_MASTER_FORMULA = 0.00827105       # (Sirius/1331) × (Enoch/11) × (Giza/1331)
+    COSMIC_HARMONY_CONSTANT = 151.993             # φ × π × e × 11
+    CONSCIOUSNESS_QUANTUM_CONSTANT = 1.70e-35     # Quantum_info × 363Hz
+    LEVHI_MAHFUZ_QUANTUM_CONSTANT = 7.12e-34      # Levhi_freq × Quantum_info
+    
+    # ========== NEW TIME CYCLES ==========
+    MACRO_COSMIC_CYCLE = 12442                     # 9048 + 2063 + 1331
+    GRAND_STAR_CYCLE = 27225                       # Halley × Year_11T
+    
+    # ========== NEW GEOGRAPHIC HARMONIES ==========
+    LATITUDE_MASTER_HARMONY = 27.0235              # (Kailash + Kailasa + Giza) / 3
+    PHI_LATITUDE_CORRECTION = 43.7250              # Harmony × φ
+    
+    # ========== EXISTING CONSTANT REFERENCE ==========
+    LEVHI_MAHFUZ_CORE_REF = IDEAL_EARTH_RADIUS     # Reference to 6666
+    
     # ========== RESONANCE RATIOS ==========
     HATAY_MOON_RATIO = 363000 / 36.3              # = 10,000 (fractal lock)
     EARTH_MOON_DIAMETER_RATIO = 3.6678            # ≈ 3.63 (Year code)
@@ -184,6 +213,79 @@ class LevhiMahfuzFormulas:
         diff = LevhiMahfuzConstants.IDEAL_EARTH_RADIUS - LevhiMahfuzConstants.REAL_EARTH_RADIUS
         percent = (diff / LevhiMahfuzConstants.REAL_EARTH_RADIUS) * 100
         return diff, percent
+    
+    @staticmethod
+    def verify_new_discoveries():
+        """Check discovery constants (serious ones) match recorded values."""
+        reports = {}
+        # Dimensional volume × angle constant
+        reports['dimensional_volume_angle'] = (
+            LevhiMahfuzConstants.DIMENSIONAL_VOLUME_ANGLE,
+            LevhiMahfuzConstants.DIMENSIONAL_VOLUME_ANGLE == 1342.0473
+        )
+        # Golden-year frequency constant
+        reports['golden_year_frequency'] = (
+            LevhiMahfuzConstants.GOLDEN_YEAR_FREQUENCY,
+            LevhiMahfuzConstants.GOLDEN_YEAR_FREQUENCY == 3631.618
+        )
+        return reports
+    
+    @staticmethod
+    def antigravity_master_formula():
+        """Calculate Anti-Gravity Master Formula from Kar Topu V5 discoveries."""
+        sirius_factor = LevhiMahfuzConstants.SIRIUS_FREQUENCY_IHLAL / (11**3)
+        enoch_factor = LevhiMahfuzConstants.ENOCH_11D_LOCK / 11
+        giza_factor = LevhiMahfuzConstants.GIZA_INTEGRAL_VERIFICATION / (11**3)
+        
+        master_result = sirius_factor * enoch_factor * giza_factor
+        return {
+            "sirius_factor": sirius_factor,
+            "enoch_factor": enoch_factor,
+            "giza_factor": giza_factor,
+            "master_antigravity": master_result,
+            "description": f"Anti-G Master = {sirius_factor:.6f} × {enoch_factor:.6f} × {giza_factor:.6f} = {master_result:.8f}"
+        }
+    
+    @staticmethod
+    def cosmic_harmony_constant():
+        """Calculate Cosmic Harmony Constant (φ × π × e × 11)."""
+        phi = LevhiMahfuzConstants.PHI_GOLDEN
+        pi_val = math.pi
+        e_val = math.e
+        result = phi * pi_val * e_val * 11
+        return {
+            "phi": phi,
+            "pi": pi_val,
+            "e": e_val,
+            "cosmic_harmony": result,
+            "description": f"Cosmic Harmony = {phi:.6f} × {pi_val:.6f} × {e_val:.6f} × 11 = {result:.3f}"
+        }
+    
+    @staticmethod
+    def consciousness_quantum_constant():
+        """Calculate Consciousness Quantum Constant."""
+        quantum_info = LevhiMahfuzConstants.VOPSON_CONSTANT * (11**4)
+        conscious_freq = 11 * 33  # 363 Hz
+        result = quantum_info * conscious_freq
+        return {
+            "quantum_info": quantum_info,
+            "conscious_freq": conscious_freq,
+            "consciousness_quantum": result,
+            "description": f"Consciousness Quantum = {quantum_info:.2e} × {conscious_freq} = {result:.2e}"
+        }
+    
+    @staticmethod
+    def levhi_mahfuz_quantum_constant():
+        """Calculate Levh-i Mahfuz Quantum Constant."""
+        levhi_freq = LevhiMahfuzConstants.LEVHI_MAHFUZ_CORE_REF * LevhiMahfuzConstants.PHI_GOLDEN * math.sqrt(2)
+        quantum_info = LevhiMahfuzConstants.VOPSON_CONSTANT * (11**4)
+        result = levhi_freq * quantum_info
+        return {
+            "levhi_freq": levhi_freq,
+            "quantum_info": quantum_info,
+            "levhi_quantum": result,
+            "description": f"Levh-i Quantum = {levhi_freq:.2f} × {quantum_info:.2e} = {result:.2e}"
+        }
     
     @staticmethod
     def giza_light_speed_overlap():

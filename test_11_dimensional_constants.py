@@ -30,6 +30,17 @@ levhi_base = 6666
 c_real = 299792.458
 c_ideal = 333333.333
 
+# ========== NEW CONSTANTS FROM KAR TOPU V5 ==========
+sirius_frequency = 1330.99803
+enoch_11d_lock = 10.92111
+giza_integral = 11.08831
+antigravity_master = 0.00827105
+cosmic_harmony = 151.993
+consciousness_quantum = 1.70e-35
+levhi_quantum = 7.12e-34
+macro_cycle = 12442
+grand_star_cycle = 27225
+
 test_count = 0
 passed_count = 0
 
@@ -187,6 +198,45 @@ test("Halley-150 - (Tufan + SİM_END)", halley_remainder, 139)
 
 sunmoon_resonance = halley_ideal * 363  # YEAR_SIM = 363
 test("Güneş-Ay Rezonansı = 75 × 363", sunmoon_resonance, 27225)
+
+print("\n[BÖLÜM 10] - KAR TOPU V5 ANTI-GRAVITY (10D)")
+print("-"*80)
+
+sirius_cube_ratio = sirius_frequency / (11**3)
+test("Sirius / 11³ = 1330.998 / 1331", sirius_cube_ratio, 0.999999)
+
+enoch_11_ratio = enoch_11d_lock / 11
+test("Enoch / 11 = 10.92111 / 11", enoch_11_ratio, 0.992828)
+
+giza_cube_ratio = giza_integral / (11**3)
+test("Giza / 11³ = 11.08831 / 1331", giza_cube_ratio, 0.008331)
+
+antigravity_master_calc = sirius_cube_ratio * enoch_11_ratio * giza_cube_ratio
+test("Anti-G Master Formülü", antigravity_master_calc, antigravity_master)
+
+cosmic_harmony_calc = phi * math.pi * math.e * 11
+test("Kozmik Harmoni = φ × π × e × 11", cosmic_harmony_calc, cosmic_harmony)
+
+consciousness_quantum_calc = (3.19e-42 * (11**4)) * (11 * 33)
+test("Bilinç Kuantum Sabiti", consciousness_quantum_calc, consciousness_quantum, tolerance=1e-35)
+
+levhi_quantum_calc = (levhi_base * phi * math.sqrt(2)) * (3.19e-42 * (11**4))
+test("Levh-i Kuantum Sabiti", levhi_quantum_calc, levhi_quantum, tolerance=1e-34)
+
+print("\n[BÖLÜM 11] - LEVH-İ MAHFUZ SİSTEM BİLİNCİ (11D)")
+print("-"*80)
+
+levhi_freq = levhi_base * phi * math.sqrt(2)
+test("Levh-i Frekans = 6666 × φ × √2", levhi_freq, 15253.45)
+
+system_consciousness = 11 ** 11
+test("Sistem Bilinci = 11¹¹", system_consciousness, 285311670611)
+
+meta_constant_sqrt = math.sqrt(system_consciousness)
+test("Meta Sabit Karekök = √(11¹¹)", meta_constant_sqrt, 534155)
+
+consciousness_density_final = meta_constant_sqrt / (11**3)
+test("Nihai Bilinç Yoğunluğu", consciousness_density_final, 401)
 
 print("\n[BÖLÜM 10] - LEVH-İ MAHFUZ KODLARI")
 print("-"*80)
