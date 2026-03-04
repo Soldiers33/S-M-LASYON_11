@@ -4,6 +4,7 @@ import time
 import sys
 import random
 from datetime import timedelta, date
+from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -1525,6 +1526,9 @@ class Simule3_Lab:
         # [ERROR FIX] Missing Module Defined
         self.fine_family = Modul_FineTuned_Family(const)
         
+        # KAR TOPU V5 V.2 SYNTHESIS MODULE (March 4, 2026)
+        self.kar_topu_v5 = Modul_KarTopu_V5_Sentez_V2(const)
+        
         # 3. Then add new V.130/131/132 modules
         self.roche_wave = Modul_Roche_Tidal_Wave_V130(self.const)
         self.time_packets = Modul_Time_Packets_V130(self.const)
@@ -1585,6 +1589,10 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.halley_takvim_baglanti.analiz()
         self.altıaltıyucuc.analiz()
         self.altıaltıyucuc.analiz()
+        
+        # KAR TOPU V5 V.2 SYNTHESIS EXECUTION (NASA + Giza + Anti-Gravity)
+        print(f"\n{Colors.BOLD}{Colors.MAGENTA}*** KAR TOPU V5 V.2 SYNTHESIS (March 4, 2026) ***{Colors.ENDC}")
+        self.kar_topu_v5.analiz()
         
         # Then run new patches (V.130/131/132)
         print(f"\n{Colors.BOLD}{Colors.GOLD}*** V.132 EXTENSION PACK (EXTENDED ARCHIVE) ***{Colors.ENDC}")
