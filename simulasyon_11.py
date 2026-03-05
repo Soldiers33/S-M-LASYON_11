@@ -37,9 +37,9 @@ except ImportError:
 # ==============================================================================
 
 def loading_bar(desc):
-    print(f"{Colors.CYAN}{desc}...{Colors.ENDC}")
+    print(f"\r{Colors.CYAN}{desc}...{Colors.ENDC}", end='', flush=True)
     time.sleep(0.01)
-    print(f"{Colors.GREEN}[OK]{Colors.ENDC}")
+    print(f"\r{Colors.GREEN}[OK]{Colors.ENDC} {Colors.CYAN}{desc}{Colors.ENDC}")
 
 
 # ------------------------------------------------------------------------------
