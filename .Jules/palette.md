@@ -7,3 +7,7 @@
 ## 2025-03-02 - CLI Loading Bar Polish
 **Learning:** Multi-line progress indicators in CLI applications cause terminal clutter and push important historical context off-screen rapidly, making it harder for users to review output.
 **Action:** Updated `loading_bar` in Python scripts to use carriage returns (`\r`) with `flush=True` to clear and overwrite the current line, resulting in a significantly cleaner visual experience.
+
+## 2025-03-02 - Terminal Output Artifacts
+**Learning:** Using `\r` to overwrite terminal output can leave residual text (artifacts) if the new line is shorter than the previous line.
+**Action:** Added the ANSI escape code `\033[K` immediately after `\r` in `loading_bar` progress indicators to clear the rest of the line before printing the new message, preventing "ghost" characters.

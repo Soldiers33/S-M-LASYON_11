@@ -20,6 +20,7 @@ class Colors:
     RED = '\033[91m'
     GOLD = '\033[33m'
     PURPLE = '\033[35m'
+    MAGENTA = '\033[35m'
 
 try:
     import pandas as pd
@@ -39,7 +40,8 @@ except ImportError:
 def loading_bar(desc):
     print(f"\r{Colors.CYAN}{desc}...{Colors.ENDC}", end='', flush=True)
     time.sleep(0.01)
-    print(f"\r{Colors.GREEN}[OK]{Colors.ENDC} {Colors.CYAN}{desc}{Colors.ENDC}")
+    # Clear the line completely before printing the final message
+    print(f"\r\033[K{Colors.GREEN}[OK]{Colors.ENDC} {Colors.CYAN}{desc}{Colors.ENDC}")
 
 
 # ------------------------------------------------------------------------------
