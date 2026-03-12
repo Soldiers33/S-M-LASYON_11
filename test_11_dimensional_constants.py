@@ -284,9 +284,10 @@ print("\n" + "="*80)
 print(f"SONUÇ: {passed_count}/{test_count} test başarılı")
 print("="*80)
 
-if passed_count == test_count:
-    print("✓ TÜM TESTLER BAŞARILI - 11 BOYUTLU SABITLER DOĞRULANMIŞTIR!")
-    sys.exit(0)
-else:
-    print(f"⚠ {test_count - passed_count} test başarısız")
-    sys.exit(1)
+if __name__ == "__main__":
+    if passed_count == test_count:
+        print("✓ TÜM TESTLER BAŞARILI - 11 BOYUTLU SABITLER DOĞRULANMIŞTIR!")
+        sys.exit(0)
+    else:
+        print(f"⚠ {test_count - passed_count} test başarısız")
+        sys.exit(1)
