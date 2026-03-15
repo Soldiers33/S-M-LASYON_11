@@ -254,7 +254,7 @@ class Modul_KarTopu_V5_Sentez_V2:
         """
         print(f"{Colors.BOLD}{Colors.CYAN}[ANALYSIS] GEOGRAPHIC SACRED HARMONIES{Colors.ENDC}")
         
-        kailash_lat = self.const.KAILASH_LATITUDE
+        kailash_lat = self.const.KAILASH_LAT
         kailasa_lat = 31.0675  # Kailasa (plane)
         giza_lat = self.kt.GIZA_LATITUDE_PRECISION
         
