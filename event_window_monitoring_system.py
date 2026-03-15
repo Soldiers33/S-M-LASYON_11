@@ -23,7 +23,7 @@ Repository: github.com/Soldiers33/S-M-LASYON_11
 import json
 import datetime
 from dataclasses import dataclass, asdict
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List
 from enum import Enum
 
 # ==================================================================================

@@ -12,10 +12,8 @@ veya
     uv run uv_monte_carlo_runner.py
 """
 
-import math
 import random
 from datetime import datetime
-from levhi_mahfuz import LevhiMahfuzConstants as LMC
 
 class MonteCarloSimulator:
     """11-Boyutlu Monte Carlo Simülatörü"""

@@ -7,9 +7,6 @@ Analyzes against 11-dimensional framework
 Outputs to results.txt
 """
 
-import json
-import math
-from datetime import datetime
 
 # ============================================================================
 # DISCOVERY DATA (From Antigravity System)
