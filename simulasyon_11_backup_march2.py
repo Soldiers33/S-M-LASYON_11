@@ -41,9 +41,9 @@ class Colors:
     PURPLE = '\033[35m'
 
 def loading_bar(desc):
-    print(f"{Colors.CYAN}{desc}...{Colors.ENDC}")
+    print(f"\r\033[K{Colors.CYAN}{desc}...{Colors.ENDC}", end='', flush=True)
     time.sleep(0.01)
-    print(f"{Colors.GREEN}[OK]{Colors.ENDC}")
+    print(f"\r\033[K{Colors.GREEN}[OK]{Colors.ENDC} {Colors.CYAN}{desc}{Colors.ENDC}")
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', 1000)
