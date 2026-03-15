@@ -11,8 +11,6 @@ Date: 2025-02-XX
 Status: ACTIVE VALIDATION
 """
 
-import math
-from typing import Tuple
 
 # ==============================================================================
 # TEST 1: ANTI-GRAVITY MASTER FORMULA (0.00827105)

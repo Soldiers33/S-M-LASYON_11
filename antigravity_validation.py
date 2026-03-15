@@ -7,7 +7,7 @@ Author: SIMULE3 V.135
 Date: 2026-03-03
 """
 
-from levhi_mahfuz import LevhiMahfuzConstants as Constants, LevhiMahfuzFormulas as Formulas
+from levhi_mahfuz import LevhiMahfuzConstants as Constants
 
 # ============================================================================
 # ANTIGRAVITY MEASUREMENTS (From 24h scanning)

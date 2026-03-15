@@ -24,7 +24,6 @@ class Colors:
 try:
     import pandas as pd
     import numpy as np
-    from scipy import stats
 except ImportError:
     print(f"{Colors.FAIL}CRITICAL ERROR: Missing Scientific Libraries!{Colors.ENDC}")
     print(f"{Colors.WARNING}This simulation requires pandas, numpy, and scipy.{Colors.ENDC}")

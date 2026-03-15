@@ -8,7 +8,6 @@ and the actual POPULATION_GOAL_MAX = 80M in code
 This reveals the full 99% reduction model (8.12B total loss)
 """
 
-import math
 
 print("="*80)
 print("NÜFUS DİNAMİKLERİ ÇELIŞKILI ANALİZİ")
