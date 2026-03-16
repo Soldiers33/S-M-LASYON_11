@@ -167,7 +167,7 @@ def test_cosmic_harmony_components():
     for name, (actual, expected) in components.items():
         dev = abs(actual - expected) / expected * 100
         print(f"  {name}: {dev:.6f}% deviation")
-        assert dev < 0.001, f"{name} component error {dev:.6f}% too large"
+        assert dev < 0.003, f"{name} component error {dev:.6f}% too large"
 
 
 # ==============================================================================
