@@ -280,13 +280,14 @@ halley_1910 = 1910
 halley_symmetry = halley_1910 + 151
 test("1910 + 151 = 2061 (Halley Simetri)", halley_symmetry, 2061)
 
-print("\n" + "="*80)
-print(f"SONUÇ: {passed_count}/{test_count} test başarılı")
-print("="*80)
+if __name__ == '__main__':
+    print("\n" + "="*80)
+    print(f"SONUÇ: {passed_count}/{test_count} test başarılı")
+    print("="*80)
 
-if passed_count == test_count:
-    print("✓ TÜM TESTLER BAŞARILI - 11 BOYUTLU SABITLER DOĞRULANMIŞTIR!")
-    sys.exit(0)
-else:
-    print(f"⚠ {test_count - passed_count} test başarısız")
-    sys.exit(1)
+    if passed_count == test_count:
+        print("✓ TÜM TESTLER BAŞARILI - 11 BOYUTLU SABITLER DOĞRULANMIŞTIR!")
+        sys.exit(0)
+    else:
+        print(f"⚠ {test_count - passed_count} test başarısız")
+        sys.exit(1)
