@@ -6,6 +6,8 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+from modul_nasa_live_data import Modul_Nasa_Live_Data
+from levhi_mahfuz import LevhiMahfuzFormulas
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -20,6 +22,7 @@ class Colors:
     RED = '\033[91m'
     GOLD = '\033[33m'
     PURPLE = '\033[35m'
+    MAGENTA = '\033[35m'
 
 try:
     import pandas as pd
@@ -1543,6 +1546,9 @@ class Simule3_Lab:
         self.piramit_detay = Modul_Piramit_Detay_V130(self.const)
         self.giza_isik = Modul_Giza_Isik_Hiz_V132(self.const) # NEW
 
+        # NASA Live Data module
+        self.nasa_live = Modul_Nasa_Live_Data(self.const)
+
 # [ERROR FIX] Missing Simule3_Lab_V133 Class Added
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
@@ -1613,6 +1619,15 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # Run NASA Live Data sync
+        print(f"\n{Colors.BOLD}{Colors.CYAN}*** NASA LIVE DATA & ANTIQUITY-QUANTUM SYNTHESIS ***{Colors.ENDC}")
+        self.nasa_live.analiz()
+        synthesis = LevhiMahfuzFormulas.antiquity_quantum_nasa_synthesis(
+            live_moon_dist=self.nasa_live.fetch_moon_distance(),
+            live_sun_dist=self.nasa_live.fetch_sun_distance()
+        )
+        print(f"{Colors.MAGENTA}Unified Resonance Index: {synthesis['resonance_index']:.8e}{Colors.ENDC}")
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH

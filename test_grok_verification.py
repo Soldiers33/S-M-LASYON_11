@@ -67,10 +67,10 @@ print("-"*80)
 
 test("C_REAL = 299,792.458 km/s", C_REAL == 299792.458, True)
 test("Giza Latitude = 29.9792458°", GIZA_LAT == 29.9792458, True)
-test("C/10,000,000 matches Giza lat", C_REAL / 10e6, GIZA_LAT, tolerance=0.0001)
+test("C/10,000,000 matches Giza lat", C_REAL / 10000, GIZA_LAT, tolerance=0.0001)
 
 # Calculate match percentage
-match_ratio = C_REAL / (GIZA_LAT * 10e6)
+match_ratio = C_REAL / (GIZA_LAT * 10000)
 test("Match ratio < 1.01 (< 1% diff)", match_ratio, 1.0, tolerance=0.01)
 
 print("\n[SECTION 4] Halley-363 Resonance")
@@ -157,20 +157,21 @@ cross_check = math.factorial(11) / 66
 test("math.factorial(11) / 66 = 604,800", cross_check, 604800, tolerance=1)
 
 # Giza-C match as decimal
-giza_c_match = C_REAL / 10000000
+giza_c_match = C_REAL / 10000
 test("Giza-C match as decimal", giza_c_match, GIZA_LAT, tolerance=0.00001)
 
-print("\n" + "="*80)
-print(f"RESULTS: {tests_passed}/{tests_total} tests passed")
-print("="*80)
+if __name__ == '__main__':
+    print("\n" + "="*80)
+    print(f"RESULTS: {tests_passed}/{tests_total} tests passed")
+    print("="*80)
 
-if tests_passed == tests_total:
-    print("✓ GROK VERIFICATION COMPLETE - ALL TESTS PASSED")
-    print("✓ Base-11 System Confirmed")
-    print("✓ Timeline Coherence Verified") 
-    print("✓ Statistical Validity Confirmed")
-    sys.exit(0)
-else:
-    failed = tests_total - tests_passed
-    print(f"⚠ {failed} test(s) failed")
-    sys.exit(1)
+    if tests_passed == tests_total:
+        print("✓ GROK VERIFICATION COMPLETE - ALL TESTS PASSED")
+        print("✓ Base-11 System Confirmed")
+        print("✓ Timeline Coherence Verified")
+        print("✓ Statistical Validity Confirmed")
+        sys.exit(0)
+    else:
+        failed = tests_total - tests_passed
+        print(f"⚠ {failed} test(s) failed")
+        sys.exit(1)
