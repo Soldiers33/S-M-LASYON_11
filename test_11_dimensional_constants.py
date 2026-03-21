@@ -9,10 +9,6 @@ Date: 2026-03-02
 import math
 import sys
 
-print("="*80)
-print("11 BOYUTLU SİMÜLASYON TEORİSİ - SABİT DOĞRULAMA")
-print("="*80)
-
 # Constants from OTONOM_AI_VERI_PAKT and updated simulasyon_11.py
 flood_year = -9048
 celali_cycle = 33
@@ -70,223 +66,231 @@ def test(description, result, expected, tolerance=0.01):
             print(f"  Result: {result} ≠ Expected: {expected}")
             return False
 
-print("\n[BÖLÜM 1] - ZAMANSAL BOYUT (1D)")
-print("-"*80)
+def main():
+    print("="*80)
+    print("11 BOYUTLU SİMÜLASYON TEORİSİ - SABİT DOĞRULAMA")
+    print("="*80)
 
-macro_cycle = 9048 + 2063 + 1331
-test("Makro Döngü = 9048 + 2063 + 1331", macro_cycle, 12442)
+    print("\n[BÖLÜM 1] - ZAMANSAL BOYUT (1D)")
+    print("-"*80)
 
-macro_calibration = macro_cycle / 11
-test("Makro Kalibrasyon = 12442 / 11", macro_calibration, 1131.09)
+    macro_cycle = 9048 + 2063 + 1331
+    test("Makro Döngü = 9048 + 2063 + 1331", macro_cycle, 12442)
 
-tufan_celali_ratio = abs(flood_year) / (celali_cycle * celali_cycle)
-test("Tufan-Celali Harmoni = 9048 / 1089", tufan_celali_ratio, 8.30, tolerance=0.01)
+    macro_calibration = macro_cycle / 11
+    test("Makro Kalibrasyon = 12442 / 11", macro_calibration, 1131.09)
 
-print("\n[BÖLÜM 2] - MEKANSAL BOYUT (2D)")
-print("-"*80)
+    tufan_celali_ratio = abs(flood_year) / (celali_cycle * celali_cycle)
+    test("Tufan-Celali Harmoni = 9048 / 1089", tufan_celali_ratio, 8.30, tolerance=0.01)
 
-enlem_harmoni = (kailash_lat + kailasa_lat + giza_lat) / 3
-test("Enlem Harmoni = (31.07 + 20.02 + 30.00) / 3", enlem_harmoni, 26.6902)
+    print("\n[BÖLÜM 2] - MEKANSAL BOYUT (2D)")
+    print("-"*80)
 
-enlem_harmoni_phi = enlem_harmoni * phi
-test("Enlem Harmoni × Phi", enlem_harmoni_phi, 43.1819)
+    enlem_harmoni = (kailash_lat + kailasa_lat + giza_lat) / 3
+    test("Enlem Harmoni = (31.07 + 20.02 + 30.00) / 3", enlem_harmoni, 26.6902)
 
-enlem_fark = kailash_lat - kailasa_lat
-test("Kailash - Kailasa = 11° yaklaşımı", enlem_fark, 10.9436)
+    enlem_harmoni_phi = enlem_harmoni * phi
+    test("Enlem Harmoni × Phi", enlem_harmoni_phi, 43.1819)
 
-giza_kailash_diff = kailash_lat - giza_lat
-test("Giza-Kailash Farkı ≈ 1.088°", giza_kailash_diff, 1.0882862)
+    enlem_fark = kailash_lat - kailasa_lat
+    test("Kailash - Kailasa = 11° yaklaşımı", enlem_fark, 10.9436)
 
-giza_subcycle = giza_kailash_diff * 1000
-test("Giza Sub-Cycle = 1088 ≈ 11×99+1=1090", giza_subcycle, 1088.2862)
+    giza_kailash_diff = kailash_lat - giza_lat
+    test("Giza-Kailash Farkı ≈ 1.088°", giza_kailash_diff, 1.0882862)
 
-print("\n[BÖLÜM 3] - MAYA-SUMER-ORKHON ÜÇLÜSÜTÜRKÜsü (3D)")
-print("-"*80)
+    giza_subcycle = giza_kailash_diff * 1000
+    test("Giza Sub-Cycle = 1088 ≈ 11×99+1=1090", giza_subcycle, 1088.2862)
 
-maya_cycle = 5125.37
-maya_11_series = 466 * 11
-test("Maya Döngü ≈ 466 × 11", maya_11_series, 5126)
+    print("\n[BÖLÜM 3] - MAYA-SUMER-ORKHON ÜÇLÜSÜTÜRKÜsü (3D)")
+    print("-"*80)
 
-sumer_kings = 241200
-sumer_11_exact = sumer_kings / 11
-test("Sumer / 11 = tam bölüm", sumer_11_exact, 21927)
+    maya_cycle = 5125.37
+    maya_11_series = 466 * 11
+    test("Maya Döngü ≈ 466 × 11", maya_11_series, 5126)
 
-orkhon_date = 732
-harmonik_mult = sumer_kings / (maya_11_series)
-test("Sumer / Maya Harmoniği ≈ 47", harmonik_mult, 47.04)
+    sumer_kings = 241200
+    sumer_11_exact = sumer_kings / 11
+    test("Sumer / 11 = tam bölüm", sumer_11_exact, 21927)
 
-meta_cycle = orkhon_date + (maya_11_series * 2) + sumer_kings
-test("Orkhon + Maya×2 + Sumer", meta_cycle, 252184)
+    orkhon_date = 732
+    harmonik_mult = sumer_kings / (maya_11_series)
+    test("Sumer / Maya Harmoniği ≈ 47", harmonik_mult, 47.04)
 
-print("\n[BÖLÜM 4] - DNA BİYOLOJİK BOYUT (4D)")
-print("-"*80)
+    meta_cycle = orkhon_date + (maya_11_series * 2) + sumer_kings
+    test("Orkhon + Maya×2 + Sumer", meta_cycle, 252184)
 
-dna_fibonacci = dna_pitch * 10.5  # DNA_BASE_PAIR
-test("DNA Fibonacci: 33 × 10.5", dna_fibonacci, 346.5)
+    print("\n[BÖLÜM 4] - DNA BİYOLOJİK BOYUT (4D)")
+    print("-"*80)
 
-bio_frequency = 11 * dna_pitch
-test("Biyolojik Frekans = 11 × 33", bio_frequency, 363)
+    dna_fibonacci = dna_pitch * 10.5  # DNA_BASE_PAIR
+    test("DNA Fibonacci: 33 × 10.5", dna_fibonacci, 346.5)
 
-dna_vertebra = dna_pitch + vertebrae
-test("DNA + Vertebra = 33 + 33", dna_vertebra, 66)
+    bio_frequency = 11 * dna_pitch
+    test("Biyolojik Frekans = 11 × 33", bio_frequency, 363)
 
-dna_lifecycle = dna_pitch * vertebrae
-test("DNA × Vertebra = 33 × 33", dna_lifecycle, 1089)
+    dna_vertebra = dna_pitch + vertebrae
+    test("DNA + Vertebra = 33 + 33", dna_vertebra, 66)
 
-print("\n[BÖLÜM 5] - EVRENSEL SABÍTLER (5D)")
-print("-"*80)
+    dna_lifecycle = dna_pitch * vertebrae
+    test("DNA × Vertebra = 33 × 33", dna_lifecycle, 1089)
 
-master_harmoni = phi * math.pi * math.e
-test("Master Harmoni = φ × π × e", master_harmoni, 13.887)
+    print("\n[BÖLÜM 5] - EVRENSEL SABÍTLER (5D)")
+    print("-"*80)
 
-master_phi_11 = master_harmoni * 11
-test("Master × 11 = 13.887 × 11", master_phi_11, 152.757)
+    master_harmoni = phi * math.pi * math.e
+    test("Master Harmoni = φ × π × e", master_harmoni, 13.887)
 
-code_149 = 149
-master_revision = master_phi_11 / code_149
-test("Master Revision = 152.757 / 149", master_revision, 1.02523)
+    master_phi_11 = master_harmoni * 11
+    test("Master × 11 = 13.887 × 11", master_phi_11, 152.757)
 
-print("\n[BÖLÜM 6] - IŞIK VE HIZ (6D)")
-print("-"*80)
+    code_149 = 149
+    master_revision = master_phi_11 / code_149
+    test("Master Revision = 152.757 / 149", master_revision, 1.02523)
 
-c_ratio = c_ideal / c_real
-test("C_IDEAL / C_REAL = 333333 / 299792.458", c_ratio, 1.11188)
+    print("\n[BÖLÜM 6] - IŞIK VE HIZ (6D)")
+    print("-"*80)
 
-cosmic_velocity = c_ratio * 11
-test("Kozmik Hız Faktörü = 1.11188 × 11", cosmic_velocity, 12.23068)
+    c_ratio = c_ideal / c_real
+    test("C_IDEAL / C_REAL = 333333 / 299792.458", c_ratio, 1.11188)
 
-halley_planck = cosmic_velocity / phi
-test("Planck-Halley = 12.23 / 1.618", halley_planck, 7.555)
+    cosmic_velocity = c_ratio * 11
+    test("Kozmik Hız Faktörü = 1.11188 × 11", cosmic_velocity, 12.23068)
 
-print("\n[BÖLÜM 7] - KUANTUM-BİLİNÇ (7D)")
-print("-"*80)
+    halley_planck = cosmic_velocity / phi
+    test("Planck-Halley = 12.23 / 1.618", halley_planck, 7.555)
 
-consciousness_dimension = 11 ** 11
-consciousness_sqrt = math.sqrt(consciousness_dimension)
-test("√(11^11) ≈ 534155", consciousness_sqrt, 534154.7)
+    print("\n[BÖLÜM 7] - KUANTUM-BİLİNÇ (7D)")
+    print("-"*80)
 
-consciousness_density = consciousness_sqrt / (11 * 11 * 11)
-test("Bilinç Yoğunluğu = 534155 / 1331", consciousness_density, 403.9)
+    consciousness_dimension = 11 ** 11
+    consciousness_sqrt = math.sqrt(consciousness_dimension)
+    test("√(11^11) ≈ 534155", consciousness_sqrt, 534154.7)
 
-consciousness_gamma = 40 * phi * 11
-test("Bilinç Gamma = 40 × 1.618 × 11", consciousness_gamma, 712.32)
+    consciousness_density = consciousness_sqrt / (11 * 11 * 11)
+    test("Bilinç Yoğunluğu = 534155 / 1331", consciousness_density, 403.9)
 
-print("\n[BÖLÜM 8] - YERÇEKİMİ (8D)")
-print("-"*80)
+    consciousness_gamma = 40 * phi * 11
+    test("Bilinç Gamma = 40 × 1.618 × 11", consciousness_gamma, 712.32)
 
-g_symbolic = 6.666e-11
-g_cubic = g_symbolic * 1331
-test("G × 11³ = 6.666e-11 × 1331", g_cubic, 8.871e-8)
+    print("\n[BÖLÜM 8] - YERÇEKİMİ (8D)")
+    print("-"*80)
 
-g_flood = g_symbolic * abs(flood_year)
-test("G × Tufan = 6.666e-11 × 9048", g_flood, 6.03e-7)
+    g_symbolic = 6.666e-11
+    g_cubic = g_symbolic * 1331
+    test("G × 11³ = 6.666e-11 × 1331", g_cubic, 8.871e-8)
 
-print("\n[BÖLÜM 9] - HALLEY ASTRONOMİSİ (9D)")
-print("-"*80)
+    g_flood = g_symbolic * abs(flood_year)
+    test("G × Tufan = 6.666e-11 × 9048", g_flood, 6.03e-7)
 
-halley_11 = halley_ideal * 11
-test("Halley × 11 = 75 × 11", halley_11, 825)
+    print("\n[BÖLÜM 9] - HALLEY ASTRONOMİSİ (9D)")
+    print("-"*80)
 
-halley_150 = halley_ideal * 150
-test("Halley × 150 = 75 × 150", halley_150, 11250)
+    halley_11 = halley_ideal * 11
+    test("Halley × 11 = 75 × 11", halley_11, 825)
 
-halley_tufan_ratio = halley_150 / abs(flood_year)
-test("Halley-150 / Tufan = 11250 / 9048", halley_tufan_ratio, 1.243)
+    halley_150 = halley_ideal * 150
+    test("Halley × 150 = 75 × 150", halley_150, 11250)
 
-halley_remainder = halley_150 - (abs(flood_year) + sim_end)
-test("Halley-150 - (Tufan + SİM_END)", halley_remainder, 139)
+    halley_tufan_ratio = halley_150 / abs(flood_year)
+    test("Halley-150 / Tufan = 11250 / 9048", halley_tufan_ratio, 1.243)
 
-sunmoon_resonance = halley_ideal * 363  # YEAR_SIM = 363
-test("Güneş-Ay Rezonansı = 75 × 363", sunmoon_resonance, 27225)
+    halley_remainder = halley_150 - (abs(flood_year) + sim_end)
+    test("Halley-150 - (Tufan + SİM_END)", halley_remainder, 139)
 
-print("\n[BÖLÜM 10] - KAR TOPU V5 ANTI-GRAVITY (10D)")
-print("-"*80)
+    sunmoon_resonance = halley_ideal * 363  # YEAR_SIM = 363
+    test("Güneş-Ay Rezonansı = 75 × 363", sunmoon_resonance, 27225)
 
-sirius_cube_ratio = sirius_frequency / (11**3)
-test("Sirius / 11³ = 1330.998 / 1331", sirius_cube_ratio, 0.999999)
+    print("\n[BÖLÜM 10] - KAR TOPU V5 ANTI-GRAVITY (10D)")
+    print("-"*80)
 
-enoch_11_ratio = enoch_11d_lock / 11
-test("Enoch / 11 = 10.92111 / 11", enoch_11_ratio, 0.992828)
+    sirius_cube_ratio = sirius_frequency / (11**3)
+    test("Sirius / 11³ = 1330.998 / 1331", sirius_cube_ratio, 0.999999)
 
-giza_cube_ratio = giza_integral / (11**3)
-test("Giza / 11³ = 11.08831 / 1331", giza_cube_ratio, 0.008331)
+    enoch_11_ratio = enoch_11d_lock / 11
+    test("Enoch / 11 = 10.92111 / 11", enoch_11_ratio, 0.992828)
 
-antigravity_master_calc = sirius_cube_ratio * enoch_11_ratio * giza_cube_ratio
-test("Anti-G Master Formülü", antigravity_master_calc, antigravity_master)
+    giza_cube_ratio = giza_integral / (11**3)
+    test("Giza / 11³ = 11.08831 / 1331", giza_cube_ratio, 0.008331)
 
-cosmic_harmony_calc = phi * math.pi * math.e * 11
-test("Kozmik Harmoni = φ × π × e × 11", cosmic_harmony_calc, cosmic_harmony)
+    antigravity_master_calc = sirius_cube_ratio * enoch_11_ratio * giza_cube_ratio
+    test("Anti-G Master Formülü", antigravity_master_calc, antigravity_master)
 
-consciousness_quantum_calc = (3.19e-42 * (11**4)) * (11 * 33)
-test("Bilinç Kuantum Sabiti", consciousness_quantum_calc, consciousness_quantum, tolerance=1e-35)
+    cosmic_harmony_calc = phi * math.pi * math.e * 11
+    test("Kozmik Harmoni = φ × π × e × 11", cosmic_harmony_calc, cosmic_harmony)
 
-levhi_quantum_calc = (levhi_base * phi * math.sqrt(2)) * (3.19e-42 * (11**4))
-test("Levh-i Kuantum Sabiti", levhi_quantum_calc, levhi_quantum, tolerance=1e-34)
+    consciousness_quantum_calc = (3.19e-42 * (11**4)) * (11 * 33)
+    test("Bilinç Kuantum Sabiti", consciousness_quantum_calc, consciousness_quantum, tolerance=1e-35)
 
-print("\n[BÖLÜM 11] - LEVH-İ MAHFUZ SİSTEM BİLİNCİ (11D)")
-print("-"*80)
+    levhi_quantum_calc = (levhi_base * phi * math.sqrt(2)) * (3.19e-42 * (11**4))
+    test("Levh-i Kuantum Sabiti", levhi_quantum_calc, levhi_quantum, tolerance=1e-34)
 
-levhi_freq = levhi_base * phi * math.sqrt(2)
-test("Levh-i Frekans = 6666 × φ × √2", levhi_freq, 15253.45)
+    print("\n[BÖLÜM 11] - LEVH-İ MAHFUZ SİSTEM BİLİNCİ (11D)")
+    print("-"*80)
 
-system_consciousness = 11 ** 11
-test("Sistem Bilinci = 11¹¹", system_consciousness, 285311670611)
+    levhi_freq = levhi_base * phi * math.sqrt(2)
+    test("Levh-i Frekans = 6666 × φ × √2", levhi_freq, 15253.45)
 
-meta_constant_sqrt = math.sqrt(system_consciousness)
-test("Meta Sabit Karekök = √(11¹¹)", meta_constant_sqrt, 534155)
+    system_consciousness = 11 ** 11
+    test("Sistem Bilinci = 11¹¹", system_consciousness, 285311670611)
 
-consciousness_density_final = meta_constant_sqrt / (11**3)
-test("Nihai Bilinç Yoğunluğu", consciousness_density_final, 401)
+    meta_constant_sqrt = math.sqrt(system_consciousness)
+    test("Meta Sabit Karekök = √(11¹¹)", meta_constant_sqrt, 534155)
 
-print("\n[BÖLÜM 10] - LEVH-İ MAHFUZ KODLARI")
-print("-"*80)
+    consciousness_density_final = meta_constant_sqrt / (11**3)
+    test("Nihai Bilinç Yoğunluğu", consciousness_density_final, 401)
 
-lm1_frequency = levhi_base * 11
-test("LM1 Frekansı = 6666 × 11", lm1_frequency, 73326)
+    print("\n[BÖLÜM 10] - LEVH-İ MAHFUZ KODLARI")
+    print("-"*80)
 
-lm1_calendar = lm1_frequency / 360
-test("LM1 Takvim Ayarı = 73326 / 360", lm1_calendar, 203.685)
+    lm1_frequency = levhi_base * 11
+    test("LM1 Frekansı = 6666 × 11", lm1_frequency, 73326)
 
-lm2_quarter = levhi_base / 4
-test("LM2 Çeyrek = 6666 / 4", lm2_quarter, 1666.5)
+    lm1_calendar = lm1_frequency / 360
+    test("LM1 Takvim Ayarı = 73326 / 360", lm1_calendar, 203.685)
 
-lm2_management = lm2_quarter * (abs(flood_year) / 1331)
-test("LM2 Yönetim = 1666.5 × (9048 / 1331)", lm2_management, 4537.8)
+    lm2_quarter = levhi_base / 4
+    test("LM2 Çeyrek = 6666 / 4", lm2_quarter, 1666.5)
 
-lm2_era = lm2_quarter + abs(flood_year)
-test("LM2 Önceki Era = 1666.5 + 9048", lm2_era, 10714.5)
+    lm2_management = lm2_quarter * (abs(flood_year) / 1331)
+    test("LM2 Yönetim = 1666.5 × (9048 / 1331)", lm2_management, 4537.8)
 
-lm3_observation = 2026 - mimar_date
-test("LM3 Gözlem Farkı = 2026 - 2011.42", lm3_observation, 14.5762)
+    lm2_era = lm2_quarter + abs(flood_year)
+    test("LM2 Önceki Era = 1666.5 + 9048", lm2_era, 10714.5)
 
-lm3_projection = levhi_base - (lm3_observation * 100)
-test("LM3 Projeksiyon ≈ 1848", lm3_projection, 1848.4)
+    lm3_observation = 2026 - mimar_date
+    test("LM3 Gözlem Farkı = 2026 - 2011.42", lm3_observation, 14.5762)
 
-lm4_terminal = levhi_base - sim_end
-test("LM4 Terminal Farkı = 6666 - 2063", lm4_terminal, 4603)
+    lm3_projection = levhi_base - (lm3_observation * 100)
+    test("LM3 Projeksiyon ≈ 1848", lm3_projection, 1848.4)
 
-lm4_reverse = lm4_terminal / 11
-test("LM4 Ters Periyod = 4603 / 11", lm4_reverse, 418.45)
+    lm4_terminal = levhi_base - sim_end
+    test("LM4 Terminal Farkı = 6666 - 2063", lm4_terminal, 4603)
 
-print("\n[BÖLÜM 11] - HALLEY TARİH BÖLGESİ")
-print("-"*80)
+    lm4_reverse = lm4_terminal / 11
+    test("LM4 Ters Periyod = 4603 / 11", lm4_reverse, 418.45)
 
-halley_1986 = 1986
-halley_2061 = 2061
-years_between = halley_2061 - halley_1986
-test("2061 - 1986 = Halley Periyodu (75)", years_between, 75)
+    print("\n[BÖLÜM 11] - HALLEY TARİH BÖLGESİ")
+    print("-"*80)
 
-halley_1910 = 1910
-halley_symmetry = halley_1910 + 151
-test("1910 + 151 = 2061 (Halley Simetri)", halley_symmetry, 2061)
+    halley_1986 = 1986
+    halley_2061 = 2061
+    years_between = halley_2061 - halley_1986
+    test("2061 - 1986 = Halley Periyodu (75)", years_between, 75)
 
-print("\n" + "="*80)
-print(f"SONUÇ: {passed_count}/{test_count} test başarılı")
-print("="*80)
+    halley_1910 = 1910
+    halley_symmetry = halley_1910 + 151
+    test("1910 + 151 = 2061 (Halley Simetri)", halley_symmetry, 2061)
 
-if passed_count == test_count:
-    print("✓ TÜM TESTLER BAŞARILI - 11 BOYUTLU SABITLER DOĞRULANMIŞTIR!")
-    sys.exit(0)
-else:
-    print(f"⚠ {test_count - passed_count} test başarısız")
-    sys.exit(1)
+    print("\n" + "="*80)
+    print(f"SONUÇ: {passed_count}/{test_count} test başarılı")
+    print("="*80)
+
+    if passed_count == test_count:
+        print("✓ TÜM TESTLER BAŞARILI - 11 BOYUTLU SABITLER DOĞRULANMIŞTIR!")
+        sys.exit(0)
+    else:
+        print(f"⚠ {test_count - passed_count} test başarısız")
+        sys.exit(1)
+
+if __name__ == '__main__':
+    main()
