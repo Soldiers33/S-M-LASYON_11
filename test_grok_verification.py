@@ -160,17 +160,18 @@ test("math.factorial(11) / 66 = 604,800", cross_check, 604800, tolerance=1)
 giza_c_match = C_REAL / 10000000
 test("Giza-C match as decimal", giza_c_match, GIZA_LAT, tolerance=0.00001)
 
-print("\n" + "="*80)
-print(f"RESULTS: {tests_passed}/{tests_total} tests passed")
-print("="*80)
+if __name__ == '__main__':
+    print("\n" + "="*80)
+    print(f"RESULTS: {tests_passed}/{tests_total} tests passed")
+    print("="*80)
 
-if tests_passed == tests_total:
-    print("✓ GROK VERIFICATION COMPLETE - ALL TESTS PASSED")
-    print("✓ Base-11 System Confirmed")
-    print("✓ Timeline Coherence Verified") 
-    print("✓ Statistical Validity Confirmed")
-    sys.exit(0)
-else:
-    failed = tests_total - tests_passed
-    print(f"⚠ {failed} test(s) failed")
-    sys.exit(1)
+    if tests_passed == tests_total:
+        print("✓ GROK VERIFICATION COMPLETE - ALL TESTS PASSED")
+        print("✓ Base-11 System Confirmed")
+        print("✓ Timeline Coherence Verified")
+        print("✓ Statistical Validity Confirmed")
+        sys.exit(0)
+    else:
+        failed = tests_total - tests_passed
+        print(f"⚠ {failed} test(s) failed")
+        sys.exit(1)
