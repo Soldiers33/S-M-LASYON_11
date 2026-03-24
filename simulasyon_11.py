@@ -20,6 +20,7 @@ class Colors:
     RED = '\033[91m'
     GOLD = '\033[33m'
     PURPLE = '\033[35m'
+    MAGENTA = '\033[35m'
 
 try:
     import pandas as pd
@@ -39,7 +40,7 @@ except ImportError:
 def loading_bar(desc):
     print(f"\r\033[K{Colors.CYAN}{desc}...{Colors.ENDC}", end='', flush=True)
     time.sleep(0.01)
-    print(f"\r\033[K{Colors.GREEN}[OK]{Colors.ENDC} {Colors.CYAN}{desc}{Colors.ENDC}\n", end='')
+    print(f"\r\033[K{Colors.GREEN}[OK]{Colors.ENDC} {Colors.CYAN}{desc}{Colors.ENDC}")
 
 
 # ------------------------------------------------------------------------------
@@ -1113,7 +1114,7 @@ class Modul_Nihai_Bilimsel_Kanit:
         print("H0: These numbers are coincidental.")
         print("H1: These numbers are the result of Simule3 (Base-11) Design.")
         
-        toplam_sapma = sum([abs(item[2] - item[3]) / item[3] for item in self.veri_seti])
+        toplam_sapma = sum(abs(item[2] - item[3]) / item[3] for item in self.veri_seti)
         ortalama_sapma = toplam_sapma / len(self.veri_seti)
         
         # P-Value: Probability of randomness
@@ -1521,7 +1522,7 @@ class Simule3_Lab:
         self.tufan_hesaplari = Modul_Tufan_Hesaplari(const)
         self.isa_dogum_kayma = Modul_Isa_Dogum_Kayma(const)
         self.halley_takvim_baglanti = Modul_Halley_Takvim_Baglanti(const)
-        self.altıaltıyucuc = Modul_666x3_Boot(const)
+        self.boot_666x3 = Modul_666x3_Boot(const)
         self.piramit_orijinal = Modul_LevhMahfuz_Piramidi_V103(const)
         
         # [ERROR FIX] Missing Module Defined
@@ -1571,28 +1572,21 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.orhun.analiz()
         self.kabul.analiz()
         self.nuh_detay.analiz()
-        self.nuh_detay.analiz()
         self.revelation.calculate_dates()
         self.revelation.fine_structure_pyramid()
         self.revelation.malta_stonehenge_update()
         self.revelation.repunit_sigma()
         self.yansima_kaniti.analiz()
-        self.yansima_kaniti.analiz()
         self.dogrulama.analiz()
         self.base11_conversion.analiz()
-        self.base11_conversion.analiz()
         self.test11_system.analiz()
-        self.test11_system.analiz()
-        self.piramit_biyoloji.analiz()
         self.piramit_biyoloji.analiz()
         self.nihai_kanit.run_full_proof()
         self.vopson_infodynamics.analiz()
         self.tufan_hesaplari.analiz()
         self.isa_dogum_kayma.analiz()
         self.halley_takvim_baglanti.analiz()
-        self.halley_takvim_baglanti.analiz()
-        self.altıaltıyucuc.analiz()
-        self.altıaltıyucuc.analiz()
+        self.boot_666x3.analiz()
         
         # KAR TOPU V5 V.2 SYNTHESIS EXECUTION (NASA + Giza + Anti-Gravity)
         print(f"\n{Colors.BOLD}{Colors.MAGENTA}*** KAR TOPU V5 V.2 SYNTHESIS (March 4, 2026) ***{Colors.ENDC}")
