@@ -6,6 +6,7 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+from modul_nasa_live_data import Modul_Nasa_Live_Data
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -20,6 +21,7 @@ class Colors:
     RED = '\033[91m'
     GOLD = '\033[33m'
     PURPLE = '\033[35m'
+    MAGENTA = '\033[35m'
 
 try:
     import pandas as pd
@@ -1543,6 +1545,8 @@ class Simule3_Lab:
         self.piramit_detay = Modul_Piramit_Detay_V130(self.const)
         self.giza_isik = Modul_Giza_Isik_Hiz_V132(self.const) # NEW
 
+        self.nasa_live = Modul_Nasa_Live_Data(self.const) # NASA Live Integration
+
 # [ERROR FIX] Missing Simule3_Lab_V133 Class Added
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
@@ -1613,6 +1617,9 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # Run NASA Live Analysis
+        self.nasa_live.analiz()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH

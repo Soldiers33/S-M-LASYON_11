@@ -157,7 +157,7 @@ def test_cosmic_harmony_calculation():
 def test_cosmic_harmony_components():
     """Test 2.2: Verify each harmonic component (Domain: Mathematical Physics)"""
     components = {
-        "Golden Ratio (φ)": (1.6180339887, 1.618),
+        "Golden Ratio (φ)": (1.6180339887, 1.6180339887),
         "Pi (π)": (3.14159265359, 3.14159),
         "Euler (e)": (2.71828182846, 2.71828),
         "Base (11)": (11.0, 11.0)
