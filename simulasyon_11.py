@@ -17,6 +17,7 @@ class Colors:
     FAIL = '\033[91m'
     ENDC = '\033[0m'
     BOLD = '\033[1m'
+    MAGENTA = '\033[35m'
     RED = '\033[91m'
     GOLD = '\033[33m'
     PURPLE = '\033[35m'
