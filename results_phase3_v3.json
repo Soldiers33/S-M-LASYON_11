@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-04T22:42:14.899330",
+  "timestamp": "2026-03-25T09:49:51.618304",
   "phase": "Phase-3",
   "components": {
     "gobekli_tepe": {
@@ -29,7 +29,7 @@
     "bio_frequency_mean": 2539.8
   },
   "monte_carlo": {
-    "mean": 362.4206168799427,
-    "stability": 0.12219032573451953
+    "mean": 362.6895115869343,
+    "stability": 0.12298138153527292
   }
 }

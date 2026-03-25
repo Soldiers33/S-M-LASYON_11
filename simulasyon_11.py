@@ -20,6 +20,7 @@ class Colors:
     RED = '\033[91m'
     GOLD = '\033[33m'
     PURPLE = '\033[35m'
+    MAGENTA = '\033[35m'
 
 try:
     import pandas as pd
@@ -266,8 +267,8 @@ class Simule3_Constants:
     
     # [LM_2] - İkinci Katman
     LM2_QUARTER = LEVHI_MAHFUZ_BASE / 4  # 1666.5
-    LM2_MANAGEMENT = LM2_QUARTER * (FLOOD_YEAR / 1331)  # 4537.8
-    LM2_PREVIOUS_ERA = LM2_QUARTER + FLOOD_YEAR  # 10714.5
+    LM2_MANAGEMENT = LM2_QUARTER * (abs(FLOOD_YEAR) / 1331)  # 11328.694215
+    LM2_PREVIOUS_ERA = LM2_QUARTER + abs(FLOOD_YEAR)  # 10714.5
     
     # [LM_3] - Üçüncü Katman
     LM3_OBSERVATION_DIFF = 2026 - GOZLEM_10T  # 48.1562
