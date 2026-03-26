@@ -36,6 +36,7 @@ class MonteCarloSimulator:
         hits = 0
         deviations = []
         
+        print(f"\r\033[K⏳ Running {self.iterations:,} iterations...", end="", flush=True)
         for _ in range(self.iterations):
             # Random perturbation
             noise = random.gauss(0, 0.5)
@@ -48,6 +49,8 @@ class MonteCarloSimulator:
             deviation = abs(test_freq - cube_11)
             deviations.append(deviation)
         
+        print(f"\r\033[K✅ Completed {self.iterations:,} iterations.\n", end="")
+
         hit_percentage = (hits / self.iterations) * 100
         avg_deviation = sum(deviations) / len(deviations)
         
@@ -75,6 +78,7 @@ class MonteCarloSimulator:
         resonances = 0
         errors = []
         
+        print(f"\r\033[K⏳ Running {self.iterations:,} iterations...", end="", flush=True)
         for _ in range(self.iterations):
             # Random perturbation
             noise = random.gauss(0, 0.05)
@@ -87,6 +91,8 @@ class MonteCarloSimulator:
             error = abs(test_freq / base_11 - 1.0)
             errors.append(error)
         
+        print(f"\r\033[K✅ Completed {self.iterations:,} iterations.\n", end="")
+
         resonance_pct = (resonances / self.iterations) * 100
         avg_error = sum(errors) / len(errors)
         
@@ -114,6 +120,7 @@ class MonteCarloSimulator:
         matches = 0
         precisions = []
         
+        print(f"\r\033[K⏳ Running {self.iterations:,} iterations...", end="", flush=True)
         for _ in range(self.iterations):
             noise = random.gauss(0, 0.02)
             test_integral = giza_target + noise
@@ -126,6 +133,8 @@ class MonteCarloSimulator:
             
             precisions.append(precision)
         
+        print(f"\r\033[K✅ Completed {self.iterations:,} iterations.\n", end="")
+
         match_pct = (matches / self.iterations) * 100
         avg_precision = sum(precisions) / len(precisions)
         
@@ -156,6 +165,7 @@ class MonteCarloSimulator:
         enoch = 10.92111
         giza = 11.08831
         
+        print(f"\r\033[K⏳ Running {self.iterations:,} iterations...", end="", flush=True)
         for _ in range(self.iterations):
             # Random perturbations
             s_noise = random.gauss(0, 0.01)
@@ -175,6 +185,8 @@ class MonteCarloSimulator:
             error = abs(result - formula_target)
             errors.append(error)
         
+        print(f"\r\033[K✅ Completed {self.iterations:,} iterations.\n", end="")
+
         validation_pct = (validations / self.iterations) * 100
         avg_error = sum(errors) / len(errors)
         
