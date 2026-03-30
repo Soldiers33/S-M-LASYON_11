@@ -99,6 +99,14 @@ class LevhiMahfuzConstants:
     
     PYRAMID_HEIGHT_GIZA = 146.6                   # meters
     
+    # ========== SENTEZ-7 GRAND UNIFICATION ==========
+    SENTEZ_V = 1331.0
+    SENTEZ_Q = 6666.0
+    SENTEZ_C_I = 1.11188
+    SENTEZ_G_I = 0.008271
+    SENTEZ_H = 1390.0
+    SENTEZ_T_END = 1999.0
+
     # ========== COSMIC CODES ==========
     MOONLIGHT_111 = 111                           # km (latitude separation unit)
     MOON_CAPTUR_DISTANCE = 22000                  # km (Roche limit approach)
@@ -154,6 +162,14 @@ class LevhiMahfuzFormulas:
     Master formulas for simulation calculations and pattern extraction.
     """
     
+    @staticmethod
+    def calculate_lambda_frequency():
+        """SENTEZ-7: Master Formula Λ = [ ( V × Q × C_i ) / ( G_i × H ) ] × ln(T_End)"""
+        upper = LevhiMahfuzConstants.SENTEZ_V * LevhiMahfuzConstants.SENTEZ_Q * LevhiMahfuzConstants.SENTEZ_C_I
+        lower = LevhiMahfuzConstants.SENTEZ_G_I * LevhiMahfuzConstants.SENTEZ_H
+        ln_t_end = math.log(LevhiMahfuzConstants.SENTEZ_T_END)
+        return (upper / lower) * ln_t_end
+
     @staticmethod
     def base10_to_base11_correction(value_10t):
         """Convert 10-base measured value to 11-base ideal."""
