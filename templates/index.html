@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levh-i Mahfuz Dashboard</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .kesif { margin-bottom: 10px; padding: 10px; border: 1px solid #ccc; }
+        .KIRMIZI { background-color: #ffcccc; }
+        .MOR { background-color: #e6ccff; }
+        .MAVI { background-color: #cceeff; }
+        .SARI { background-color: #ffffcc; }
+        .PEMBE { background-color: #ffccff; }
+        .SIYAH { background-color: #f0f0f0; }
+        button { padding: 5px 10px; cursor: pointer; transition: background-color 0.2s ease, transform 0.1s ease; }
+        button:hover { background-color: #e0e0e0; }
+        button:active { transform: scale(0.98); }
+        button:focus-visible { outline: 2px solid #0056b3; outline-offset: 2px; }
+        input[type="text"] { padding: 5px; width: 300px; }
+        input[type="text"]:focus-visible { outline: 2px solid #0056b3; outline-offset: 1px; border-color: transparent; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+    </style>
+</head>
+<body>
+    <h1>LEVH-İ MAHFUZ DASHBOARD</h1>
+
+    <h2>Sistem Durumu</h2>
+    <div id="sistem-durumu">Yükleniyor...</div>
+
+    <h2>Keşifler</h2>
+    <div id="kesifler">
+        {% for k in kesifler %}
+            <div class="kesif {{ k.renk }}">
+                <strong>{{ k.tarih }}</strong> - {{ k.islem_turu }}<br>
+                Değer: {{ k.deger }} | Kategori: {{ k.kategori }}<br>
+                Açıklama: {{ k.aciklama }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Kar Topu Logları</h2>
+    <div id="kartopu">
+        {% for log in kartopu %}
+            <div class="kesif">
+                <strong>{{ log.tarih }}</strong> - {{ log.kaynak }}<br>
+                Veri: {{ log.veri }}<br>
+                Analiz: {{ log.analiz }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Bot ile İletişim</h2>
+    <div id="sohbet">
+        {% for s in sohbetler %}
+            <p><strong>{{ s.gonderen }}:</strong> {{ s.mesaj }} ({{ s.tarih }})</p>
+        {% endfor %}
+    </div>
+    <form onsubmit="gonderMesaj(event)">
+        <label for="mesaj-input" class="sr-only">Mesajınız</label>
+        <input type="text" id="mesaj-input" placeholder="Mesajınız..." required aria-required="true">
+        <button type="submit" aria-label="Mesajı gönder">Gönder</button>
+    </form>
+
+    <h2>Kaynak Ekle</h2>
+    <form onsubmit="ekleKaynak(event)">
+        <label for="kaynak-input" class="sr-only">Dosya yolu veya link</label>
+        <input type="text" id="kaynak-input" placeholder="Dosya yolu veya link..." required aria-required="true">
+        <button type="submit" aria-label="Kaynağı ekle">Ekle</button>
+    </form>
+
+    <h2>Masaüstü Tara</h2>
+    <button onclick="masaustuTara()" aria-label="Masaüstünü tara ve yeni dosyaları ekle">Masaüstü Tara</button>
+
+    <script>
+        function gonderMesaj(e) {
+            e.preventDefault();
+            const mesaj = document.getElementById('mesaj-input').value;
+            fetch('/bot_cevap', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mesaj: mesaj })
+            }).then(r => r.json()).then(data => {
+                if (data.status === 'ok') location.reload();
+            });
+        }
+
+        function ekleKaynak(e) {
+            e.preventDefault();
+            const yol = document.getElementById('kaynak-input').value;
+            fetch('/kaynak_ekle', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ yol: yol })
+            }).then(r => r.json()).then(data => {
+                if (data.status === 'ok') location.reload();
+            });
+        }
+
+        function masaustuTara() {
+            fetch('/masaustu_tara', { method: 'POST' })
+            .then(r => r.json()).then(data => {
+                alert(data.mesaj);
+                if (data.status === 'ok') location.reload();
+            });
+        }
+
+        function guncelleDurum() {
+            fetch('/sistem_durumu')
+            .then(r => r.json()).then(data => {
+                document.getElementById('sistem-durumu').innerHTML =
+                    `Çalışıyor: ${data.calisiyor ? 'Evet' : 'Hayır'}<br>Anlık İşlem: ${data.anlik_islem}`;
+            });
+        }
+
+        setInterval(guncelleDurum, 2000);
+        guncelleDurum();
+    </script>
+</body>
+</html>

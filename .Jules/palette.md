@@ -11,3 +11,7 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+
+## 2026-04-02 - Vanilla HTML Form Accessibility Pattern
+**Learning:** When dealing with raw HTML templates (like Flask Jinja templates without a CSS framework), forms are often missing basic accessibility features like `aria-label` or visually hidden `<label>` elements, causing screen readers to struggle with context. Simple `required` attributes and basic hover transitions provide an immediate UX and A11y boost with minimal footprint.
+**Action:** Always verify keyboard focus states and screen reader labels when encountering raw HTML forms, explicitly injecting semantic HTML (`<label>`, `aria-required`, `aria-label`) to establish a reusable baseline pattern for legacy/vanilla components.
