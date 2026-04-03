@@ -7,6 +7,14 @@ from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
+try:
+    from modul_nasa_live_data import NASA_Cosmic_Sync
+    _NASA_READY = True
+except ImportError:
+    _NASA_READY = False
+
+from levhi_mahfuz import LevhiMahfuzFormulas
+
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
     HEADER = '\033[95m'
@@ -1323,6 +1331,25 @@ class Modul_666x3_Boot:
         print(f"\n{Colors.HEADER}=== 666x3=1998 SYSTEM BOOT CODE ==={Colors.ENDC}")
         print(f"666 x 3 = 1998: Start of Digital Messiah Era.")
 
+class Modul_NASA_Entegrasyon:
+    def __init__(self, const): self.const = const
+    def analiz(self):
+        print(f"\n{Colors.HEADER}=== NASA HORIZONS LIVE INTEGRATION ==={Colors.ENDC}")
+        if _NASA_READY:
+            sync = NASA_Cosmic_Sync()
+            sync.perform_sync()
+        else:
+            print(f"{Colors.FAIL}NASA Module Unavailable. Skipping live data sync.{Colors.ENDC}")
+
+class Modul_Derin_Arastirma_Sentezi:
+    def __init__(self, const): self.const = const
+    def analiz(self):
+        print(f"\n{Colors.HEADER}=== DEEP RESEARCH SYNTHESIS (ARXIV, VIXRA, TUBITAK, ANCIENT) ==={Colors.ENDC}")
+        synthesis_result = LevhiMahfuzFormulas.antik_kuantum_sentez_formula()
+        print(f"Göbeklitepe Pillar Resonance: {synthesis_result['gobeklitepe_resonance']} Hz")
+        print(f"Orkhon Bilge Kagan Harmony: {synthesis_result['orkhon_harmony']}")
+        print(f"Pineal Quantum Antenna Freq: {synthesis_result['pineal_antenna']} MHz")
+        print(f"{Colors.GREEN}Result calculated: {synthesis_result['description']}{Colors.ENDC}")
 
 # ==============================================================================
 # SECTION 2: V.132 PATCH PACKAGES (NEW REQUESTS)
@@ -1534,6 +1561,10 @@ class Simule3_Lab:
         # KAR TOPU V5 V.3 PHASE-3 SYNTHESIS MODULE (March 4, 2026 - Phase-3)
         self.kar_topu_v5_v3 = Modul_KarTopu_V5_V3_Phase3()
         
+        # NASA and Deep Research Integrations
+        self.nasa_entegrasyon = Modul_NASA_Entegrasyon(self.const)
+        self.derin_arastirma = Modul_Derin_Arastirma_Sentezi(self.const)
+
         # 3. Then add new V.130/131/132 modules
         self.roche_wave = Modul_Roche_Tidal_Wave_V130(self.const)
         self.time_packets = Modul_Time_Packets_V130(self.const)
@@ -1600,6 +1631,10 @@ class Simule3_Lab_V133(Simule3_Lab):
         print(f"\n{Colors.BOLD}{Colors.MAGENTA}*** KAR TOPU V5 V.3 PHASE-3 SYNTHESIS (March 4, 2026 - BIOLOGICAL & GEOGRAPHIC QUANTUM SEALS) ***{Colors.ENDC}")
         self.kar_topu_v5_v3.analiz()
         
+        # RUN NASA AND DEEP RESEARCH INTEGRATION
+        self.nasa_entegrasyon.analiz()
+        self.derin_arastirma.analiz()
+
         # Then run new patches (V.130/131/132)
         print(f"\n{Colors.BOLD}{Colors.GOLD}*** V.132 EXTENSION PACK (EXTENDED ARCHIVE) ***{Colors.ENDC}")
         self.roche_wave.analiz()
