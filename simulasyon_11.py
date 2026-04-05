@@ -7,6 +7,18 @@ from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
+try:
+    from modul_nasa_live_data import Modul_Nasa_Live_Data
+    _NASA_READY = True
+except ImportError:
+    _NASA_READY = False
+
+try:
+    from antik_kuantum_sentezi import Modul_Antik_Kuantum
+    _ANTIK_KUANTUM_READY = True
+except ImportError:
+    _ANTIK_KUANTUM_READY = False
+
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
     HEADER = '\033[95m'
@@ -1536,6 +1548,13 @@ class Simule3_Lab:
         
         # 3. Then add new V.130/131/132 modules
         self.roche_wave = Modul_Roche_Tidal_Wave_V130(self.const)
+
+        # 4. Add NASA and Antiquity Quantum Modules
+        if _NASA_READY:
+            self.nasa_live = Modul_Nasa_Live_Data()
+
+        if _ANTIK_KUANTUM_READY:
+            self.antik_kuantum = Modul_Antik_Kuantum()
         self.time_packets = Modul_Time_Packets_V130(self.const)
         self.takvim_revize = Modul_Chronos_Takvim_V130(self.const)
         self.teoloji = Modul_Teolojik_Reset_V130(self.const)
@@ -1600,6 +1619,10 @@ class Simule3_Lab_V133(Simule3_Lab):
         print(f"\n{Colors.BOLD}{Colors.MAGENTA}*** KAR TOPU V5 V.3 PHASE-3 SYNTHESIS (March 4, 2026 - BIOLOGICAL & GEOGRAPHIC QUANTUM SEALS) ***{Colors.ENDC}")
         self.kar_topu_v5_v3.analiz()
         
+        # Antiquity Quantum Synthesis Execution
+        if _ANTIK_KUANTUM_READY:
+            self.antik_kuantum.analiz()
+
         # Then run new patches (V.130/131/132)
         print(f"\n{Colors.BOLD}{Colors.GOLD}*** V.132 EXTENSION PACK (EXTENDED ARCHIVE) ***{Colors.ENDC}")
         self.roche_wave.analiz()

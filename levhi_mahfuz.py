@@ -144,6 +144,12 @@ class LevhiMahfuzConstants:
     # ========== EXISTING CONSTANT REFERENCE ==========
     LEVHI_MAHFUZ_CORE_REF = IDEAL_EARTH_RADIUS     # Reference to 6666
     
+    # ========== ADDITIONAL CONSTANTS ==========
+    CMB_TEMPERATURE = 2.725                        # Cosmic Microwave Background
+    GOBEKLITEPE_LATITUDE = 37.2232                 # Göbeklitepe
+    GOBEKLITEPE_LONGITUDE = 38.9224                # Göbeklitepe
+    PLANCK_LENGTH = 1.616e-35                      # Planck Length
+
     # ========== RESONANCE RATIOS ==========
     HATAY_MOON_RATIO = 363000 / 36.3              # = 10,000 (fractal lock)
     EARTH_MOON_DIAMETER_RATIO = 3.6678            # ≈ 3.63 (Year code)
@@ -293,6 +299,26 @@ class LevhiMahfuzFormulas:
         giza_str = str(LevhiMahfuzConstants.GIZA_LATITUDE).replace('.', '')
         light_str = str(int(LevhiMahfuzConstants.SPEED_LIGHT_REAL))
         return giza_str in light_str or light_str in giza_str
+
+    @staticmethod
+    def cmb_resonance():
+        """Calculate CMB Resonance"""
+        return LevhiMahfuzConstants.CMB_TEMPERATURE * 11
+
+    @staticmethod
+    def gobeklitepe_alignment():
+        """Calculate Göbeklitepe Alignment Distance from Giza"""
+        lat1 = math.radians(LevhiMahfuzConstants.GIZA_LATITUDE)
+        lon1 = math.radians(31.1342) # Giza Longitude
+        lat2 = math.radians(LevhiMahfuzConstants.GOBEKLITEPE_LATITUDE)
+        lon2 = math.radians(LevhiMahfuzConstants.GOBEKLITEPE_LONGITUDE)
+
+        dlon = lon2 - lon1
+        dlat = lat2 - lat1
+        a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
+        c = 2 * math.asin(math.sqrt(a))
+        r = 6371 # Radius of earth in kilometers.
+        return c * r
 
 
 class LevhiMahfuzPatterns:
