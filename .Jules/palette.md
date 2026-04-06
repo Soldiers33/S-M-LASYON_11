@@ -11,3 +11,7 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+
+## 2026-04-06 - CLI Monte Carlo Progress UX
+**Learning:** Long running loops (like Monte Carlo simulations) without progress feedback appear as system hangs to users. Waiting for the simulation to finish before showing output causes uncertainty.
+**Action:** Implemented in-place progress percentage updates (`\r\033[K`) during the loop execution to provide continuous feedback without cluttering the terminal.

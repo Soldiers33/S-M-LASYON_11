@@ -254,7 +254,7 @@ class Modul_KarTopu_V5_Sentez_V2:
         """
         print(f"{Colors.BOLD}{Colors.CYAN}[ANALYSIS] GEOGRAPHIC SACRED HARMONIES{Colors.ENDC}")
         
-        kailash_lat = self.const.KAILASH_LAT
+        kailash_lat = getattr(self.const, 'KAILASH_LATITUDE', getattr(self.const, 'KAILASH_LAT', 31.067))
         kailasa_lat = 31.0675  # Kailasa (plane)
         giza_lat = self.kt.GIZA_LATITUDE_PRECISION
         
@@ -342,6 +342,14 @@ class Modul_KarTopu_V5_Sentez_V2:
             # Harmony constant variation
             harmony = 1.618 * math.pi * math.e * 11 * (1 + random.gauss(0, 0.00001))
             results_harmony.append(harmony)
+
+            # Show progress
+            step = max(1, iterations // 10)
+            if (i + 1) % step == 0 or (i + 1) == iterations:
+                progress = ((i + 1) / iterations) * 100
+                print(f"\r\033[K    Progress: {progress:5.1f}% ({i+1}/{iterations})", end='', flush=True)
+
+        print()  # Empty print to cleanly end the progress bar line
         
         # Statistics
         import statistics
