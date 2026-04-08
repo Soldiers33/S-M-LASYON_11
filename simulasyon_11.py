@@ -7,6 +7,24 @@ from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
+try:
+    from modul_nasa_live_data import Modul_NasaLiveData
+    _NASA_READY = True
+except ImportError:
+    _NASA_READY = False
+
+try:
+    from antik_kuantum_sentezi import Modul_AntikKuantumSentezi
+    _ANTIK_KUANTUM_READY = True
+except ImportError:
+    _ANTIK_KUANTUM_READY = False
+
+try:
+    from deep_research_module import DeepResearchModule
+    _RESEARCH_READY = True
+except ImportError:
+    _RESEARCH_READY = False
+
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
     HEADER = '\033[95m'
@@ -1544,6 +1562,13 @@ class Simule3_Lab:
         self.piramit_detay = Modul_Piramit_Detay_V130(self.const)
         self.giza_isik = Modul_Giza_Isik_Hiz_V132(self.const) # NEW
 
+        if _NASA_READY:
+            self.nasa_live = Modul_NasaLiveData(self.const)
+        if _ANTIK_KUANTUM_READY:
+            self.antik_sentez = Modul_AntikKuantumSentezi(self.const)
+        if _RESEARCH_READY:
+            self.deep_research = DeepResearchModule(self.const)
+
 # [ERROR FIX] Missing Simule3_Lab_V133 Class Added
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
@@ -1611,6 +1636,15 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # MEGA SENTEZ-11: YENİ MODÜLLER (V.135)
+        print(f"\n{Colors.BOLD}{Colors.GOLD}*** MEGA SENTEZ-11 (NASA & DEEP RESEARCH) V.135 ***{Colors.ENDC}")
+        if _RESEARCH_READY:
+            self.deep_research.analiz()
+        if _NASA_READY:
+            self.nasa_live.analiz()
+        if _ANTIK_KUANTUM_READY:
+            self.antik_sentez.analiz()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
