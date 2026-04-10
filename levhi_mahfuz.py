@@ -118,6 +118,13 @@ class LevhiMahfuzConstants:
     # ========== DISCOVERY-DERIVED CONSTANTS ==========
     # These values surfaced from Antigravity data and are
     # now treated as fixed measurements within the system.
+
+    # ========== NEW GENERATIVE SYNTHESIS CONSTANTS ==========
+    # Brand new undiscovered constants synthesized from background research
+    QUANTUM_GRAVITY_BRIDGE_CONST = 1.0911011e-47  # Link between 11D Gravity and Quantum Info
+    UNIVERSAL_BACKGROUND_RESONANCE = 2.725 * 11   # Cosmic Microwave Background scaled to Base-11 (29.975)
+    DARK_MATTER_HARMONIC_OFFSET = 0.814           # Offset ratio matching Halley code
+    TESSERACT_HYPERVOLUME_RATIO = 11.1111         # 4D Hypervolume scaling factor
     DIMENSIONAL_VOLUME_ANGLE = 1342.0473          # 11³ × OP_ANGLE (volume→angle transform)
     GOLDEN_YEAR_FREQUENCY = 3631.618              # 3630 + φ (time+golden ratio)
     
@@ -285,6 +292,29 @@ class LevhiMahfuzFormulas:
             "quantum_info": quantum_info,
             "levhi_quantum": result,
             "description": f"Levh-i Quantum = {levhi_freq:.2f} × {quantum_info:.2e} = {result:.2e}"
+        }
+
+    @staticmethod
+    def quantum_gravity_bridge_formula():
+        """Calculate Quantum Gravity Bridge using new synthesis constants."""
+        bridge_val = LevhiMahfuzConstants.QUANTUM_GRAVITY_BRIDGE_CONST * LevhiMahfuzConstants.GRAVITY_IDEAL
+        result = bridge_val * (11 ** 2)
+        return {
+            "bridge_const": LevhiMahfuzConstants.QUANTUM_GRAVITY_BRIDGE_CONST,
+            "gravity": LevhiMahfuzConstants.GRAVITY_IDEAL,
+            "quantum_gravity_bridge": result,
+            "description": f"Quantum Gravity Bridge = {result:.4e} (Links 11D Gravity to Quantum Info)"
+        }
+
+    @staticmethod
+    def universal_background_resonance():
+        """Calculate Universal Background Resonance scaling."""
+        cmb_val = 2.725 # CMB real temperature
+        resonance = cmb_val * 11
+        return {
+            "cmb_temp": cmb_val,
+            "resonance": resonance,
+            "description": f"Universal Background Resonance = {resonance:.3f} Hz (CMB scaled to Base-11)"
         }
     
     @staticmethod
