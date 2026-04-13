@@ -623,6 +623,8 @@ class Modul_KarTopu_V5_V3_Phase3:
         stability_scores = []
         convergence_rate = []
         
+        print(f"\r    \033[KLoading...", end='', flush=True)
+
         for iteration in range(iterations):
             # Random perturbations on constants (±5%)
             gobekli_perturbed = self.gobekli.LATITUDE * random.uniform(0.95, 1.05)
@@ -648,7 +650,10 @@ class Modul_KarTopu_V5_V3_Phase3:
             # Show progress
             if (iteration + 1) % (iterations // 10) == 0:
                 progress = ((iteration + 1) / iterations) * 100
-                print(f"    Progress: {progress:5.1f}% ({iteration+1}/{iterations})")
+                print(f"\r    \033[KProgress: {progress:5.1f}% ({iteration+1}/{iterations})", end='', flush=True)
+
+        print(f"\r    \033[K[OK] Simulation Complete")
+        print()
         
         # Statistics
         mean_result = sum(results_list) / len(results_list)
