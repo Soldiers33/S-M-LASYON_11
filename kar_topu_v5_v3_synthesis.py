@@ -648,8 +648,9 @@ class Modul_KarTopu_V5_V3_Phase3:
             # Show progress
             if (iteration + 1) % (iterations // 10) == 0:
                 progress = ((iteration + 1) / iterations) * 100
-                print(f"    Progress: {progress:5.1f}% ({iteration+1}/{iterations})")
+                print(f"\r\033[K    Progress: {progress:5.1f}% ({iteration+1}/{iterations})", end='', flush=True)
         
+        print() # Final newline after loop completes
         # Statistics
         mean_result = sum(results_list) / len(results_list)
         std_dev = (sum((x - mean_result)**2 for x in results_list) / len(results_list))**0.5
