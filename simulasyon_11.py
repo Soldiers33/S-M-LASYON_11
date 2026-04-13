@@ -7,6 +7,28 @@ from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
+_NASA_READY = False
+try:
+    from modul_nasa_live_data import Modul_Nasa_Live_Data
+    _NASA_READY = True
+except ImportError:
+    pass
+
+_RESEARCH_READY = False
+try:
+    from deep_research_module import Modul_Deep_Research
+    _RESEARCH_READY = True
+except ImportError:
+    pass
+
+_DOGRULAMA_HAZIR = False
+try:
+    from dogrulama_testleri import Modul_Dogrulama_Testleri
+    _DOGRULAMA_HAZIR = True
+except ImportError:
+    pass
+
+
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
     HEADER = '\033[95m'
@@ -1548,6 +1570,12 @@ class Simule3_Lab:
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
         super().__init__() # Call the init method of the parent class
+        if _NASA_READY:
+            self.nasa_module = Modul_Nasa_Live_Data()
+        if _RESEARCH_READY:
+            self.research_module = Modul_Deep_Research()
+        if _DOGRULAMA_HAZIR:
+            self.dogrulama_testleri = Modul_Dogrulama_Testleri()
 
     def run_all(self):
         # First run the original flow (V.103)
@@ -1600,6 +1628,13 @@ class Simule3_Lab_V133(Simule3_Lab):
         print(f"\n{Colors.BOLD}{Colors.MAGENTA}*** KAR TOPU V5 V.3 PHASE-3 SYNTHESIS (March 4, 2026 - BIOLOGICAL & GEOGRAPHIC QUANTUM SEALS) ***{Colors.ENDC}")
         self.kar_topu_v5_v3.analiz()
         
+        if _NASA_READY:
+            self.nasa_module.analiz()
+        if _RESEARCH_READY:
+            self.research_module.analiz()
+        if _DOGRULAMA_HAZIR:
+            self.dogrulama_testleri.analiz()
+
         # Then run new patches (V.130/131/132)
         print(f"\n{Colors.BOLD}{Colors.GOLD}*** V.132 EXTENSION PACK (EXTENDED ARCHIVE) ***{Colors.ENDC}")
         self.roche_wave.analiz()
