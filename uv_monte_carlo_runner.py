@@ -17,6 +17,9 @@ import random
 from datetime import datetime
 from levhi_mahfuz import LevhiMahfuzConstants as LMC
 
+def loading_bar(desc):
+    print(f"\r\033[K\033[96m{desc}...\033[0m", end='', flush=True)
+
 class MonteCarloSimulator:
     """11-Boyutlu Monte Carlo Simülatörü"""
     
@@ -36,6 +39,7 @@ class MonteCarloSimulator:
         hits = 0
         deviations = []
         
+        loading_bar("Simulating Sirius Frequency Alignments")
         for _ in range(self.iterations):
             # Random perturbation
             noise = random.gauss(0, 0.5)
@@ -48,6 +52,7 @@ class MonteCarloSimulator:
             deviation = abs(test_freq - cube_11)
             deviations.append(deviation)
         
+        print(f"\r\033[K\033[92m[OK]\033[0m \033[96mSimulating Sirius Frequency Alignments\033[0m\n", end='')
         hit_percentage = (hits / self.iterations) * 100
         avg_deviation = sum(deviations) / len(deviations)
         
@@ -75,6 +80,7 @@ class MonteCarloSimulator:
         resonances = 0
         errors = []
         
+        loading_bar("Testing Enoch 11D Quantum Locks")
         for _ in range(self.iterations):
             # Random perturbation
             noise = random.gauss(0, 0.05)
@@ -87,6 +93,7 @@ class MonteCarloSimulator:
             error = abs(test_freq / base_11 - 1.0)
             errors.append(error)
         
+        print(f"\r\033[K\033[92m[OK]\033[0m \033[96mTesting Enoch 11D Quantum Locks\033[0m\n", end='')
         resonance_pct = (resonances / self.iterations) * 100
         avg_error = sum(errors) / len(errors)
         
@@ -114,6 +121,7 @@ class MonteCarloSimulator:
         matches = 0
         precisions = []
         
+        loading_bar("Validating Giza Integral Reflections")
         for _ in range(self.iterations):
             noise = random.gauss(0, 0.02)
             test_integral = giza_target + noise
@@ -126,6 +134,7 @@ class MonteCarloSimulator:
             
             precisions.append(precision)
         
+        print(f"\r\033[K\033[92m[OK]\033[0m \033[96mValidating Giza Integral Reflections\033[0m\n", end='')
         match_pct = (matches / self.iterations) * 100
         avg_precision = sum(precisions) / len(precisions)
         
@@ -156,6 +165,7 @@ class MonteCarloSimulator:
         enoch = 10.92111
         giza = 11.08831
         
+        loading_bar("Calculating Anti-Gravity Master Resonances")
         for _ in range(self.iterations):
             # Random perturbations
             s_noise = random.gauss(0, 0.01)
@@ -175,6 +185,7 @@ class MonteCarloSimulator:
             error = abs(result - formula_target)
             errors.append(error)
         
+        print(f"\r\033[K\033[92m[OK]\033[0m \033[96mCalculating Anti-Gravity Master Resonances\033[0m\n", end='')
         validation_pct = (validations / self.iterations) * 100
         avg_error = sum(errors) / len(errors)
         

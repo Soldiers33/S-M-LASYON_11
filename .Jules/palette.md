@@ -11,3 +11,7 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+
+## 2026-03-25 - CLI Long-Running Processes Feedback
+**Learning:** Long-running CLI scripts without any visual feedback can feel unresponsive or broken, increasing user anxiety or causing premature termination. Adding small, inline loading indicators provides reassurance.
+**Action:** Extracted the `\r\033[K` `loading_bar` pattern into `uv_monte_carlo_runner.py` to give immediate visual feedback before long (e.g., 100,000 iterations) Monte Carlo calculations.
