@@ -6,6 +6,11 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+try:
+    from modul_nasa_live_data import Modul_Nasa_Live_Data
+    _NASA_READY = True
+except ImportError:
+    _NASA_READY = False
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -1463,6 +1468,67 @@ class Modul_Piramit_Detay_V130:
         print(f"11! (39,916,800) / 66 = {week_seconds:,.0f} (604,800 Seconds). Exactly 1 Week.")
 
 
+class Quantum_Resonance_Breaker:
+    def __init__(self, const):
+        self.const = const
+        # SENTEZ-7 Constants
+        self.V = 1331.0
+        self.Q = 6666.0
+        self.C_i = 1.11188
+        self.G_i = 0.008271
+        self.H = 1390.0
+        self.T_End = 1999.0
+
+    def calculate_lambda_frequency(self):
+        import math
+        # Formula: [ ( V × Q × C_i ) / ( G_i × H ) ] × ln(T_End)
+        upper_volume = self.V * self.Q * self.C_i
+        lower_friction = self.G_i * self.H
+        ln_t_end = math.log(self.T_End)
+        lambda_freq = (upper_volume / lower_friction) * ln_t_end
+        return lambda_freq
+
+    def analiz(self):
+        print(f"\n{Colors.BOLD}{Colors.CYAN}[SENTEZ-7] QUANTUM RESONANCE BREAKER (Λ) INITIALIZATION{Colors.ENDC}")
+        freq = self.calculate_lambda_frequency()
+        print(f"{Colors.GREEN}Lambda Break Frequency (Λ): {freq / 1000000:.6f} MHz{Colors.ENDC}")
+        if abs(freq - 6521763) < 1000:
+             print(f"[{Colors.BOLD}{Colors.WARNING}+++ MATCH +++{Colors.ENDC}] 6.52 MHz Resonance achieved. Gravity dampening active.")
+        print(f"{Colors.CYAN}------------------------------------------------------------{Colors.ENDC}")
+
+class Dimensional_Escape_Overload:
+    def __init__(self, const):
+        self.const = const
+        self.escape_velocity_mhz = 23.386439
+
+    def calculate_escape_velocity(self):
+        return self.escape_velocity_mhz
+
+    def analiz(self):
+        print(f"\n{Colors.BOLD}{Colors.FAIL}[SENTEZ-7] DIMENSIONAL ESCAPE OVERLOAD{Colors.ENDC}")
+        print(f"{Colors.WARNING}Matrix Break Point Velocity: {self.escape_velocity_mhz} MHz{Colors.ENDC}")
+        print(f"{Colors.FAIL}Warning: Approaching 23.38 MHz infinite friction boundary. Door open sequence.{Colors.ENDC}")
+        print(f"{Colors.FAIL}------------------------------------------------------------{Colors.ENDC}")
+
+class Pineal_Quantum_Antenna:
+    def __init__(self, const):
+        self.const = const
+        self.theta_wave = 8.0 # Hz
+        self.universal_wifi = 6.521763 # MHz
+
+    def sync_frequency(self):
+        # The connection logic links the biological 8.0 Hz Theta wave to the 6.52 MHz universal wifi
+        return self.universal_wifi / self.theta_wave
+
+    def analiz(self):
+        print(f"\n{Colors.BOLD}{Colors.BLUE}[SENTEZ-7] PINEAL QUANTUM ANTENNA (M-THEORY LINK){Colors.ENDC}")
+        ratio = self.sync_frequency()
+        print(f"{Colors.GREEN}Biological Theta Wave: {self.theta_wave} Hz{Colors.ENDC}")
+        print(f"{Colors.CYAN}Cosmic Wi-Fi Coupling Ratio: {ratio:,.2f} cycles/Hz{Colors.ENDC}")
+        print(f"[{Colors.BOLD}{Colors.MAGENTA}SYNC{Colors.ENDC}] Piezoelectric calcite crystals harmonized with 11-Dimensional String vibrations.")
+        print(f"{Colors.BLUE}------------------------------------------------------------{Colors.ENDC}")
+
+
 # ------------------------------------------------------------------------------
 # MAIN KERNEL (FULL INTEGRATION V.133)
 # ------------------------------------------------------------------------------
@@ -1548,6 +1614,16 @@ class Simule3_Lab:
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
         super().__init__() # Call the init method of the parent class
+        # SENTEZ-7 Additions
+        self.sentez7_quantum = Quantum_Resonance_Breaker(self.const)
+        self.sentez7_escape = Dimensional_Escape_Overload(self.const)
+        self.sentez7_pineal = Pineal_Quantum_Antenna(self.const)
+
+        # NASA LIVE DATA
+        if _NASA_READY:
+            self.nasa_live = Modul_Nasa_Live_Data(self.const)
+        else:
+            self.nasa_live = None
 
     def run_all(self):
         # First run the original flow (V.103)
@@ -1611,6 +1687,16 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # SENTEZ-7 RUN
+        print(f"\n{Colors.BOLD}{Colors.MAGENTA}*** SENTEZ-7 GRAND UNIFICATION ***{Colors.ENDC}")
+        self.sentez7_quantum.analiz()
+        self.sentez7_escape.analiz()
+        self.sentez7_pineal.analiz()
+
+        # NASA LIVE DATA
+        if self.nasa_live:
+            self.nasa_live.analiz()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
