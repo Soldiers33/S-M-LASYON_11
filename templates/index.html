@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levh-i Mahfuz Dashboard</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .panel { background-color: #1e293b; border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        h1, h2, h3 { color: #38bdf8; margin-top: 0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #334155; }
+        th { color: #94a3b8; font-weight: 600; }
+        .KIRMIZI { color: #ef4444; font-weight: bold; }
+        .MOR { color: #a855f7; font-weight: bold; }
+        .MAVI { color: #3b82f6; }
+        .SARI { color: #eab308; }
+        .PEMBE { color: #ec4899; }
+        .SIYAH { color: #f8fafc; }
+
+        .chat-container { height: 300px; overflow-y: auto; background-color: #0f172a; border-radius: 4px; padding: 10px; margin-bottom: 10px; border: 1px solid #334155; }
+        .message { margin-bottom: 10px; padding: 8px 12px; border-radius: 4px; }
+        .message.sistem { background-color: #0284c7; color: white; margin-right: 20px; }
+        .message.user { background-color: #334155; color: white; margin-left: 20px; text-align: right; }
+
+        .input-group { display: flex; gap: 10px; }
+        input[type="text"] { flex: 1; padding: 10px; border-radius: 4px; border: 1px solid #334155; background-color: #0f172a; color: white; }
+        button { padding: 10px 15px; border: none; border-radius: 4px; background-color: #0ea5e9; color: white; cursor: pointer; font-weight: bold; transition: background-color 0.2s; }
+        button:hover { background-color: #0284c7; }
+        button:disabled { background-color: #475569; cursor: not-allowed; }
+
+        .status-badge { display: inline-block; padding: 4px 8px; border-radius: 9999px; font-size: 12px; font-weight: bold; }
+        .status-active { background-color: #22c55e; color: #0f172a; }
+        .status-idle { background-color: #f59e0b; color: #0f172a; }
+
+        .source-list { list-style: none; padding: 0; }
+        .source-item { display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid #334155; }
+        .source-badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; background-color: #475569; }
+
+        /* Loading Spinner */
+        .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s ease-in-out infinite; margin-right: 8px; vertical-align: middle; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+        button:focus-visible, input:focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }
+
+        /* Toast Notifications */
+        #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast { background-color: #1e293b; color: white; padding: 12px 20px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); border-left: 4px solid #38bdf8; min-width: 250px; animation: slideIn 0.3s ease-out forwards; }
+        .toast.error { border-left-color: #ef4444; }
+        .toast.success { border-left-color: #22c55e; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+    </style>
+</head>
+<body>
+    <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div>
+            <h1>Levh-i Mahfuz (11-Boyutlu Otonom Ağ)</h1>
+            <p style="color: #94a3b8; margin: 0;">Sentez Motoru Durumu: <span id="miner-status" class="status-badge status-active">Aktif Tarama</span></p>
+            <p id="miner-action" style="color: #38bdf8; font-size: 14px; margin-top: 5px;">Sistem başlatılıyor...</p>
+        </div>
+        <div>
+            <button id="toggle-miner" aria-label="Sistemi Duraklat">Sistemi Duraklat</button>
+            <button id="scan-desktop" aria-label="Masaüstünü Tara" style="background-color: #8b5cf6;">Masaüstünü Tara</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sol Panel - Ana Veri Akışı -->
+        <div class="panel">
+            <h2>Kozmik Keşifler ve Otonom Analizler</h2>
+            <div style="overflow-x: auto;">
+                <table id="kesifler-table">
+                    <thead>
+                        <tr>
+                            <th>Zaman</th>
+                            <th>Kaynak/İşlem</th>
+                            <th>Veri Değeri</th>
+                            <th>Kategori</th>
+                            <th>Akıl Yürütme/Sonuç</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for k in kesifler %}
+                        <tr>
+                            <td style="color: #64748b; font-size: 12px;">{{ k[1][11:] }}</td>
+                            <td>{{ k[2] }}</td>
+                            <td style="font-family: monospace;">{{ k[3] }}</td>
+                            <td><span class="{{ k[5] if k|length > 5 else 'SIYAH' }}">{{ k[4] }}</span></td>
+                            <td style="font-size: 14px;">{{ k[5] if k|length > 5 else k[4] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sağ Panel - Kontrol ve Kaynaklar -->
+        <div>
+            <div class="panel" style="margin-bottom: 20px;">
+                <h2>Dekoder-11 İletişim Terminali</h2>
+                <div class="chat-container" id="chat-box" aria-live="polite">
+                    {% for s in sohbetler %}
+                    <div class="message {{ 'sistem' if s[1] == 'SİSTEM' else 'user' }}">
+                        <strong style="font-size: 12px; opacity: 0.8;">{{ s[1] }}</strong><br>
+                        {{ s[2] }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <form id="chat-form" class="input-group">
+                    <label for="chat-input" class="visually-hidden">Mesajınız</label>
+                    <input type="text" id="chat-input" placeholder="Sisteme komut, link veya dosya yolu verin..." required autocomplete="off">
+
+                    <!-- UX IMPROVEMENT: Added ARIA label, disabled state logic, and loading spinner placeholder -->
+                    <button type="submit" id="chat-submit" aria-live="polite" aria-label="Mesaj Gönder">Gönder</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Bilgi Kütüphanesi</h2>
+                    <span style="color: #94a3b8; font-size: 12px;" id="kaynak-count">{{ kaynaklar|length }} Kaynak</span>
+                </div>
+                <ul class="source-list" id="kaynak-list">
+                    {% for kay in kaynaklar[:15] %}
+                    <li class="source-item">
+                        <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80%;">
+                            <span class="source-badge">{{ kay[2] }}</span>
+                            <span style="font-size: 13px; margin-left: 8px;" title="{{ kay[3] }}">
+                                {% if kay[2] == 'DOSYA' %}
+                                    <a href="/dosya_ac?yol={{ kay[3] }}" target="_blank" style="color: #38bdf8; text-decoration: none;">{{ kay[3].split('\\')[-1].split('/')[-1] }}</a>
+                                {% else %}
+                                    <a href="{{ kay[3] }}" target="_blank" style="color: #38bdf8; text-decoration: none;">{{ kay[3][:30] }}...</a>
+                                {% endif %}
+                            </span>
+                        </div>
+                        <button class="delete-btn" data-id="{{ kay[0] }}" aria-label="Kaynağı Sil" style="background-color: transparent; color: #ef4444; padding: 2px 6px;">✕</button>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <script>
+        // Toast Notification System
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.setAttribute('role', 'alert');
+            toast.textContent = message;
+
+            container.appendChild(toast);
+
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                toast.style.animation = 'fadeOut 0.3s ease-out forwards';
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Scroll chat to bottom
+        const chatBox = document.getElementById('chat-box');
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Auto-update mechanism
+        setInterval(async () => {
+            try {
+                const statusRes = await fetch('/sistem_durumu');
+                const statusData = await statusRes.json();
+
+                const statusBadge = document.getElementById('miner-status');
+                const actionText = document.getElementById('miner-action');
+                const toggleBtn = document.getElementById('toggle-miner');
+
+                if (statusData.calisiyor) {
+                    statusBadge.textContent = 'Aktif Tarama';
+                    statusBadge.className = 'status-badge status-active';
+                    toggleBtn.textContent = 'Sistemi Duraklat';
+                    toggleBtn.setAttribute('aria-label', 'Sistemi Duraklat');
+                    toggleBtn.style.backgroundColor = '#ef4444';
+                } else {
+                    statusBadge.textContent = 'Beklemede';
+                    statusBadge.className = 'status-badge status-idle';
+                    toggleBtn.textContent = 'Sistemi Başlat';
+                    toggleBtn.setAttribute('aria-label', 'Sistemi Başlat');
+                    toggleBtn.style.backgroundColor = '#22c55e';
+                }
+
+                actionText.textContent = statusData.anlik_islem;
+
+                // Sadece tabloyu güncellemek için ek API çağrısı eklenebilir.
+                // Şimdilik sayfayı yenilemiyoruz, sadece JS ile tabloyu güncelleme mantığı buraya eklenecek.
+
+            } catch (err) {
+                console.error('Status fetch error:', err);
+            }
+        }, 3000);
+
+        // Chat submission
+        document.getElementById('chat-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const input = document.getElementById('chat-input');
+            const submitBtn = document.getElementById('chat-submit');
+            const mesaj = input.value.trim();
+
+            if (!mesaj) return;
+
+            // UX IMPROVEMENT: Visual feedback for async action
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner"></span> İşleniyor...';
+            submitBtn.setAttribute('aria-label', 'Mesaj gönderiliyor, lütfen bekleyin');
+
+            // Add user message to UI immediately
+            chatBox.innerHTML += `
+                <div class="message user">
+                    <strong style="font-size: 12px; opacity: 0.8;">DEKODER-11</strong><br>
+                    ${mesaj}
+                </div>
+            `;
+            chatBox.scrollTop = chatBox.scrollHeight;
+            input.value = '';
+
+            try {
+                const res = await fetch('/bot_cevap', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mesaj })
+                });
+                const data = await res.json();
+
+                if (data.status === 'ok') {
+                    chatBox.innerHTML += `
+                        <div class="message sistem">
+                            <strong style="font-size: 12px; opacity: 0.8;">SİSTEM</strong><br>
+                            ${data.cevap}
+                        </div>
+                    `;
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }
+            } catch (err) {
+                console.error(err);
+                // UX IMPROVEMENT: Error feedback
+                chatBox.innerHTML += `
+                    <div class="message sistem" style="background-color: #ef4444;">
+                        <strong style="font-size: 12px; opacity: 0.8;">HATA</strong><br>
+                        Sunucu ile iletişim kurulamadı.
+                    </div>
+                `;
+            } finally {
+                // UX IMPROVEMENT: Restore button state
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+                submitBtn.setAttribute('aria-label', 'Mesaj Gönder');
+                input.focus();
+            }
+        });
+
+        // Toggle miner
+        document.getElementById('toggle-miner').addEventListener('click', async (e) => {
+            const isRunning = e.target.textContent.includes('Duraklat');
+            await fetch('/sistem_tetikle', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ durum: !isRunning })
+            });
+        });
+
+        // Scan desktop
+        document.getElementById('scan-desktop').addEventListener('click', async (e) => {
+            const btn = e.target;
+            const originalText = btn.textContent;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Taranıyor...';
+            btn.setAttribute('aria-label', 'Masaüstü taranıyor, lütfen bekleyin');
+
+            try {
+                const res = await fetch('/masaustu_tara', { method: 'POST' });
+                const data = await res.json();
+                showToast(data.mesaj, data.eklenen > 0 ? 'success' : 'info');
+                if (data.eklenen > 0) {
+                    setTimeout(() => window.location.reload(), 1500); // Wait for toast before reload
+                }
+            } catch (err) {
+                showToast('Tarama sırasında hata oluştu.', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalText;
+                btn.setAttribute('aria-label', 'Masaüstünü Tara');
+            }
+        });
+
+        // Delete source
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                if(!confirm('Bu kaynağı kütüphaneden kaldırmak istediğinize emin misiniz?')) return;
+
+                const id = e.target.dataset.id;
+                try {
+                    await fetch('/kaynak_sil', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id })
+                    });
+                    e.target.closest('.source-item').remove();
+                } catch(err) {
+                    console.error(err);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
