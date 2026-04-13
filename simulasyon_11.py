@@ -32,6 +32,27 @@ except ImportError:
     print(f"Please run: {Colors.GREEN}pip install pandas numpy scipy{Colors.ENDC}")
     sys.exit(1)
 
+_NASA_READY = False
+try:
+    from modul_nasa_live_data import NasaLiveModule
+    _NASA_READY = True
+except ImportError:
+    pass
+
+_RESEARCH_READY = False
+try:
+    from deep_research_module import DeepResearchModule
+    _RESEARCH_READY = True
+except ImportError:
+    pass
+
+_DOGRULAMA_HAZIR = False
+try:
+    from dogrulama_testleri import DogrulamaTestleri
+    _DOGRULAMA_HAZIR = True
+except ImportError:
+    pass
+
 # ==============================================================================
 # SIMULE3: V.135 - OMEGA VERIFICATION ARCHIVE (PROVEN FULL VERSION)
 # STATUS: NameError Fixed. All Scientific Proof Modules Added.
@@ -1544,6 +1565,14 @@ class Simule3_Lab:
         self.piramit_detay = Modul_Piramit_Detay_V130(self.const)
         self.giza_isik = Modul_Giza_Isik_Hiz_V132(self.const) # NEW
 
+        # DYNAMIC GENERATIVE MODULES
+        if _NASA_READY:
+            self.nasa_live = NasaLiveModule(self.const)
+        if _RESEARCH_READY:
+            self.deep_research = DeepResearchModule(self.const)
+        if _DOGRULAMA_HAZIR:
+            self.dogrulama_test = DogrulamaTestleri(self.const)
+
 # [ERROR FIX] Missing Simule3_Lab_V133 Class Added
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
@@ -1611,6 +1640,14 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # Run New Background Generative AI & Verification Modules
+        if _NASA_READY:
+            self.nasa_live.analiz()
+        if _RESEARCH_READY:
+            self.deep_research.analiz()
+        if _DOGRULAMA_HAZIR:
+            self.dogrulama_test.analiz()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
