@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levh-i Mahfuz | 11 Boyutlu Kontrol Paneli</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --panel-bg: #161b22;
+            --text-main: #c9d1d9;
+            --accent: #58a6ff;
+            --success: #2ea043;
+            --danger: #f85149;
+            --border: #30363d;
+            --glow: 0 0 10px rgba(88, 166, 255, 0.5);
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        .panel {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        h2 {
+            color: var(--accent);
+            margin-top: 0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .status-badge {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            background-color: var(--success);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(46, 160, 67, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(46, 160, 67, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 160, 67, 0); }
+        }
+        .data-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        .data-item {
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .data-item:hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+        .data-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+        .data-value {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--accent);
+            text-shadow: var(--glow);
+        }
+        .data-desc {
+            font-size: 0.95rem;
+        }
+        .data-category {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: rgba(88, 166, 255, 0.2);
+            color: var(--accent);
+            font-size: 0.8rem;
+            align-self: flex-start;
+        }
+        .btn {
+            background-color: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            background-color: #3182ce;
+            box-shadow: var(--glow);
+        }
+        .btn:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+        .btn-danger {
+            background-color: var(--danger);
+        }
+        .btn-danger:hover {
+            background-color: #d73a49;
+            box-shadow: 0 0 10px rgba(248, 81, 73, 0.5);
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 5px rgba(88, 166, 255, 0.3);
+        }
+        .chat-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chat-message {
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+        .chat-user {
+            background-color: rgba(88, 166, 255, 0.1);
+            align-self: flex-end;
+            border: 1px solid rgba(88, 166, 255, 0.3);
+        }
+        .chat-ai {
+            background-color: rgba(46, 160, 67, 0.1);
+            align-self: flex-start;
+            border: 1px solid rgba(46, 160, 67, 0.3);
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 15px 20px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            display: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .toast.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #484f58; }
+    </style>
+</head>
+<body>
+    <div id="toast-container" aria-live="polite" class="toast"></div>
+
+    <div class="panel">
+        <h2>Kuantum Sentez Keşifleri <span class="status-badge" id="sistem-durum">SİSTEM AKTİF</span></h2>
+        <div class="controls">
+            <button class="btn" id="btn-tara" onclick="masaustuTara()">Masaüstü Tara</button>
+            <button class="btn btn-danger" id="btn-durdur" onclick="sistemTetikle(false)">Motoru Durdur</button>
+            <button class="btn" id="btn-baslat" onclick="sistemTetikle(true)" style="display:none;">Motoru Başlat</button>
+        </div>
+        <ul class="data-list" id="kesif-listesi">
+            {% for k in kesifler %}
+            <li class="data-item">
+                <div class="data-header">
+                    <span>{{ k[1] }}</span>
+                    <span>ID: {{ k[0] }}</span>
+                </div>
+                <div class="data-category">{{ k[4] }} | {{ k[2] }}</div>
+                <div class="data-value">{{ k[3] }}</div>
+                <div class="data-desc">{{ k[5] }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="panel">
+        <h2>Kartopu V5 Canlı Akış</h2>
+        <ul class="data-list" id="kartopu-listesi">
+            {% for log in kartopu %}
+            <li class="data-item">
+                <div class="data-header">
+                    <span>{{ log[1] }}</span>
+                    <span>Modül: {{ log[2] }}</span>
+                </div>
+                <div class="data-desc">{{ log[3] }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="panel">
+        <h2>Dekoder-11 (AI Asistan)</h2>
+        <div class="data-list chat-box" id="sohbet-gecmisi" style="margin-bottom: 15px;">
+            {% for s in sohbetler %}
+            <div class="chat-message chat-user">
+                <strong>Sen:</strong> {{ s[1] }}
+            </div>
+            <div class="chat-message chat-ai">
+                <strong>AI:</strong> {{ s[2] }}
+            </div>
+            {% endfor %}
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: auto;">
+            <label for="mesaj-input" class="sr-only">Mesajınız</label>
+            <input type="text" id="mesaj-input" aria-label="YZ Ajana Soru Sor" placeholder="YZ Ajana Soru Sor (Örn: Altın Oran 11 ile nasıl kesişir?)" onkeypress="if(event.key === 'Enter') mesajGonder()">
+            <button class="btn" id="btn-gonder" onclick="mesajGonder()">Gönder</button>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>Kaynak Kütüphanesi</h2>
+        <div class="controls" style="margin-bottom: 10px;">
+            <label for="yeni-kaynak" class="sr-only">Dosya Yolu</label>
+            <input type="text" id="yeni-kaynak" aria-label="Dosya Yolu" placeholder="Dosya Yolu (Örn: C:\Belgeler\veri.pdf)" style="margin-bottom: 0;">
+            <button class="btn" onclick="kaynakEkle()">Ekle</button>
+        </div>
+        <ul class="data-list">
+            {% for kaynak in kaynaklar %}
+            <li class="data-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <div class="data-header">{{ kaynak[1] }} | {{ kaynak[2] }}</div>
+                    <div class="data-desc" style="word-break: break-all; font-size: 0.85rem; color: #8b949e;">{{ kaynak[3] }}</div>
+                </div>
+                <div style="display: flex; gap: 5px;">
+                    <button class="btn" style="padding: 4px 8px; font-size: 0.8rem;" onclick="dosyaAc('{{ kaynak[3]|replace('\\', '\\\\') }}')">Aç</button>
+                    <button class="btn btn-danger" style="padding: 4px 8px; font-size: 0.8rem;" onclick="kaynakSil({{ kaynak[0] }})">Sil</button>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast-container');
+            toast.textContent = message;
+
+            if (type === 'error') {
+                toast.style.borderLeftColor = 'var(--danger)';
+            } else if (type === 'success') {
+                toast.style.borderLeftColor = 'var(--success)';
+            } else {
+                toast.style.borderLeftColor = 'var(--accent)';
+            }
+
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if(!toast.classList.contains('show')) toast.style.display = 'none';
+                }, 300);
+            }, 3000);
+            toast.style.display = 'block';
+        }
+        function escapeHtml(unsafe) {
+            return unsafe
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+        }
+
+        function mesajGonder() {
+            const input = document.getElementById("mesaj-input");
+            const btn = document.getElementById("btn-gonder");
+            const mesaj = input.value.trim();
+            if(!mesaj) return;
+
+            // Add user message visually immediately with escaping to prevent XSS
+            const sohbetBox = document.getElementById("sohbet-gecmisi");
+            sohbetBox.innerHTML += `
+                <div class="chat-message chat-user">
+                    <strong>Sen:</strong> ${escapeHtml(mesaj)}
+                </div>
+            `;
+
+            input.value = "";
+            btn.disabled = true;
+            btn.innerText = "Bekleniyor...";
+
+            fetch("/bot_cevap", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({mesaj: mesaj})
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === "ok") {
+                    sohbetBox.innerHTML += `
+                        <div class="chat-message chat-ai">
+                            <strong>AI:</strong> ${escapeHtml(data.cevap)}
+                        </div>
+                    `;
+                    sohbetBox.scrollTop = sohbetBox.scrollHeight;
+                }
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.innerText = "Gönder";
+            });
+        }
+
+        function masaustuTara() {
+            const btn = document.getElementById("btn-tara");
+            btn.innerText = "Taranıyor...";
+            btn.disabled = true;
+
+            fetch("/masaustu_tara", {method: "POST"})
+            .then(res => res.json())
+            .then(data => {
+                showToast(data.mesaj, data.eklenen > 0 ? "success" : "info");
+                if(data.eklenen > 0) {
+                    setTimeout(() => location.reload(), 2000);
+                }
+            })
+            .finally(() => {
+                btn.innerText = "Masaüstü Tara";
+                btn.disabled = false;
+            });
+        }
+
+        function sistemTetikle(durum) {
+            fetch("/sistem_tetikle", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({durum: durum})
+            }).then(() => {
+                document.getElementById("btn-durdur").style.display = durum ? "block" : "none";
+                document.getElementById("btn-baslat").style.display = !durum ? "block" : "none";
+                const badge = document.getElementById("sistem-durum");
+                if(durum) {
+                    badge.innerText = "SİSTEM AKTİF";
+                    badge.style.backgroundColor = "var(--success)";
+                } else {
+                    badge.innerText = "SİSTEM DURDURULDU";
+                    badge.style.backgroundColor = "var(--danger)";
+                }
+            });
+        }
+
+        function kaynakEkle() {
+            const yol = document.getElementById("yeni-kaynak").value.trim();
+            if(!yol) return;
+
+            fetch("/kaynak_ekle", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({yol: yol})
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === "ok") {
+                    showToast("Kaynak başarıyla eklendi.", "success");
+                    setTimeout(() => location.reload(), 2000);
+                } else {
+                    showToast("Hata oluştu.", "error");
+                }
+            });
+        }
+
+        function kaynakSil(id) {
+            if(!confirm("Bu kaynağı silmek istediğinize emin misiniz?")) return;
+
+            fetch("/kaynak_sil", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({id: id})
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === "ok") {
+                    location.reload();
+                }
+            });
+        }
+
+        function dosyaAc(yol) {
+            window.open("/dosya_ac?yol=" + encodeURIComponent(yol), "_blank");
+        }
+
+        // Auto-update mechanism (Long Polling / Interval based)
+        setInterval(() => {
+            fetch("/canli_veri")
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === "ok") {
+                    // Update Kesifler
+                    const kesifList = document.getElementById("kesif-listesi");
+                    if(data.kesifler && data.kesifler.length > 0) {
+                        kesifList.innerHTML = data.kesifler.map(k => `
+                            <li class="data-item">
+                                <div class="data-header">
+                                    <span>${escapeHtml(String(k[1]))}</span>
+                                    <span>ID: ${escapeHtml(String(k[0]))}</span>
+                                </div>
+                                <div class="data-category">${escapeHtml(String(k[4]))} | ${escapeHtml(String(k[2]))}</div>
+                                <div class="data-value">${escapeHtml(String(k[3]))}</div>
+                                <div class="data-desc">${escapeHtml(String(k[5]))}</div>
+                            </li>
+                        `).join('');
+                    }
+
+                    // Update Kartopu
+                    const kartopuList = document.getElementById("kartopu-listesi");
+                    if(data.kartopu && data.kartopu.length > 0) {
+                        kartopuList.innerHTML = data.kartopu.map(log => `
+                            <li class="data-item">
+                                <div class="data-header">
+                                    <span>${escapeHtml(String(log[1]))}</span>
+                                    <span>Modül: ${escapeHtml(String(log[2]))}</span>
+                                </div>
+                                <div class="data-desc">${escapeHtml(String(log[3]))}</div>
+                            </li>
+                        `).join('');
+                    }
+                }
+            })
+            .catch(e => console.error("Update failed", e));
+        }, 5000); // Check every 5 seconds
+
+        // Initial scroll to bottom for chat
+        window.onload = function() {
+            const sohbetBox = document.getElementById("sohbet-gecmisi");
+            if(sohbetBox) sohbetBox.scrollTop = sohbetBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
