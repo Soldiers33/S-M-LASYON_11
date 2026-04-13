@@ -21,6 +21,7 @@ class Colors:
     GOLD = '\033[33m'
     MAGENTA = '\033[35m'
     PURPLE = '\033[35m'
+    MAGENTA = '\033[35m'
 
 try:
     import pandas as pd
