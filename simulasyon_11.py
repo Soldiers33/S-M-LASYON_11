@@ -1544,6 +1544,16 @@ class Simule3_Lab:
         self.piramit_detay = Modul_Piramit_Detay_V130(self.const)
         self.giza_isik = Modul_Giza_Isik_Hiz_V132(self.const) # NEW
 
+        # NASA LIVE DATA MODULE
+        _NASA_READY = False
+        try:
+            import modul_nasa_live_data
+            self.nasa_module = modul_nasa_live_data.ModulNasaLiveData(self.const)
+            _NASA_READY = True
+        except ImportError:
+            print(f"{Colors.WARNING}ModulNasaLiveData not found. Skipping...{Colors.ENDC}")
+        self._NASA_READY = _NASA_READY
+
 # [ERROR FIX] Missing Simule3_Lab_V133 Class Added
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
@@ -1611,6 +1621,9 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        if self._NASA_READY:
+            self.nasa_module.analiz()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
