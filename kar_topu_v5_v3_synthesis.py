@@ -616,6 +616,7 @@ class Modul_KarTopu_V5_V3_Phase3:
         """Monte Carlo simulation for Phase-3 quantum stability and convergence"""
         print(f"{Colors.BOLD}{Colors.CYAN}[MONTE CARLO] PHASE-3 QUANTUM STABILITY SIMULATION{Colors.ENDC}")
         print(f"  Running {iterations} iterations...")
+        print(f"\r    \033[K{Colors.CYAN}Loading Phase-3 Stability...{Colors.ENDC}", end='', flush=True)
         
         import random
         
@@ -648,8 +649,11 @@ class Modul_KarTopu_V5_V3_Phase3:
             # Show progress
             if (iteration + 1) % (iterations // 10) == 0:
                 progress = ((iteration + 1) / iterations) * 100
-                print(f"    Progress: {progress:5.1f}% ({iteration+1}/{iterations})")
-        
+                print(f"\r    \033[K{Colors.CYAN}Progress: {progress:5.1f}% ({iteration+1}/{iterations}){Colors.ENDC}", end='', flush=True)
+
+        print(f"\r    \033[K{Colors.GREEN}[OK]{Colors.ENDC} {Colors.CYAN}Phase-3 Stability complete{Colors.ENDC}")
+        print()
+
         # Statistics
         mean_result = sum(results_list) / len(results_list)
         std_dev = (sum((x - mean_result)**2 for x in results_list) / len(results_list))**0.5

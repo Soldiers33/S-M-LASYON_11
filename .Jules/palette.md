@@ -11,3 +11,6 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+## 2026-03-29 - [CLI Loading Feedback Refinement]
+**Learning:** Terminal output needs accessibility and UX polish too. Overwriting terminal lines using carriage returns (`\r`) and erase-line (`\033[K`) provides a clean progress bar, but leaving the final loading state hanging creates a false 'frozen' feeling. Also, when iterations occur fast, the initial loading indicator needs to be visible *before* the loop block starts, and an empty `print()` post-completion is critical to prevent subsequent output blocks from overlapping onto the final success indicator line.
+**Action:** Always wrap iterative CLI progress indicators with a pre-loop 'Loading...' print and a post-loop '[OK]' with an empty newline to gracefully transition UI state in the terminal.
