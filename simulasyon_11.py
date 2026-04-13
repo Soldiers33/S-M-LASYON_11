@@ -7,6 +7,24 @@ from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
+try:
+    from modul_nasa_live_data import Modul_Nasa_Live_Data
+    _NASA_READY = True
+except ImportError:
+    _NASA_READY = False
+
+try:
+    from dogrulama_testleri import Modul_Dogrulama_Testleri
+    _DOGRULAMA_HAZIR = True
+except ImportError:
+    _DOGRULAMA_HAZIR = False
+
+try:
+    from generavity_module import Modul_Generavity
+    _GENERAVITY_READY = True
+except ImportError:
+    _GENERAVITY_READY = False
+
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
     HEADER = '\033[95m'
@@ -1534,6 +1552,14 @@ class Simule3_Lab:
         # KAR TOPU V5 V.3 PHASE-3 SYNTHESIS MODULE (March 4, 2026 - Phase-3)
         self.kar_topu_v5_v3 = Modul_KarTopu_V5_V3_Phase3()
         
+        # --- YENI MODULLER ---
+        if _NASA_READY:
+            self.nasa_veri = Modul_Nasa_Live_Data(self.const)
+        if _DOGRULAMA_HAZIR:
+            self.dogrulama_testleri = Modul_Dogrulama_Testleri(self.const)
+        if _GENERAVITY_READY:
+            self.generavity_mod = Modul_Generavity(self.const)
+
         # 3. Then add new V.130/131/132 modules
         self.roche_wave = Modul_Roche_Tidal_Wave_V130(self.const)
         self.time_packets = Modul_Time_Packets_V130(self.const)
@@ -1611,6 +1637,16 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # --- NEW DYNAMIC AND VERIFICATION MODULES (NASA, GENERAVITY, DOĞRULAMA) ---
+        print(f"\n{Colors.BOLD}{Colors.PURPLE}*** DYNAMIC VERIFICATION AND DATA MODULES (YENİ EKLENTİLER) ***{Colors.ENDC}")
+        if _NASA_READY:
+            self.nasa_veri.analiz()
+        if _GENERAVITY_READY:
+            self.generavity_mod.analiz()
+        if _DOGRULAMA_HAZIR:
+            self.dogrulama_testleri.analiz()
+
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
