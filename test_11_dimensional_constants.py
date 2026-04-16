@@ -15,6 +15,7 @@ celali_cycle = 33
 halley_ideal = 75
 sim_end = 2063
 mimar_date = 2011.4219
+gozlem_10t = 1977.8438
 kailash_lat = 31.0675
 kailasa_lat = 20.0239
 giza_lat = 29.9792458
@@ -257,8 +258,8 @@ def main():
     lm2_era = lm2_quarter + abs(flood_year)
     test("LM2 Önceki Era = 1666.5 + 9048", lm2_era, 10714.5)
 
-    lm3_observation = 2026 - mimar_date
-    test("LM3 Gözlem Farkı = 2026 - 2011.42", lm3_observation, 14.5762)
+    lm3_observation = 2026 - gozlem_10t
+    test("LM3 Gözlem Farkı = 2026 - 1977.8438", lm3_observation, 48.1562)
 
     lm3_projection = 14.5781 * 363.0
     test("LM3 Projeksiyon ≈ 1848", lm3_projection, 5291.8503)
