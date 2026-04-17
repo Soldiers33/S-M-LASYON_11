@@ -7,6 +7,24 @@ from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
+try:
+    from modul_nasa_live_data import Modul_NASA_LiveData
+    _NASA_READY = True
+except ImportError:
+    _NASA_READY = False
+
+try:
+    from deep_research_module import Modul_DeepResearch
+    _RESEARCH_READY = True
+except ImportError:
+    _RESEARCH_READY = False
+
+try:
+    from dogrulama_testleri import Modul_Dogrulama_Testleri
+    _DOGRULAMA_HAZIR = True
+except ImportError:
+    _DOGRULAMA_HAZIR = False
+
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
     HEADER = '\033[95m'
@@ -1610,6 +1628,22 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.kod_149.analiz()
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
+
+        # Run newly integrated autonomous / live-data modules
+        if _NASA_READY:
+            print(f"\n{Colors.BOLD}{Colors.CYAN}*** NASA LIVE DATA INTEGRATION ***{Colors.ENDC}")
+            nasa_mod = Modul_NASA_LiveData(self.const)
+            nasa_mod.analiz()
+
+        if _RESEARCH_READY:
+            print(f"\n{Colors.BOLD}{Colors.CYAN}*** DEEP RESEARCH AUTONOMOUS MODULE ***{Colors.ENDC}")
+            research_mod = Modul_DeepResearch()
+            research_mod.analiz()
+
+        if _DOGRULAMA_HAZIR:
+            print(f"\n{Colors.BOLD}{Colors.CYAN}*** AI VALIDATION & VERIFICATION ***{Colors.ENDC}")
+            dogrulama_mod = Modul_Dogrulama_Testleri()
+            dogrulama_mod.analiz()
         
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
