@@ -7,6 +7,28 @@ from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
+# Dynamic External Modules integration
+_NASA_READY = False
+try:
+    from modul_nasa_live_data import Modul_Nasa_Live_Data
+    _NASA_READY = True
+except ImportError:
+    pass
+
+_RESEARCH_READY = False
+try:
+    from deep_research_module import DeepResearchModule
+    _RESEARCH_READY = True
+except ImportError:
+    pass
+
+_DOGRULAMA_HAZIR = False
+try:
+    from dogrulama_testleri import DogrulamaTestleri
+    _DOGRULAMA_HAZIR = True
+except ImportError:
+    pass
+
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
     HEADER = '\033[95m'
@@ -1611,6 +1633,23 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # DYNAMIC AUTONOMOUS MODULES
+        print(f"\n{Colors.BOLD}{Colors.CYAN}*** DYNAMIC AUTONOMOUS DATA PIPELINE ***{Colors.ENDC}")
+        if _NASA_READY:
+            Modul_Nasa_Live_Data().analiz()
+        else:
+            print(f"{Colors.WARNING}[!] NASA LIVE DATA module not loaded.{Colors.ENDC}")
+
+        if _RESEARCH_READY:
+            DeepResearchModule().analiz()
+        else:
+            print(f"{Colors.WARNING}[!] DEEP RESEARCH module not loaded.{Colors.ENDC}")
+
+        if _DOGRULAMA_HAZIR:
+            DogrulamaTestleri().analiz()
+        else:
+            print(f"{Colors.WARNING}[!] VERIFICATION TEST module not loaded.{Colors.ENDC}")
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
