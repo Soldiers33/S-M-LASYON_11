@@ -136,6 +136,11 @@ class LevhiMahfuzConstants:
     # ========== NEW TIME CYCLES ==========
     MACRO_COSMIC_CYCLE = 12442                     # 9048 + 2063 + 1331
     GRAND_STAR_CYCLE = 27225                       # Halley × Year_11T
+
+    # ========== SENTEZ-7 FREQUENCY DISCOVERIES ==========
+    SENTEZ_7_LAMBDA_FREQ = 6521763                # Hz (6.52 MHz)
+    SENTEZ_7_ESCAPE_FREQ = 23386439               # Hz (23.38 MHz)
+    SENTEZ_7_PINEAL_THETA = 8.0                   # Hz
     
     # ========== NEW GEOGRAPHIC HARMONIES ==========
     LATITUDE_MASTER_HARMONY = 27.0235              # (Kailash + Kailasa + Giza) / 3
@@ -287,6 +292,23 @@ class LevhiMahfuzFormulas:
             "description": f"Levh-i Quantum = {levhi_freq:.2f} × {quantum_info:.2e} = {result:.2e}"
         }
     
+    @staticmethod
+    def sentez7_lambda_formula():
+        """Calculate SENTEZ-7 Lambda Master Frequency."""
+        v = 1331.0
+        q = 6666.0
+        c_i = 1.11188
+        g_i = 0.008271
+        h = 1390.0
+        t_end = 1999.0
+
+        numerator = v * q * c_i
+        denominator = g_i * h
+        freq = (numerator / denominator) * math.log(t_end)
+        return {
+            "lambda_freq": freq,
+            "description": f"Lambda = [ ( {v} × {q} × {c_i} ) / ( {g_i} × {h} ) ] × ln({t_end}) = {freq:.0f} Hz"
+        }
     @staticmethod
     def giza_light_speed_overlap():
         """Verify Giza latitude contains speed of light digits."""
