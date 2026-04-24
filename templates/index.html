@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levh-i Mahfuz Dashboard</title>
+    <style>
+        body { font-family: sans-serif; background: #f0f0f0; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .box { padding: 15px; border: 1px solid #ddd; border-radius: 4px; background: #fafafa; }
+        .SIYAH { color: black; }
+        .KIRMIZI { color: red; font-weight: bold; }
+        .MOR { color: purple; font-weight: bold; }
+        .MAVI { color: blue; }
+        .SARI { color: #b8860b; }
+        .PEMBE { color: deeppink; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #eee; }
+        .system-status { font-weight: bold; margin-bottom: 20px; padding: 10px; background: #e8f5e9; border-left: 4px solid #4caf50; }
+        button { padding: 8px 16px; margin: 5px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px; }
+        button:hover { background: #0056b3; }
+        input[type="text"] { padding: 8px; width: calc(100% - 100px); }
+        .flex { display: flex; align-items: center; gap: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌌 Levh-i Mahfuz Dashboard</h1>
+
+        <div class="system-status" id="sys-status">
+            Durum: Başlatılıyor...
+        </div>
+
+        <div class="grid">
+            <div class="box">
+                <h2>Son Keşifler (Matris Yansımaları)</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tarih</th>
+                            <th>Kaynak</th>
+                            <th>Değer</th>
+                            <th>Kategori</th>
+                            <th>Detay</th>
+                        </tr>
+                    </thead>
+                    <tbody id="kesif-tablo">
+                        {% for k in kesifler %}
+                        <tr class="{{ k.renk }}">
+                            <td>{{ k.tarih if k.tarih else k[1] }}</td>
+                            <td>{{ k.islem_turu if k.islem_turu else k[2] }}</td>
+                            <td>{{ k.deger if k.deger else k[3] }}</td>
+                            <td>{{ k.kategori if k.kategori else k[4] }}</td>
+                            <td>{{ k.aciklama if k.aciklama else k[5] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="box">
+                <h2>Kar Topu Günlüğü (Akıl Yürütme)</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tarih</th>
+                            <th>Kaynak</th>
+                            <th>Değer</th>
+                            <th>Analiz</th>
+                        </tr>
+                    </thead>
+                    <tbody id="kartopu-tablo">
+                        {% for k in kartopu %}
+                        <tr>
+                            <td>{{ k.tarih if k.tarih else k[0] }}</td>
+                            <td>{{ k.kaynak if k.kaynak else k[1] }}</td>
+                            <td>{{ k.veri if k.veri else k[2] }}</td>
+                            <td>{{ k.analiz if k.analiz else k[3] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="grid" style="margin-top: 20px;">
+            <div class="box">
+                <h2>Sistem İletişim (Dekoder-11)</h2>
+                <div style="height: 200px; overflow-y: auto; background: #fff; padding: 10px; border: 1px solid #ddd; margin-bottom: 10px;" id="chat-box">
+                    {% for s in sohbetler %}
+                    <p><strong>[{{ s[0] }}] {{ s[1] }}:</strong> {{ s[2] }}</p>
+                    {% endfor %}
+                </div>
+                <div class="flex">
+                    <input type="text" id="mesaj-input" placeholder="Sisteme mesaj yaz veya dosya yolu ver...">
+                    <button id="send-btn" aria-live="polite" onclick="mesajGonder()">Gönder</button>
+                </div>
+            </div>
+
+            <div class="box">
+                <h2>Kaynak Kütüphanesi</h2>
+                <div class="flex" style="margin-bottom: 10px;">
+                    <button onclick="masaustuTara()" style="background: #28a745;">Masaüstünü Tara & Ekle</button>
+                    <button onclick="sistemTetikle(true)">Otonom Başlat</button>
+                    <button onclick="sistemTetikle(false)" style="background: #dc3545;">Durdur</button>
+                </div>
+                <div style="height: 180px; overflow-y: auto;">
+                    <table style="font-size: 0.9em;">
+                        <tbody>
+                            {% for kay in kaynaklar %}
+                            <tr>
+                                <td>{{ kay[1] if kay|length > 2 else kay.tarih }}</td>
+                                <td><strong>{{ kay[2] if kay|length > 2 else kay.tur }}</strong></td>
+                                <td style="word-break: break-all;">{{ kay[3] if kay|length > 2 else kay.yol }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function mesajGonder() {
+            const input = document.getElementById('mesaj-input');
+            const btn = document.getElementById('send-btn');
+            const msj = input.value;
+            if (!msj) return;
+
+            btn.disabled = true;
+            btn.innerText = "Gönderiliyor...";
+            btn.style.opacity = "0.7";
+            btn.style.cursor = "not-allowed";
+
+            fetch('/bot_cevap', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({mesaj: msj})
+            }).then(r => r.json()).then(data => {
+                input.value = '';
+                btn.innerText = "Başarılı!";
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            }).catch(() => {
+                btn.disabled = false;
+                btn.innerText = "Gönder";
+                btn.style.opacity = "1";
+                btn.style.cursor = "pointer";
+            });
+        }
+
+        function masaustuTara() {
+            fetch('/masaustu_tara', {method: 'POST'})
+                .then(r => r.json())
+                .then(data => {
+                    alert(data.mesaj);
+                    location.reload();
+                });
+        }
+
+        function sistemTetikle(durum) {
+            fetch('/sistem_tetikle', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({durum: durum})
+            }).then(r => r.json()).then(data => {
+                alert(durum ? "Sistem Başlatıldı" : "Sistem Durduruldu");
+            });
+        }
+
+        setInterval(() => {
+            fetch('/sistem_durumu')
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById('sys-status').innerText = `Durum: ${data.calisiyor ? 'ÇALIŞIYOR' : 'DURAKLATILDI'} | İşlem: ${data.anlik_islem}`;
+                });
+        }, 2000);
+    </script>
+</body>
+</html>

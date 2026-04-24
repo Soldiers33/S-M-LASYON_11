@@ -11,3 +11,7 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+
+## 2026-04-24 - Async Action Micro-UX Feedback
+**Learning:** For asynchronous chat interactions in vanilla HTML/JS where `location.reload()` is used to update state, users lack immediate visual confirmation if the page simply waits on the network. Adding a toast or visual state change on the trigger element builds confidence.
+**Action:** Implemented the pattern of adding `aria-live="polite"` and an `id` to the trigger button, visually disabling it, and altering its text to indicate a loading and success state before applying a `setTimeout` to delay `location.reload()`. This ensures screen readers and sighted users both receive proper feedback.
