@@ -40,7 +40,7 @@ except ImportError:
 def loading_bar(desc):
     print(f"\r\033[K{Colors.CYAN}{desc}...{Colors.ENDC}", end='', flush=True)
     time.sleep(0.01)
-    print(f"\r\033[K{Colors.GREEN}[OK]{Colors.ENDC} {Colors.CYAN}{desc}{Colors.ENDC}\n", end='')
+    print(f"\r\033[K{Colors.GREEN}[OK]{Colors.ENDC} {Colors.CYAN}{desc}{Colors.ENDC}")
 
 
 # ------------------------------------------------------------------------------
