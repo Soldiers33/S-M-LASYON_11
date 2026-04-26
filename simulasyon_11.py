@@ -7,6 +7,18 @@ from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
+try:
+    from modul_nasa_live_data import Modul_NASA_LiveData
+    _NASA_READY = True
+except ImportError:
+    _NASA_READY = False
+
+try:
+    from deep_research_module import Modul_Deep_Research
+    _RESEARCH_READY = True
+except ImportError:
+    _RESEARCH_READY = False
+
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
     HEADER = '\033[95m'
@@ -1544,12 +1556,22 @@ class Simule3_Lab:
         self.piramit_detay = Modul_Piramit_Detay_V130(self.const)
         self.giza_isik = Modul_Giza_Isik_Hiz_V132(self.const) # NEW
 
+        if _NASA_READY:
+            self.nasa_modul = Modul_NASA_LiveData(self.const)
+        if _RESEARCH_READY:
+            self.research_modul = Modul_Deep_Research(self.const)
+
 # [ERROR FIX] Missing Simule3_Lab_V133 Class Added
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
         super().__init__() # Call the init method of the parent class
 
     def run_all(self):
+        if _NASA_READY:
+            self.nasa_modul.analiz()
+        if _RESEARCH_READY:
+            self.research_modul.analiz()
+
         # First run the original flow (V.103)
         print(f"{Colors.BOLD}{Colors.CYAN}SIMULE3 V.103 ULTIMATE STARTING...{Colors.ENDC}\n")
         self.mikro.metre(1)
