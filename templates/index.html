@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SİMÜLE-11</title>
+</head>
+<body>
+    <h1>LEVH-İ MAHFUZ DASHBOARD</h1>
+
+    <div id="toast" aria-live="polite" style="display:none; padding:10px; border:1px solid #ccc; background:#f0f0f0;"></div>
+
+    <h2>Sistem Kontrolü</h2>
+    <form id="kontrolForm">
+        <label for="mesaj">Mesaj Gönder</label>
+        <input type="text" id="mesaj" name="mesaj" required>
+        <button type="submit" id="submitBtn">Gönder</button>
+    </form>
+
+    <h2>Kesifler</h2>
+    <ul>
+    {% for k in kesifler %}
+        <li>{{ k[1] }} - {{ k[2] }} - {{ k[3] }}</li>
+    {% endfor %}
+    </ul>
+
+    <h2>Sohbetler</h2>
+    <ul>
+    {% for s in sohbetler %}
+        <li>{{ s[0] }} [{{ s[1] }}]: {{ s[2] }}</li>
+    {% endfor %}
+    </ul>
+
+    <script>
+        document.getElementById('kontrolForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const toast = document.getElementById('toast');
+            const msj = document.getElementById('mesaj').value;
+
+            btn.disabled = true;
+            btn.textContent = 'Gönderiliyor...';
+
+            fetch('/bot_cevap', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mesaj: msj })
+            })
+            .then(res => res.json())
+            .then(data => {
+                btn.disabled = false;
+                btn.textContent = 'Gönder';
+                toast.textContent = data.cevap || 'Mesaj gönderildi';
+                toast.style.display = 'block';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                    toast.textContent = '';
+                }, 3000);
+            })
+            .catch(error => {
+                btn.disabled = false;
+                btn.textContent = 'Gönder';
+                toast.textContent = 'Bir hata oluştu.';
+                toast.style.display = 'block';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                    toast.textContent = '';
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>
