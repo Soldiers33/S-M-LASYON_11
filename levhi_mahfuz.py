@@ -127,6 +127,14 @@ class LevhiMahfuzConstants:
     ENOCH_11D_LOCK = 10.92111                     # Book of Enoch 11th dimension lock
     GIZA_INTEGRAL_VERIFICATION = 11.08831         # Giza pyramids integral verification
     
+    # ========== SENTEZ-7 QUANTUM MASTER CONSTANTS ==========
+    V_VOLUME = 1331.0                             # 11-Dimensional spacetime volume
+    Q_CODE = 6666.0                               # Divine communication coefficient
+    C_I_DEVIATION = 1.11188                       # 10T to 11T light speed deviation
+    G_I_GRAVITY = 0.008271                        # Anti-gravity lower limit
+    H_HUM = 1390.0                                # Background cosmic string resonance (Hz)
+    T_END_BOOT = 1999.0                           # Flood boot cycle year (Digital Reset)
+
     # ========== NEW FORMULAS FROM DEEP ANALYSIS ==========
     ANTIGRAVITY_MASTER_FORMULA = 0.00827105       # (Sirius/1331) × (Enoch/11) × (Giza/1331)
     COSMIC_HARMONY_CONSTANT = 151.993             # φ × π × e × 11

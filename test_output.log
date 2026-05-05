@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/workspaces/S-M-LASYON_11/test_dark_energy_matter_constants.py", line 15, in <module>
-    import pytest
-ModuleNotFoundError: No module named 'pytest'
