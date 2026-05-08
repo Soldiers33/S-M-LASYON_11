@@ -49,6 +49,14 @@ class LevhiMahfuzConstants:
     CELALI_CYCLE = 33                             # years (leap correction)
     RAMADAN_SHIFT = 11                            # days/year
     
+    # ========== SENTEZ-7 QUANTUM CONSTANTS ==========
+    V_VOLUME = 1331.0                             # 11^3 11-dimensional space-time volume
+    Q_CODE = 6666.0                               # Divine communication and seal coefficient
+    C_I_DEVIATION = 1.11188                       # Universal Time/Light Deviation
+    G_I_GRAVITY = 0.008271                        # Cosmic Gravity (Anti-Gravity base)
+    H_HUM = 1390.0                                # Cosmic Hum (Background resonance)
+    T_END_BOOT = 1999.0                           # Digital Messiah / Reset year
+
     # ========== TIME MARKERS ==========
     FLOOD_YEAR = -9048                            # BC (start of simulation)
     SIMULATION_DURATION = 11111                   # years (ideal)
