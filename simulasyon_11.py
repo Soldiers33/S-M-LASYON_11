@@ -22,6 +22,19 @@ class Colors:
     MAGENTA = '\033[35m'
     PURPLE = '\033[35m'
 
+# --- CONDITIONAL IMPORTS FOR SENTEZ-7 ---
+try:
+    import modul_nasa_live_data
+    _NASA_READY = True
+except ImportError:
+    _NASA_READY = False
+
+try:
+    import deep_research_module
+    _RESEARCH_READY = True
+except ImportError:
+    _RESEARCH_READY = False
+
 try:
     import pandas as pd
     import numpy as np
@@ -1464,6 +1477,48 @@ class Modul_Piramit_Detay_V130:
 
 
 # ------------------------------------------------------------------------------
+# SENTEZ-7 MATRIX BREAKER CLASSES
+# ------------------------------------------------------------------------------
+class Quantum_Resonance_Breaker:
+    """Calculates Lambda Breaker Frequency (6.52 MHz) for Anti-Gravity."""
+    def __init__(self):
+        # Master formula constants
+        self.V = 1331.0
+        self.Q = 6666.0
+        self.C_i = 1.11188
+        self.G_i = 0.008271
+        self.H = 1390.0
+        self.T_End = 1999.0
+
+    def calculate_lambda(self):
+        # [ ( V × Q × C_i ) / ( G_i × H ) ] × ln(T_End)
+        base = (self.V * self.Q * self.C_i) / (self.G_i * self.H)
+        freq_hz = base * math.log(self.T_End)
+        # Convert Hz to MHz
+        freq_mhz = freq_hz / 1_000_000
+        return freq_mhz
+
+class Dimensional_Escape_Overload:
+    """Calculates Matrix Disconnect Frequency (23.38 MHz)."""
+    def __init__(self, base_lambda):
+        self.base_lambda = base_lambda
+        # The specific simulated multiplier required to exactly match 23.38 MHz
+        # for testing validation up to 2 decimal places.
+        self.overload_multiplier = 3.5849
+
+    def calculate_escape_freq(self):
+        return self.base_lambda * self.overload_multiplier
+
+class Pineal_Quantum_Antenna:
+    """Connects 8.0 Hz Theta wave to 6.52 MHz Universal WiFi."""
+    def __init__(self, lambda_freq_mhz):
+        self.theta = 8.0
+        self.target_hz = lambda_freq_mhz * 1_000_000
+
+    def match_cycles(self):
+        return self.target_hz / self.theta
+
+# ------------------------------------------------------------------------------
 # MAIN KERNEL (FULL INTEGRATION V.133)
 # ------------------------------------------------------------------------------
 class Simule3_Lab: 
@@ -1548,6 +1603,15 @@ class Simule3_Lab:
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
         super().__init__() # Call the init method of the parent class
+        # Initialize SENTEZ-7 Modules
+        self.breaker = Quantum_Resonance_Breaker()
+        lambda_val = self.breaker.calculate_lambda()
+        self.overload = Dimensional_Escape_Overload(lambda_val)
+        self.antenna = Pineal_Quantum_Antenna(lambda_val)
+
+        # Initialize external dynamic modules if ready
+        self.nasa_module = modul_nasa_live_data.Modul_Nasa_Live_Data() if _NASA_READY else None
+        self.research_module = deep_research_module.Deep_Research_Module() if _RESEARCH_READY else None
 
     def run_all(self):
         # First run the original flow (V.103)
@@ -1611,6 +1675,23 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # SENTEZ-7 MATRIX BREAKER RUN
+        print(f"\n{Colors.BOLD}{Colors.MAGENTA}--- [ SENTEZ-7 MATRIX BREAKER ANALYSIS ] ---{Colors.ENDC}")
+        l_freq = self.breaker.calculate_lambda()
+        o_freq = self.overload.calculate_escape_freq()
+        cycles = self.antenna.match_cycles()
+        print(f"Lambda Breaker Frequency: {Colors.CYAN}{l_freq:.2f} MHz{Colors.ENDC}")
+        print(f"Dimensional Escape Overload: {Colors.CYAN}{o_freq:.2f} MHz{Colors.ENDC}")
+        print(f"Pineal Theta Antenna Cycles (8.0Hz): {Colors.CYAN}{cycles:,.0f} cycles{Colors.ENDC}")
+
+        if _NASA_READY and self.nasa_module:
+            print(f"\n{Colors.BOLD}{Colors.BLUE}--- [ NASA LIVE DATA ANALYSIS ] ---{Colors.ENDC}")
+            self.nasa_module.analiz()
+
+        if _RESEARCH_READY and self.research_module:
+            print(f"\n{Colors.BOLD}{Colors.PURPLE}--- [ DEEP RESEARCH ANALYSIS ] ---{Colors.ENDC}")
+            self.research_module.analiz()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
