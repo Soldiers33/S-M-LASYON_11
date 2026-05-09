@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levh-i Mahfuz Dashboard 11</title>
+    <style>
+        body { font-family: monospace; background: #0a0a0a; color: #00ff00; margin: 0; padding: 20px; }
+        .container { display: flex; gap: 20px; }
+        .panel { border: 1px solid #333; padding: 15px; background: #111; flex: 1; }
+        .header { text-align: center; font-size: 24px; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        .log-entry { margin-bottom: 10px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        .alert { color: #ff3333; font-weight: bold; }
+        .sys-btn { background: #333; color: #fff; border: 1px solid #555; padding: 8px 15px; cursor: pointer; }
+        .sys-btn:hover { background: #444; }
+        #status { margin-bottom: 15px; padding: 10px; background: #002200; border: 1px solid #005500; }
+        input[type="text"] { background: #000; color: #0f0; border: 1px solid #333; padding: 8px; width: 80%; }
+        button { background: #222; color: #0f0; border: 1px solid #0f0; padding: 8px; cursor: pointer; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+    </style>
+</head>
+<body>
+    <div class="header">LEVH-İ MAHFUZ OTONOM SİSTEM (11 BOYUTLU)</div>
+
+    <div id="status">
+        Durum: <span id="miner-status">Yükleniyor...</span><br>
+        İşlem: <span id="miner-action">Bekleniyor...</span>
+    </div>
+
+    <div class="container">
+        <!-- Keşifler Paneli -->
+        <div class="panel">
+            <h3>Kuantum Keşif Logları</h3>
+            <div id="kesif-listesi">
+                {% for k in kesifler %}
+                <div class="log-entry">
+                    <small>[{{ k[1] }}]</small>
+                    <strong>{{ k[2] }}</strong>: {{ k[4] }}
+                    {% if k[5] != "SIYAH" %}<span class="alert">({{ k[3] }})</span>{% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Chat / Komut Paneli -->
+        <div class="panel">
+            <h3>Sistem Dekoderi</h3>
+            <div style="height: 300px; overflow-y: auto; border: 1px solid #333; padding: 10px; margin-bottom: 10px;" id="chat-box">
+                {% for s in sohbetler %}
+                <div><small>{{ s[0] }}</small> <strong>{{ s[1] }}:</strong> {{ s[2] }}</div>
+                {% endfor %}
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <label for="cmd-input" class="sr-only">Komut Giriniz</label>
+                <input type="text" id="cmd-input" placeholder="Sisteme komut veya link verin...">
+                <button id="submit-btn" onclick="mesajGonder()" aria-live="polite">Gönder</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function escapeHtml(unsafe) {
+            return unsafe
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+        }
+
+        function guncelleDurum() {
+            fetch('/sistem_durumu')
+                .then(r => r.json())
+                .then(d => {
+                    document.getElementById('miner-status').innerText = d.calisiyor ? "AKTİF" : "DURAKLATILDI";
+                    document.getElementById('miner-status').style.color = d.calisiyor ? "#0f0" : "#f00";
+                    document.getElementById('miner-action').innerText = d.anlik_islem;
+                });
+        }
+
+        function canliVeri() {
+            fetch('/canli_veri')
+                .then(r => r.json())
+                .then(d => {
+                    if(d.status === "ok") {
+                        let html = "";
+                        d.kesifler.forEach(k => {
+                            html += `<div class="log-entry"><small>[${k.tarih}]</small> <strong>${k.islem_turu}</strong>: ${k.aciklama} `;
+                            if(k.renk === "KIRMIZI") html += `<span class="alert">(${k.kategori})</span>`;
+                            html += `</div>`;
+                        });
+                        document.getElementById('kesif-listesi').innerHTML = html;
+                    }
+                });
+        }
+
+        function mesajGonder() {
+            const mesaj = document.getElementById('cmd-input').value;
+            if(!mesaj) return;
+
+            const btn = document.getElementById('submit-btn');
+            const originalText = btn.innerText;
+            btn.innerText = "Gönderiliyor...";
+            btn.disabled = true;
+            btn.style.opacity = "0.7";
+            btn.style.cursor = "not-allowed";
+
+            fetch('/bot_cevap', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({mesaj: mesaj})
+            })
+            .then(r => r.json())
+            .then(d => {
+                if(d.status === "ok") {
+                    document.getElementById('cmd-input').value = "";
+                    const cb = document.getElementById('chat-box');
+                    cb.innerHTML += `<div><small>Şimdi</small> <strong>SİZ:</strong> ${escapeHtml(mesaj)}</div>`;
+                    cb.innerHTML += `<div><small>Şimdi</small> <strong>SİSTEM:</strong> ${escapeHtml(d.cevap)}</div>`;
+                    cb.scrollTop = cb.scrollHeight;
+                }
+            })
+            .catch(err => {
+                console.error("Hata:", err);
+            })
+            .finally(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+                btn.style.opacity = "1";
+                btn.style.cursor = "pointer";
+            });
+        }
+
+        setInterval(guncelleDurum, 2000);
+        setInterval(canliVeri, 5000);
+    </script>
+</body>
+</html>
