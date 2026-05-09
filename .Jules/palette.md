@@ -11,3 +11,4 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+## 2026-05-09 - Chat Escaping\n**Learning:** When using Vanilla JS to dynamically build UI elements with strings containing user input, we must escape HTML characters to prevent XSS.\n**Action:** Applied an `escapeHtml` function to the frontend code in `templates/index.html` before injecting user input and system responses into the DOM.
