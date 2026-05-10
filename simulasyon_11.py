@@ -7,6 +7,24 @@ from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
+try:
+    from modul_nasa_live_data import Modul_NASA_Live_Data
+    _NASA_READY = True
+except ImportError:
+    _NASA_READY = False
+
+try:
+    from deep_research_module import Deep_Research_Module
+    _RESEARCH_READY = True
+except ImportError:
+    _RESEARCH_READY = False
+
+try:
+    from dogrulama_testleri import DogrulamaTestleri
+    _DOGRULAMA_HAZIR = True
+except ImportError:
+    _DOGRULAMA_HAZIR = False
+
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
     HEADER = '\033[95m'
@@ -1544,6 +1562,13 @@ class Simule3_Lab:
         self.piramit_detay = Modul_Piramit_Detay_V130(self.const)
         self.giza_isik = Modul_Giza_Isik_Hiz_V132(self.const) # NEW
 
+        if _NASA_READY:
+            self.nasa_module = Modul_NASA_Live_Data()
+        if _RESEARCH_READY:
+            self.research_module = Deep_Research_Module()
+        if _DOGRULAMA_HAZIR:
+            self.dogrulama_module = DogrulamaTestleri()
+
 # [ERROR FIX] Missing Simule3_Lab_V133 Class Added
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
@@ -1611,6 +1636,13 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        if _NASA_READY:
+            self.nasa_module.analiz()
+        if _RESEARCH_READY:
+            self.research_module.analiz()
+        if _DOGRULAMA_HAZIR:
+            self.dogrulama_module.analiz()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
