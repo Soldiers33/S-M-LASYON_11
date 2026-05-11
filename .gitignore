@@ -1,0 +1,4 @@
+__pycache__/
+*.log
+*.txt
+results_phase3_v3.json

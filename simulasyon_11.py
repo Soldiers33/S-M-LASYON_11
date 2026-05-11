@@ -32,6 +32,12 @@ except ImportError:
     print(f"Please run: {Colors.GREEN}pip install pandas numpy scipy{Colors.ENDC}")
     sys.exit(1)
 
+try:
+    from modul_nasa_live_data import NASA_Live_Data_Module
+    _NASA_READY = True
+except ImportError:
+    _NASA_READY = False
+
 # ==============================================================================
 # SIMULE3: V.135 - OMEGA VERIFICATION ARCHIVE (PROVEN FULL VERSION)
 # STATUS: NameError Fixed. All Scientific Proof Modules Added.
@@ -1325,6 +1331,69 @@ class Modul_666x3_Boot:
 
 
 # ==============================================================================
+# SENTEZ-7 GRAND UNIFICATION (Matrix Breaker & Overload Modules)
+# ==============================================================================
+
+class Quantum_Resonance_Breaker:
+    def __init__(self, const):
+        self.const = const
+        self.V = 1331.0
+        self.Q = 6666.0
+        self.C_i = 1.11188
+        self.G_i = 0.008271
+        self.H = 1390.0
+        self.T_End = 1999.0
+
+    def calculate_lambda(self):
+        numerator = self.V * self.Q * self.C_i
+        denominator = self.G_i * self.H
+        ln_tend = math.log(self.T_End)
+        lambda_val = (numerator / denominator) * ln_tend
+        return lambda_val
+
+    def analiz(self):
+        lambda_val = self.calculate_lambda()
+        print(f"\n{Colors.HEADER}=== SENTEZ-7: QUANTUM RESONANCE BREAKER (Λ) ==={Colors.ENDC}")
+        print(f"Formula: Λ = [ ( V × Q × C_i ) / ( G_i × H ) ] × ln(T_End)")
+        print(f"Constants: V={self.V}, Q={self.Q}, C_i={self.C_i}, G_i={self.G_i}, H={self.H}, T_End={self.T_End}")
+        print(f"Calculated Λ (Breaking Frequency): {Colors.GREEN}{lambda_val:,.2f} Hz (~6.52 MHz){Colors.ENDC}")
+        print("Note: This short-wave radio tunnel directly governs matter and anti-gravity.")
+
+class Dimensional_Escape_Overload:
+    def __init__(self, const):
+        self.const = const
+        self.breaker = Quantum_Resonance_Breaker(const)
+        self.multiplier = 3.5849
+
+    def calculate_escape(self):
+        lambda_val = self.breaker.calculate_lambda()
+        return lambda_val * self.multiplier
+
+    def analiz(self):
+        escape_val = self.calculate_escape()
+        print(f"\n{Colors.HEADER}=== SENTEZ-7: DIMENSIONAL ESCAPE OVERLOAD ==={Colors.ENDC}")
+        print(f"Base Breaker Frequency: ~6.52 MHz")
+        print(f"Matrix Snap Point Multiplier: {self.multiplier}")
+        print(f"Calculated Escape Frequency: {Colors.RED}{escape_val:,.2f} Hz (~23.38 MHz){Colors.ENDC}")
+        print("Warning: Quantum escape velocity reached. Friction approaches zero.")
+
+class Pineal_Quantum_Antenna:
+    def __init__(self, const):
+        self.const = const
+        self.theta_wave = 8.0 # Hz
+        self.breaker = Quantum_Resonance_Breaker(const)
+
+    def analiz(self):
+        lambda_val = self.breaker.calculate_lambda()
+        cycles = lambda_val / self.theta_wave
+        print(f"\n{Colors.HEADER}=== SENTEZ-7: PINEAL QUANTUM ANTENNA ==={Colors.ENDC}")
+        print(f"Deep Theta Wave: {self.theta_wave} Hz")
+        print(f"Universal Wifi (Λ): ~6.52 MHz")
+        print(f"Coherence Cycles: {Colors.CYAN}{cycles:,.2f} cycles/sec{Colors.ENDC}")
+        print("Mechanism: Pineal calcite crystals resonate with 11-Dimensional String vibrations.")
+
+
+# ==============================================================================
 # SECTION 2: V.132 PATCH PACKAGES (NEW REQUESTS)
 # ==============================================================================
 
@@ -1544,6 +1613,11 @@ class Simule3_Lab:
         self.piramit_detay = Modul_Piramit_Detay_V130(self.const)
         self.giza_isik = Modul_Giza_Isik_Hiz_V132(self.const) # NEW
 
+        # SENTEZ-7 Modules
+        self.quantum_breaker = Quantum_Resonance_Breaker(self.const)
+        self.escape_overload = Dimensional_Escape_Overload(self.const)
+        self.pineal_antenna = Pineal_Quantum_Antenna(self.const)
+
 # [ERROR FIX] Missing Simule3_Lab_V133 Class Added
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
@@ -1610,6 +1684,19 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.kod_149.analiz()
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
+
+        # SENTEZ-7 Execution
+        print(f"\n{Colors.BOLD}{Colors.MAGENTA}*** SENTEZ-7: GRAND UNIFICATION MATRIX BREAKER ***{Colors.ENDC}")
+        self.quantum_breaker.analiz()
+        self.escape_overload.analiz()
+        self.pineal_antenna.analiz()
+
+        # NASA Live Data Execution
+        if _NASA_READY:
+            nasa_module = NASA_Live_Data_Module()
+            nasa_module.analiz()
+        else:
+            print(f"\n{Colors.WARNING}NASA Live Data Module not found. Skipping live API integration.{Colors.ENDC}")
         
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
