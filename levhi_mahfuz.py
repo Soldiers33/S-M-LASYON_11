@@ -121,6 +121,17 @@ class LevhiMahfuzConstants:
     DIMENSIONAL_VOLUME_ANGLE = 1342.0473          # 11³ × OP_ANGLE (volume→angle transform)
     GOLDEN_YEAR_FREQUENCY = 3631.618              # 3630 + φ (time+golden ratio)
     
+    # ========== SENTEZ-7 GRAND UNIFICATION CONSTANTS ==========
+    SENTEZ7_V_VOLUME = 1331.0                     # 11-Dimensional spacetime volume
+    SENTEZ7_Q_CODE = 6666.0                       # Revelation cipher
+    SENTEZ7_C_I_DEVIATION = 1.11188               # Ideal light vs Real light
+    SENTEZ7_G_I_GRAVITY = 0.008271                # Anti-Gravity base factor
+    SENTEZ7_H_HUM = 1390.0                        # Background String hum (Hz)
+    SENTEZ7_T_END_BOOT = 1999.0                   # Digital Messiah / Boot Year
+    SENTEZ7_LAMBDA_FREQ = 6521763.0               # Matrix Breaker Frequency (~6.52 MHz)
+    SENTEZ7_OVERLOAD_FREQ = 23379869.0            # Dimensional Escape Overload (~23.38 MHz)
+    SENTEZ7_PINEAL_THETA = 8.0                    # Pineal Quantum Antenna (Hz)
+
     # ========== NEW DISCOVERIES FROM KAR TOPU V5 ==========
     # Anti-Gravity Synthesis Constants (March 4, 2026)
     SIRIUS_FREQUENCY_IHLAL = 1330.99803           # Dogon Tribe Sirius frequency violation
