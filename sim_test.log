@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/app/simulasyon_11.py", line 1658, in <module>
+    lab = Simule3_Lab_V133()
+          ^^^^^^^^^^^^^^^^^^
+  File "/app/simulasyon_11.py", line 1578, in __init__
+    self.dogrulama_testleri = Modul_Gercek_Dunya_Dogrulama(constants_or_config=None)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Modul_Gercek_Dunya_Dogrulama.__init__() got an unexpected keyword argument 'constants_or_config'
