@@ -1,0 +1,5 @@
+
+__pycache__/
+*.log
+arkaplan_simulasyon_log.txt
+arkaplan_simulasyon_error.log
