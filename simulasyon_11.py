@@ -7,6 +7,24 @@ from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
+try:
+    import modul_nasa_live_data as Yeni_Nasa
+    _NASA_READY = True
+except ImportError:
+    _NASA_READY = False
+
+try:
+    import deep_research_module as Yeni_Research
+    _RESEARCH_READY = True
+except ImportError:
+    _RESEARCH_READY = False
+
+try:
+    import dogrulama_testleri as Yeni_Dogrulama
+    _DOGRULAMA_HAZIR = True
+except ImportError:
+    _DOGRULAMA_HAZIR = False
+
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
     HEADER = '\033[95m'
@@ -1549,6 +1567,14 @@ class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
         super().__init__() # Call the init method of the parent class
 
+        # Instantiate dynamic modules if available
+        if _NASA_READY:
+            self.nasa_module = Yeni_Nasa.Modul_Nasa_Live_Data(self.const)
+        if _RESEARCH_READY:
+            self.research_module = Yeni_Research.Modul_Deep_Research(self.const)
+        if _DOGRULAMA_HAZIR:
+            self.dogrulama_module = Yeni_Dogrulama.Modul_Dogrulama_Testleri(self.const)
+
     def run_all(self):
         # First run the original flow (V.103)
         print(f"{Colors.BOLD}{Colors.CYAN}SIMULE3 V.103 ULTIMATE STARTING...{Colors.ENDC}\n")
@@ -1611,6 +1637,14 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # ACTIVE DYNAMIC EXTENSIONS (NASA, Deep Research, Validation)
+        if _NASA_READY:
+            self.nasa_module.analiz()
+        if _RESEARCH_READY:
+            self.research_module.analiz()
+        if _DOGRULAMA_HAZIR:
+            self.dogrulama_module.analiz()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
