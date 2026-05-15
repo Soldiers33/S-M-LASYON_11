@@ -121,6 +121,18 @@ class LevhiMahfuzConstants:
     DIMENSIONAL_VOLUME_ANGLE = 1342.0473          # 11³ × OP_ANGLE (volume→angle transform)
     GOLDEN_YEAR_FREQUENCY = 3631.618              # 3630 + φ (time+golden ratio)
     
+    # ========== SENTEZ-7 MATRIX CONSTANTS ==========
+    SENTEZ7_V = 1331.0                            # Quantum Volume
+    SENTEZ7_Q = 6666.0                            # Revelation Code
+    SENTEZ7_C_I = 1.11188                         # Time/Light Shift
+    SENTEZ7_G_I = 0.008271                        # Anti-Gravity Lower Bound
+    SENTEZ7_H = 1390.0                            # Cosmic Hum (Hz)
+    SENTEZ7_T_END = 1999.0                        # Digital Reset Year
+    SENTEZ7_ORBIT_VOLUME = 9865095.25             # 9.86M km (Orbit Volume Projection)
+    SENTEZ7_LAMBDA_HZ = 6521763.0                 # 6.52 MHz (Break Frequency)
+    SENTEZ7_ESCAPE_HZ = 23386439.0                # 23.38 MHz (Matrix Escape)
+    SENTEZ7_THETA_WAVE = 8.0                      # 8.0 Hz (Pineal Coherence)
+
     # ========== NEW DISCOVERIES FROM KAR TOPU V5 ==========
     # Anti-Gravity Synthesis Constants (March 4, 2026)
     SIRIUS_FREQUENCY_IHLAL = 1330.99803           # Dogon Tribe Sirius frequency violation
@@ -285,6 +297,27 @@ class LevhiMahfuzFormulas:
             "quantum_info": quantum_info,
             "levhi_quantum": result,
             "description": f"Levh-i Quantum = {levhi_freq:.2f} × {quantum_info:.2e} = {result:.2e}"
+        }
+
+    @staticmethod
+    def calculate_sentez7_lambda():
+        """Calculate the SENTEZ-7 Matrix Breaking Frequency (Lambda)."""
+        V = LevhiMahfuzConstants.SENTEZ7_V
+        Q = LevhiMahfuzConstants.SENTEZ7_Q
+        C_i = LevhiMahfuzConstants.SENTEZ7_C_I
+        G_i = LevhiMahfuzConstants.SENTEZ7_G_I
+        H = LevhiMahfuzConstants.SENTEZ7_H
+        T_End = LevhiMahfuzConstants.SENTEZ7_T_END
+
+        numerator = V * Q * C_i
+        denominator = G_i * H
+        lambda_hz = (numerator / denominator) * math.log(T_End)
+
+        return {
+            "numerator": numerator,
+            "denominator": denominator,
+            "lambda_hz": lambda_hz,
+            "description": f"Λ = ({numerator:.2f} / {denominator:.2f}) × ln({T_End}) = {lambda_hz:.2f} Hz"
         }
     
     @staticmethod
