@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levh-i Mahfuz Dashboard</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .container { display: flex; gap: 20px; }
+        .col { flex: 1; border: 1px solid #ccc; padding: 10px; }
+        .row { border-bottom: 1px solid #eee; padding: 5px 0; }
+        .btn { padding: 5px 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Levh-i Mahfuz Dashboard</h1>
+
+    <div style="margin-bottom: 20px;">
+        <button id="toggleBtn" class="btn" onclick="toggleSystem()">Sistemi Durdur</button>
+        <span id="sysStatus">Çalışıyor</span>
+    </div>
+
+    <div class="container">
+        <div class="col">
+            <h2>Keşifler</h2>
+            {% for k in kesifler %}
+                <div class="row">{{ k[1] }}: {{ k[2] }} - {{ k[4] }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="col">
+            <h2>Sohbetler</h2>
+            <div id="chatBox">
+            {% for s in sohbetler %}
+                <div class="row"><b>{{ s[1] }}:</b> {{ s[2] }}</div>
+            {% endfor %}
+            </div>
+            <div style="margin-top: 10px;">
+                <input type="text" id="msgInput" placeholder="Mesaj yazın...">
+                <button id="sendBtn" class="btn" onclick="sendMessage()">Gönder</button>
+            </div>
+        </div>
+
+        <div class="col">
+            <h2>Kaynaklar</h2>
+            <button class="btn" onclick="scanDesktop()">Masaüstü Tara</button>
+            <div id="sourcesList" style="margin-top: 10px;">
+            {% for k in kaynaklar %}
+                <div class="row">{{ k[2] }}: {{ k[3] }} <button class="btn" onclick="deleteSource({{ k[0] }})">Sil</button></div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" aria-live="polite" style="display: none; position: fixed; bottom: 20px; right: 20px; background: #333; color: white; padding: 10px 20px; border-radius: 4px; z-index: 1000;"></div>
+
+    <script>
+        let isRunning = true;
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function toggleSystem() {
+            isRunning = !isRunning;
+            document.getElementById('sysStatus').innerText = isRunning ? 'Çalışıyor' : 'Duraklatıldı';
+            document.getElementById('toggleBtn').innerText = isRunning ? 'Sistemi Durdur' : 'Sistemi Başlat';
+
+            fetch('/sistem_tetikle', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ durum: isRunning })
+            });
+        }
+
+        function sendMessage() {
+            const msgInput = document.getElementById('msgInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const msg = msgInput.value.trim();
+
+            if (!msg) return;
+
+            sendBtn.disabled = true;
+            sendBtn.innerText = "Gönderiliyor...";
+
+            fetch('/bot_cevap', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mesaj: msg })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'ok') {
+                    const chatBox = document.getElementById('chatBox');
+                    chatBox.innerHTML += `<div class="row"><b>DEKODER-11:</b> ${escapeHtml(msg)}</div>`;
+                    chatBox.innerHTML += `<div class="row"><b>SİSTEM:</b> ${escapeHtml(data.cevap)}</div>`;
+                    msgInput.value = '';
+                } else {
+                    showToast('Hata oluştu!');
+                }
+            })
+            .catch(() => {
+                showToast('Bağlantı hatası oluştu!');
+            })
+            .finally(() => {
+                sendBtn.disabled = false;
+                sendBtn.innerText = "Gönder";
+            });
+        }
+
+        function scanDesktop() {
+            fetch('/masaustu_tara', { method: 'POST' })
+            .then(res => res.json())
+            .then(data => showToast(data.mesaj))
+            .catch(() => showToast('Tarama sırasında hata oluştu.'));
+        }
+
+        function deleteSource(id) {
+            fetch('/kaynak_sil', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: id })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'ok') location.reload();
+            });
+        }
+    </script>
+</body>
+</html>
