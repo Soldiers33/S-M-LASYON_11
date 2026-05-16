@@ -11,3 +11,6 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+## 2026-05-16 - Prevent blocking UI with Javascript Alert
+**Learning:** Raw HTML/JS apps might rely on synchronous `alert()` dialogues, which blocks execution and is completely inaccessible for screen readers without proper context.
+**Action:** Always replace `alert()` with a non-blocking `aria-live="polite"` toast notification for better a11y and continuous UI interaction. Also, disable action buttons and supply explicit text indicating the async state (e.g. "Gönderiliyor...").
