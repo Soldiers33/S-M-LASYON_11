@@ -7,6 +7,11 @@ from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
+# Yeni Modüller (Otonom arka plan ve veri doğrulama)
+from modul_nasa_live_data import Modul_NASA_Live_Data
+from deep_research_module import Modul_Deep_Research
+from dogrulama_testleri import Modul_Sistem_Dogrulama
+
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
     HEADER = '\033[95m'
@@ -1548,6 +1553,9 @@ class Simule3_Lab:
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
         super().__init__() # Call the init method of the parent class
+        self.nasa_live = Modul_NASA_Live_Data(self.const)
+        self.deep_research = Modul_Deep_Research(self.const)
+        self.sistem_dogrulama = Modul_Sistem_Dogrulama(self.const)
 
     def run_all(self):
         # First run the original flow (V.103)
@@ -1611,6 +1619,11 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # DEVASA VERI EKLENTILERI VE OTONOM SISTEMLER
+        self.sistem_dogrulama.analiz()
+        self.nasa_live.analiz()
+        self.deep_research.analiz()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
