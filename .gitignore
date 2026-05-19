@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.log
+test_nasa.py
+test_requests.py
+test_requests2.py
+test_requests3.py
