@@ -11,3 +11,7 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+
+## 2026-05-20 - Adding async loading states to raw HTML/JS interfaces
+**Learning:** For micro-UX modifications involving asynchronous actions in raw HTML/JS templates, a standard accessible pattern is to add `aria-live="polite"` and an `id` to the trigger button, then use JavaScript to visually disable the button and alter its text to indicate a loading state.
+**Action:** Implemented an accessible loading state on the message submit button with dynamic ARIA properties and text indicators to provide immediate feedback during backend processing.

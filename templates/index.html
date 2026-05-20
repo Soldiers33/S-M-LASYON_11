@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>SİMÜLASYON-11 LEVH-İ MAHFUZ ARAYÜZÜ</title>
+    <style>
+        body { background-color: #121212; color: #00ff00; font-family: monospace; }
+        .container { display: flex; flex-direction: row; }
+        .panel { border: 1px solid #333; margin: 10px; padding: 10px; width: 30%; }
+        h2 { border-bottom: 1px solid #00ff00; padding-bottom: 5px; }
+        ul { list-style-type: none; padding-left: 0; }
+        li { margin-bottom: 5px; }
+
+        /* UX styles */
+        .system-status { padding: 10px; border: 1px dashed #00ff00; margin: 10px; display: inline-block; }
+        button { background-color: #000; color: #00ff00; border: 1px solid #00ff00; padding: 5px 10px; cursor: pointer; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        button:focus-visible { outline: 2px solid #00ff00; outline-offset: 2px; }
+        input[type="text"] { background: #000; color: #00ff00; border: 1px solid #00ff00; padding: 5px; width: 60%; }
+        input[type="text"]:focus-visible { outline: 2px solid #00ff00; outline-offset: 2px; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+    </style>
+</head>
+<body>
+    <h1>SİMÜLASYON-11 ARAYÜZÜ</h1>
+
+    <div class="system-status" id="status-panel" aria-live="polite">
+        Sistem Durumu: Yükleniyor...
+    </div>
+
+    <div style="margin: 10px;">
+        <form id="chat-form">
+            <label for="chat-input" class="sr-only">Mesaj Gönder</label>
+            <input type="text" id="chat-input" placeholder="DEKODER-11'e mesaj gönder..." required aria-label="Mesaj Gönder">
+            <button type="submit" id="submit-btn" aria-label="Mesajı İlet">
+                <span id="btn-text">Gönder</span>
+            </button>
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="panel">
+            <h2>Keşifler</h2>
+            <ul id="kesif-list">
+                {% for kesif in kesifler %}
+                <li>{{ kesif[1] }} - {{ kesif[4] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="panel">
+            <h2>Sohbetler</h2>
+            <ul id="sohbet-list">
+                {% for sohbet in sohbetler %}
+                <li><b>{{ sohbet[1] }}:</b> {{ sohbet[2] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="panel">
+            <h2>Kaynaklar</h2>
+            <ul>
+                {% for kaynak in kaynaklar %}
+                <li>{{ kaynak[2] }} - {{ kaynak[3] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Sistem durumu otomatik güncelleme
+        async function fetchStatus() {
+            try {
+                const res = await fetch('/sistem_durumu');
+                const data = await res.json();
+                const panel = document.getElementById('status-panel');
+                panel.textContent = 'Sistem: ' + (data.calisiyor ? 'Aktif' : 'Duraklatıldı') + ' | İşlem: ' + data.anlik_islem;
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        setInterval(fetchStatus, 3000);
+        fetchStatus();
+
+        // Chat formu async gönderimi ve UX disabled state
+        document.getElementById('chat-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = document.getElementById('chat-input');
+            const btn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const mesaj = input.value;
+
+            // Loading state UX
+            btn.disabled = true;
+            btn.setAttribute('aria-disabled', 'true');
+            btnText.textContent = 'İletiliyor...';
+
+            fetch('/bot_cevap', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mesaj: mesaj })
+            })
+            .then(res => res.json())
+            .then(data => {
+                input.value = '';
+                // Basit optimistic update
+                const ul = document.getElementById('sohbet-list');
+                const li = document.createElement('li');
+                li.innerHTML = `<b>SİSTEM:</b> ${data.cevap}`;
+                ul.prepend(li);
+            })
+            .catch(err => console.error(err))
+            .finally(() => {
+                // Restore state UX
+                btn.disabled = false;
+                btn.removeAttribute('aria-disabled');
+                btnText.textContent = 'Gönder';
+            });
+        });
+    </script>
+</body>
+</html>
