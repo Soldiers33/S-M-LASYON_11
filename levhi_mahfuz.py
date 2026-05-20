@@ -49,6 +49,14 @@ class LevhiMahfuzConstants:
     CELALI_CYCLE = 33                             # years (leap correction)
     RAMADAN_SHIFT = 11                            # days/year
     
+    # ========== SENTEZ-7/8 CONSTANTS ==========
+    V_VOLUME = 363.0                              # Base resonance volume
+    Q_CODE = 11111111111                          # Matrix key (R11)
+    C_I_DEVIATION = 0.0001                        # Consciousness deviation factor
+    G_I_GRAVITY = 9.81 * (11 / 10)                # Corrected gravity metric
+    H_HUM = 6.52                                  # MHz Matrix Breaker Lambda
+    T_END_BOOT = 2026.3                           # End of boot sequence timeline
+
     # ========== TIME MARKERS ==========
     FLOOD_YEAR = -9048                            # BC (start of simulation)
     SIMULATION_DURATION = 11111                   # years (ideal)
