@@ -11,3 +11,7 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+
+## 2026-05-22 - Form Input Accessibility
+**Learning:** The `dashboard_11` Flask app renders a raw HTML template directly containing a complex `aria-live` async fetch pipeline, meaning any screen-reader users lack context immediately if the primary input (`#mesajGirdi`) isn't explicitly labelled prior to interaction.
+**Action:** When working on standalone HTML files injected into Flask endpoints, prioritize explicit `aria-label` attributes on core form controls to ensure context isn't lost during async partial reloads.
