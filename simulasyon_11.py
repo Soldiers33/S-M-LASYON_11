@@ -7,6 +7,14 @@ from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
+_NASA_READY = True
+try:
+    from modul_nasa_live_data import NASA_Live_Data_Module
+    from deep_research_module import Deep_Research_Module
+    from dogrulama_testleri import Yeni_Dogrulama
+except ImportError:
+    _NASA_READY = False
+
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
     HEADER = '\033[95m'
@@ -1610,6 +1618,19 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.kod_149.analiz()
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
+
+        if _NASA_READY:
+            print(f"\n{Colors.BOLD}{Colors.CYAN}*** NASA HORIZONS & DEEP RESEARCH (AUTONOMOUS INTEGRATION) ***{Colors.ENDC}")
+            nasa_modul = NASA_Live_Data_Module()
+            nasa_modul.analiz()
+
+            deep_res = Deep_Research_Module()
+            new_constant = deep_res.analiz()
+
+            dogrulama = Yeni_Dogrulama()
+            if new_constant is not None:
+                dogrulama.add_to_queue(new_constant, "arXiv Synthesis")
+            dogrulama.analiz()
         
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
