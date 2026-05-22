@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kar Topu V5 - 11 Boyutlu Simülasyon Ağı</title>
+    <style>
+        body { background-color: #0d1117; color: #c9d1d9; font-family: monospace; padding: 20px; }
+        .container { max-width: 1200px; margin: auto; }
+        .box { border: 1px solid #30363d; background-color: #161b22; padding: 15px; margin-bottom: 20px; border-radius: 6px; }
+        h1, h2 { color: #58a6ff; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 8px; border: 1px solid #30363d; text-align: left; }
+        th { background-color: #21262d; }
+        input[type="text"] { width: 80%; padding: 8px; background-color: #0d1117; color: white; border: 1px solid #30363d; border-radius: 4px;}
+        button { padding: 8px 16px; background-color: #238636; color: white; border: none; border-radius: 4px; cursor: pointer;}
+        button:hover { background-color: #2ea043; }
+        .toast {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #238636;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌌 Kar Topu V5 - 11 Boyutlu Simülasyon Ağı</h1>
+
+        <div class="box">
+            <h2>Görev İletimi (DEKODER-11'e)</h2>
+            <form id="botForm" style="display:flex; gap:10px;">
+                <input type="text" id="mesajGirdi" placeholder="AI'ya görev veya soru iletiniz..." aria-label="Görev veya soru" required>
+                <button type="submit" id="gonderButon">Gönder</button>
+            </form>
+            <div id="toastMessage" class="toast" aria-live="polite"></div>
+        </div>
+
+        <div class="box">
+            <h2>Kar Topu Günlükleri</h2>
+            <table>
+                <tr><th>Tarih</th><th>Kaynak</th><th>Veri</th><th>Analiz</th></tr>
+                {% for log in kartopu %}
+                <tr>
+                    <td>{{ log[0] }}</td>
+                    <td>{{ log[1] }}</td>
+                    <td>{{ log[2][:100] }}...</td>
+                    <td>{{ log[3][:100] }}...</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('botForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('gonderButon');
+            const input = document.getElementById('mesajGirdi');
+            const toast = document.getElementById('toastMessage');
+
+            btn.disabled = true;
+            btn.textContent = "Gönderiliyor...";
+
+            fetch('/bot_cevap', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mesaj: input.value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                input.value = "";
+                toast.textContent = data.cevap || "Gönderildi!";
+                toast.style.display = "block";
+
+                setTimeout(() => {
+                    toast.style.display = "none";
+                    location.reload();
+                }, 2000);
+            })
+            .catch(error => {
+                toast.textContent = "Hata oluştu!";
+                toast.style.backgroundColor = "#da3633";
+                toast.style.display = "block";
+                setTimeout(() => {
+                    toast.style.display = "none";
+                    toast.style.backgroundColor = "#238636";
+                }, 2000);
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.textContent = "Gönder";
+            });
+        });
+    </script>
+</body>
+</html>
