@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>SİMÜLASYON 11 - LEVH-İ MAHFUZ DASHBOARD</title>
+    <style>
+        body { background-color: #0d1117; color: #c9d1d9; font-family: monospace; margin: 0; padding: 20px; }
+        .container { display: flex; gap: 20px; }
+        .panel { background-color: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 15px; flex: 1; height: 85vh; overflow-y: auto; }
+        .kaynak-panel { flex: 0.8; }
+        h2 { border-bottom: 1px solid #30363d; padding-bottom: 10px; margin-top: 0; color: #58a6ff; }
+        .item { padding: 10px; border-bottom: 1px solid #30363d; }
+        .item:last-child { border-bottom: none; }
+        .tarih { color: #8b949e; font-size: 0.85em; }
+        .kategori { padding: 2px 6px; border-radius: 10px; font-size: 0.8em; margin-left: 10px; font-weight: bold; }
+
+        .cat-kirmizi { background-color: rgba(248, 81, 73, 0.1); color: #f85149; border: 1px solid rgba(248,81,73,0.4); }
+        .cat-mor { background-color: rgba(188, 140, 255, 0.1); color: #bc8cff; border: 1px solid rgba(188,140,255,0.4); text-shadow: 0 0 5px #bc8cff; }
+        .cat-mavi { background-color: rgba(88, 166, 255, 0.1); color: #58a6ff; border: 1px solid rgba(88,166,255,0.4); }
+        .cat-sari { background-color: rgba(210, 153, 34, 0.1); color: #d29922; border: 1px solid rgba(210,153,34,0.4); }
+        .cat-siyah { background-color: #010409; color: #8b949e; border: 1px solid #30363d; }
+        .cat-pembe { background-color: rgba(255, 123, 114, 0.1); color: #ff7b72; border: 1px solid rgba(255,123,114,0.4); }
+
+        .chat-input-container { display: flex; margin-top: 15px; gap: 10px; }
+        input[type="text"] { flex: 1; padding: 10px; background: #010409; border: 1px solid #30363d; color: #c9d1d9; border-radius: 6px; }
+        button { padding: 10px 20px; background: #238636; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #2ea043; }
+        .btn-danger { background: #da3633; }
+        .btn-danger:hover { background: #f85149; }
+        .btn-secondary { background: #21262d; border: 1px solid #30363d; }
+        .btn-secondary:hover { background: #30363d; }
+
+        .chat-msg { margin-bottom: 10px; padding: 10px; border-radius: 6px; }
+        .msg-sys { background: rgba(88, 166, 255, 0.1); border-left: 3px solid #58a6ff; }
+        .msg-user { background: rgba(35, 134, 54, 0.1); border-left: 3px solid #238636; }
+
+        .kaynak-item { display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #0d1117; margin-bottom: 5px; border-radius: 4px; border: 1px solid #30363d;}
+        .kaynak-link { color: #58a6ff; text-decoration: none; word-break: break-all; font-size: 0.9em;}
+        .kaynak-link:hover { text-decoration: underline; }
+
+        .status-bar { padding: 10px; background: #161b22; border: 1px solid #30363d; margin-bottom: 20px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;}
+        .status-indicator { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+        .status-on { background-color: #3fb950; box-shadow: 0 0 8px #3fb950;}
+        .status-off { background-color: #f85149; }
+
+        .controls { display: flex; gap: 10px; }
+
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #238636;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+
+        .toast.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <div>
+            <span id="sistem-led" class="status-indicator status-on"></span>
+            <strong>SİSTEM DURUMU:</strong> <span id="sistem-text">Aktif - Analizler Çalışıyor</span>
+        </div>
+        <div class="controls">
+            <button onclick="sistemTetikle(true)">Sistemi Başlat</button>
+            <button onclick="sistemTetikle(false)" class="btn-danger">Sistemi Durdur</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- SOL PANEL: CANLI KEŞİFLER -->
+        <div class="panel" id="kesif-panel">
+            <h2>🌌 Levh-i Mahfuz / Kar Topu Canlı Akış</h2>
+            <div id="kesif-liste">
+                <!-- JavaScript ile Doldurulacak -->
+            </div>
+        </div>
+
+        <!-- ORTA PANEL: DEKODER-11 İLETİŞİM -->
+        <div class="panel">
+            <h2>💬 DEKODER-11 Terminali</h2>
+            <div id="sohbet-liste" style="height: calc(100% - 120px); overflow-y: auto; padding-right: 10px;">
+                {% for sohbet in sohbetler %}
+                    <div class="chat-msg {% if sohbet[1] == 'SİSTEM' %}msg-sys{% else %}msg-user{% endif %}">
+                        <div class="tarih">{{ sohbet[0] }} - <b>{{ sohbet[1] }}</b></div>
+                        <div>{{ sohbet[2] }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="chat-input-container">
+                <input type="text" id="mesaj-input" aria-label="Sisteme mesaj girin" placeholder="Sisteme komut, link veya yerel dosya yolu (C:\...) girin...">
+                <button id="btn-gonder" onclick="mesajGonder()">Gönder</button>
+            </div>
+        </div>
+
+        <!-- SAĞ PANEL: KÜTÜPHANE VE KAYNAKLAR -->
+        <div class="panel kaynak-panel">
+            <h2>📚 Kütüphane / Kaynak Havuzu</h2>
+            <div style="margin-bottom: 15px;">
+                <button class="btn-secondary" onclick="masaustuTara()" style="width: 100%;">🖥️ Masaüstü ve Klasörleri Tara</button>
+            </div>
+            <div id="kaynak-liste">
+                {% for k in kaynaklar %}
+                    <div class="kaynak-item" id="kaynak-{{ k[0] }}">
+                        <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            <span class="kategori cat-siyah" style="margin-left: 0; margin-right: 5px;">{{ k[2] }}</span>
+                            {% if k[2] == 'DOSYA' %}
+                                <a href="/dosya_ac?yol={{ k[3] }}" target="_blank" class="kaynak-link" title="{{ k[3] }}">{{ k[3].split('\\')[-1] }}</a>
+                            {% else %}
+                                <a href="{{ k[3] }}" target="_blank" class="kaynak-link" title="{{ k[3] }}">{{ k[3] }}</a>
+                            {% endif %}
+                        </div>
+                        <button aria-label="Kaynağı sil" class="btn-danger" style="padding: 4px 8px; font-size: 0.8em;" onclick="kaynakSil({{ k[0] }})">X</button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Mesaj</div>
+
+    <script>
+        function showToast(msg) {
+            var x = document.getElementById("toast");
+            x.innerHTML = msg;
+            x.className = "toast show";
+            setTimeout(function(){ x.className = x.className.replace("toast show", "toast"); }, 3000);
+        }
+
+        function mesajGonder() {
+            const input = document.getElementById('mesaj-input');
+            const btn = document.getElementById('btn-gonder');
+            const mesaj = input.value.trim();
+            if(!mesaj) return;
+
+            input.disabled = true;
+            btn.disabled = true;
+            btn.innerText = "Gönderiliyor...";
+            btn.setAttribute("aria-live", "polite");
+
+            fetch('/bot_cevap', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({mesaj: mesaj})
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === 'ok') {
+                    input.value = '';
+                    setTimeout(() => location.reload(), 1500); // Give user a moment to see toast
+                } else {
+                    input.disabled = false;
+                    btn.disabled = false;
+                    btn.innerText = "Gönder";
+                    showToast("Bir hata oluştu.");
+                }
+            })
+            .catch(() => {
+                input.disabled = false;
+                btn.disabled = false;
+                btn.innerText = "Gönder";
+                showToast("Bağlantı hatası oluştu.");
+            });
+        }
+
+        function kaynakSil(id) {
+            if(!confirm("Bu kaynağı silmek istediğinize emin misiniz?")) return;
+            fetch('/kaynak_sil', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({id: id})
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === 'ok') {
+                    document.getElementById('kaynak-'+id).remove();
+                    showToast(data.mesaj);
+                }
+            });
+        }
+
+        function masaustuTara() {
+            showToast("Masaüstü taranıyor, lütfen bekleyin...");
+            fetch('/masaustu_tara', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'}
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === 'ok') {
+                    showToast(data.mesaj);
+                    if(data.eklenen > 0) {
+                        setTimeout(() => location.reload(), 2000);
+                    }
+                }
+            });
+        }
+
+        function sistemTetikle(durum) {
+            fetch('/sistem_tetikle', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({durum: durum})
+            }).then(() => guncelleSistemDurumu());
+        }
+
+        function guncelleSistemDurumu() {
+            fetch('/sistem_durumu')
+                .then(r => r.json())
+                .then(data => {
+                    const led = document.getElementById('sistem-led');
+                    const text = document.getElementById('sistem-text');
+
+                    if(data.calisiyor) {
+                        led.className = "status-indicator status-on";
+                        text.innerText = "Aktif - " + data.anlik_islem;
+                    } else {
+                        led.className = "status-indicator status-off";
+                        text.innerText = "DURDURULDU - " + data.anlik_islem;
+                    }
+                });
+        }
+
+        function guncelleCanliVeri() {
+            fetch('/canli_veri')
+                .then(r => r.json())
+                .then(data => {
+                    if(data.status !== 'ok') return;
+
+                    const liste = document.getElementById('kesif-liste');
+                    let html = '';
+
+                    // Önce Kar Topu Loglarını (Sentetik Data) Göster
+                    if(data.kartopu && data.kartopu.length > 0) {
+                        html += `<div style="color: #bc8cff; border-bottom: 1px dashed #30363d; margin-bottom: 10px; padding-bottom: 5px;">❄️ KAR TOPU V5 SENTEZ AKIŞI</div>`;
+                        data.kartopu.forEach(k => {
+                            html += `
+                            <div class="item" style="border-left: 2px solid #bc8cff; padding-left: 10px; margin-bottom: 5px; background: rgba(188,140,255,0.05);">
+                                <div class="tarih">${k.tarih} - [${k.kaynak}]</div>
+                                <div style="font-size: 0.9em; margin-top: 4px;"><b>Veri:</b> ${k.veri}</div>
+                                <div style="font-size: 0.85em; color: #8b949e; margin-top: 2px;"><b>Analiz:</b> ${k.analiz}</div>
+                            </div>
+                            `;
+                        });
+                        html += `<div style="height: 15px;"></div>`;
+                    }
+
+                    // Sonra Kesifleri Göster
+                    data.kesifler.forEach(k => {
+                        let catClass = "cat-siyah";
+                        if(k.renk === "KIRMIZI") catClass = "cat-kirmizi";
+                        else if(k.renk === "MOR") catClass = "cat-mor";
+                        else if(k.renk === "MAVI") catClass = "cat-mavi";
+                        else if(k.renk === "SARI") catClass = "cat-sari";
+                        else if(k.renk === "PEMBE") catClass = "cat-pembe";
+
+                        html += `
+                        <div class="item">
+                            <div>
+                                <span class="tarih">${k.tarih}</span>
+                                <span class="kategori ${catClass}">${k.kategori}</span>
+                            </div>
+                            <div style="margin-top: 5px;">
+                                <strong>${k.islem_turu}:</strong> ${k.deger}
+                            </div>
+                            <div style="font-size: 0.9em; color: #8b949e; margin-top: 5px;">${k.aciklama}</div>
+                        </div>
+                        `;
+                    });
+
+                    liste.innerHTML = html;
+                });
+        }
+
+        // Enter tuşu ile mesaj gönderme
+        document.getElementById("mesaj-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                mesajGonder();
+            }
+        });
+
+        // Sayfa yüklendiğinde sohbeti en alta kaydır
+        window.onload = function() {
+            var sohbet = document.getElementById("sohbet-liste");
+            sohbet.scrollTop = sohbet.scrollHeight;
+        }
+
+        // Periyodik güncellemeler
+        setInterval(guncelleSistemDurumu, 5000);
+        setInterval(guncelleCanliVeri, 5000);
+
+        // İlk yükleme
+        guncelleCanliVeri();
+    </script>
+</body>
+</html>
