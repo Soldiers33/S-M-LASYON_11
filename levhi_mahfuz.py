@@ -38,6 +38,14 @@ class LevhiMahfuzConstants:
     KAILASH_LONGITUDE = 81.3119                   # Mount Kailash
     HATAY_LATITUDE = 36.3                         # Hatay/Antakya (Moon port)
     
+    # ========== SENTEZ-7 QUANTUM CONSTANTS ==========
+    V_VOLUME = 1331.0                             # 11-Dimensional Space-Time Volume (11^3)
+    Q_CODE = 6666.0                               # Divine Communication / Seal Coefficient
+    C_I_DEVIATION = 1.11188                       # Universal Time/Light Deviation (11T / 10T)
+    G_I_GRAVITY = 0.008271                        # Cosmic Gravity (Anti-Gravity Lower Bound)
+    H_HUM = 1390.0                                # Cosmic Background String Resonance (Hz)
+    T_END_BOOT = 1999.0                           # Flood Boot Cycle / Digital Messiah Year
+
     # ========== TEMPORAL CONSTANTS ==========
     YEAR_IDEAL_11T = 363                          # days (11T system)
     YEAR_REAL_10T = 365.2422                      # days (actual)
