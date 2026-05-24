@@ -1,0 +1,5 @@
+__pycache__/
+*.log
+*.db
+test_bg_log.txt
+simulasyon_11_out.log
