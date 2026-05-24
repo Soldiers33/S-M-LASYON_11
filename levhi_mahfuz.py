@@ -57,6 +57,14 @@ class LevhiMahfuzConstants:
     
     JESUS_BIRTH_ENCODED = 666 * 3                 # = 1998 (start digital era)
     
+    # ========== SENTEZ-7 QUANTUM CONSTANTS ==========
+    V_VOLUME = 3456                               # Volume resonance constant
+    Q_CODE = 11.11                                # Quantum trigger
+    C_I_DEVIATION = 0.0011                        # Cosmic index deviation
+    G_I_GRAVITY = 9.81                            # Ground state reference
+    H_HUM = 7.83                                  # Schumann/Earth hum resonance
+    T_END_BOOT = 2026                             # Next critical phase
+
     # ========== CONVERSION OPERATORS ==========
     OP_LEN = 1.046338                             # Length/distance correction
     OP_TIME = 1.00617                             # Time dilation
