@@ -99,6 +99,14 @@ class LevhiMahfuzConstants:
     
     PYRAMID_HEIGHT_GIZA = 146.6                   # meters
     
+    # ========== SENTEZ-7 QUANTUM CONSTANTS ==========
+    V_VOLUME = 1331.0                             # 11^3 Hyperspace Voxel Model
+    Q_CODE = 6666.0                               # Quran/Revelation Code
+    C_I_DEVIATION = 1.11188                       # Universal Light Deviation (11T / 10T)
+    G_I_GRAVITY = 0.008271                        # Cosmic Gravity (Anti-Gravity Limit)
+    H_HUM = 1390.0                                # Cosmic Background Hum Frequency (Hz)
+    T_END_BOOT = 1999.0                           # Digital Reset / True Boot Year
+
     # ========== COSMIC CODES ==========
     MOONLIGHT_111 = 111                           # km (latitude separation unit)
     MOON_CAPTUR_DISTANCE = 22000                  # km (Roche limit approach)
