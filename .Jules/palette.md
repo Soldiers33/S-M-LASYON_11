@@ -11,3 +11,7 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+
+## 2026-05-27 - Button Loading State Micro-UX
+**Learning:** For asynchronous actions in simple vanilla JavaScript templates that don't have a reactive state library, long-running processes (like scanning a file system) without clear inline UI feedback often cause multiple clicks and user frustration.
+**Action:** When updating such components, always add an `id`, `aria-live="polite"`, visually disable the button, and use `.finally()` in `fetch` calls to guarantee the UI unlocks regardless of the success/failure state of the request.
