@@ -49,6 +49,10 @@ class LevhiMahfuzConstants:
     CELALI_CYCLE = 33                             # years (leap correction)
     RAMADAN_SHIFT = 11                            # days/year
     
+    # ========== DEEP RESEARCH CONSTANTS ==========
+    DEEP_SPACE_RESONANCE = 11.001342              # Derived arXiv string constant
+    NASA_LIVE_CORRECTION_BASE = BASE_SYSTEM * 33000 # 363,000 km baseline
+
     # ========== TIME MARKERS ==========
     FLOOD_YEAR = -9048                            # BC (start of simulation)
     SIMULATION_DURATION = 11111                   # years (ideal)

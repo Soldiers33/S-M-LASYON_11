@@ -6,6 +6,9 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+import dogrulama_testleri as Yeni_Dogrulama
+from modul_nasa_live_data import Modul_NASA_LiveData
+from deep_research_module import DeepResearchModule
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -1548,6 +1551,9 @@ class Simule3_Lab:
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
         super().__init__() # Call the init method of the parent class
+        self.validation_queue = Yeni_Dogrulama.DogrulamaTestleri()
+        self.nasa_module = Modul_NASA_LiveData()
+        self.arxiv_module = DeepResearchModule()
 
     def run_all(self):
         # First run the original flow (V.103)
@@ -1611,6 +1617,21 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # NASA LIVE DATA INTEGRATION
+        nasa_results = self.nasa_module.analiz()
+        if nasa_results:
+            for k, v in nasa_results.items():
+                self.validation_queue.add_to_queue("NASA", "Astronomical", v, k)
+
+        # DEEP RESEARCH INTEGRATION
+        arxiv_results = self.arxiv_module.analiz()
+        if arxiv_results:
+            for k, v in arxiv_results.items():
+                self.validation_queue.add_to_queue("arXiv", "Quantum/String", v, k)
+
+        # RUN VALIDATION QUEUE
+        self.validation_queue.run_all_validations()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
