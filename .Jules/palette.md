@@ -11,3 +11,7 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+
+## 2026-05-28 - Avoid Over-Engineering UX Changes
+**Learning:** Adding a massive UI system (like a dashboard with multiple files, logging, etc.) when tasked with a *micro-UX* improvement completely violates the <50 line constraint and pollutes the repository.
+**Action:** Next time, find an *existing* element in the code and add a small accessibility or feedback enhancement (like adding a loading state to a button or an `aria-label`).
