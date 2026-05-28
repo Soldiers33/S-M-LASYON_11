@@ -141,6 +141,12 @@ class LevhiMahfuzConstants:
     LATITUDE_MASTER_HARMONY = 27.0235              # (Kailash + Kailasa + Giza) / 3
     PHI_LATITUDE_CORRECTION = 43.7250              # Harmony × φ
     
+    # ========== NEW JWST / NASA DISCOVERIES (2024-2026) ==========
+    JWST_HUBBLE_CONSTANT = 70.0                   # km/s/Mpc (Wendy Freedman 2024 JWST data)
+    HUBBLE_TENSION_FACTOR = 73.0 / 70.0           # Discrepancy indicator (Riess vs Freedman)
+    JWST_11_RESONANCE = 70.0 * 11                 # 770 (Hubble constant 11-dimension lock)
+    DARK_ENERGY_SHIFT_CODE = (73.0 / 70.0) * 11.08831 # Dark energy cosmological shift factor
+
     # ========== EXISTING CONSTANT REFERENCE ==========
     LEVHI_MAHFUZ_CORE_REF = IDEAL_EARTH_RADIUS     # Reference to 6666
     
@@ -285,6 +291,21 @@ class LevhiMahfuzFormulas:
             "quantum_info": quantum_info,
             "levhi_quantum": result,
             "description": f"Levh-i Quantum = {levhi_freq:.2f} × {quantum_info:.2e} = {result:.2e}"
+        }
+
+    @staticmethod
+    def jwst_dark_energy_resonance():
+        """Calculate massive formula for JWST Dark Energy 11-Resonance."""
+        tension = LevhiMahfuzConstants.HUBBLE_TENSION_FACTOR
+        resonance = LevhiMahfuzConstants.JWST_11_RESONANCE
+        shift = LevhiMahfuzConstants.DARK_ENERGY_SHIFT_CODE
+        result = tension * resonance * shift
+        return {
+            "tension_factor": tension,
+            "resonance_11": resonance,
+            "shift_code": shift,
+            "dark_energy_resonance": result,
+            "description": f"JWST Dark Energy Resonance = {tension:.3f} × {resonance:.1f} × {shift:.3f} = {result:.2f}"
         }
     
     @staticmethod

@@ -6,6 +6,8 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+from dogrulama_testleri import DogrulamaTestleri
+from modul_nasa_live_data import ModulNasaLiveData
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -1534,6 +1536,10 @@ class Simule3_Lab:
         # KAR TOPU V5 V.3 PHASE-3 SYNTHESIS MODULE (March 4, 2026 - Phase-3)
         self.kar_topu_v5_v3 = Modul_KarTopu_V5_V3_Phase3()
         
+        # NASA AND VALIDATION MODULES
+        self.nasa_live = ModulNasaLiveData()
+        self.dogrulama_surekli = DogrulamaTestleri()
+
         # 3. Then add new V.130/131/132 modules
         self.roche_wave = Modul_Roche_Tidal_Wave_V130(self.const)
         self.time_packets = Modul_Time_Packets_V130(self.const)
@@ -1611,6 +1617,24 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # CONTINUOUS VALIDATION & NASA INTEGRATION
+        nasa_data = self.nasa_live.fetch_nasa_data()
+
+        # Feed data to validation module queue
+        self.dogrulama_surekli.add_to_queue(
+            source_id="JWST_2024",
+            data_type="JWST_HUBBLE_CONSTANT",
+            value=nasa_data['JWST_HUBBLE_CONSTANT']
+        )
+        self.dogrulama_surekli.add_to_queue(
+            source_id="JWST_2024",
+            data_type="DARK_ENERGY_SHIFT_CODE",
+            value=nasa_data['DARK_ENERGY_SHIFT_CODE']
+        )
+
+        # Run autonomous validation
+        self.dogrulama_surekli.run_validations()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
