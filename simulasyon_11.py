@@ -6,6 +6,8 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+from dogrulama_testleri import DogrulamaTestleri
+from modul_nasa_live_data import ModulNasaLiveData
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -1525,6 +1527,9 @@ class Simule3_Lab:
         self.boot_666x3 = Modul_666x3_Boot(const)
         self.piramit_orijinal = Modul_LevhMahfuz_Piramidi_V103(const)
         
+        self.aktif_dogrulama_testleri = DogrulamaTestleri()
+        self.nasa_live_data = ModulNasaLiveData()
+
         # [ERROR FIX] Missing Module Defined
         self.fine_family = Modul_FineTuned_Family(const)
         
@@ -1586,6 +1591,11 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_biyoloji.analiz()
         self.piramit_biyoloji.analiz()
         self.nihai_kanit.run_full_proof()
+
+        # NASA & Active Validation Integration
+        self.nasa_live_data.analiz()
+        self.aktif_dogrulama_testleri.add_to_queue({"type": "AI_GENERATION", "source": "simule_core"})
+        self.aktif_dogrulama_testleri.run_tests()
         self.vopson_infodynamics.analiz()
         self.tufan_hesaplari.analiz()
         self.isa_dogum_kayma.analiz()
