@@ -8,6 +8,10 @@ from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
 
 # --- VISUAL INTERFACE COLORS ---
+from modul_nasa_live_data import ModulNasaLiveData
+from deep_research_module import ModulDeepResearch
+from dogrulama_testleri import DogrulamaTestleri
+
 class Colors:
     HEADER = '\033[95m'
     BLUE = '\033[94m'
@@ -1548,9 +1552,27 @@ class Simule3_Lab:
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
         super().__init__() # Call the init method of the parent class
+        self._nasa_module = ModulNasaLiveData()
+        self._deep_research = ModulDeepResearch()
+        self._dogrulama = DogrulamaTestleri()
+
 
     def run_all(self):
         # First run the original flow (V.103)
+        # OTONOM AI MODULLERI ENTEGRASYONU
+        print(f"\n{Colors.BOLD}{Colors.MAGENTA}*** OTONOM AI CANLI VERI & ARGE MODULLERI ***{Colors.ENDC}")
+        nasa_data = self._nasa_module.analiz()
+        self._dogrulama.add_to_queue("NASA_LIVE", nasa_data)
+
+        research_data = self._deep_research.analiz()
+        self._dogrulama.add_to_queue("ARXIV_DEEP_RESEARCH", research_data)
+
+        validation_success = self._dogrulama.analiz()
+        if validation_success:
+            print(f"{Colors.GREEN}[+] TUM YENI KESIFLER DOGRULANDI VE MATRISE EKLENDI.{Colors.ENDC}\n")
+        else:
+            print(f"{Colors.WARNING}[-] BAZI VERILER DOGRULAMADAN GECEMEDI, GUVENLI MODDA DEVAM EDILIYOR.{Colors.ENDC}\n")
+
         print(f"{Colors.BOLD}{Colors.CYAN}SIMULE3 V.103 ULTIMATE STARTING...{Colors.ENDC}\n")
         self.mikro.metre(1)
         self.enlem_boylam.hatay_analiz()
