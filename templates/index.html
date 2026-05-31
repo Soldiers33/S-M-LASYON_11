@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SİMÜLASYON_11 Otonom Keşif</title>
+    <!-- Tailwind CSS (for quick styling) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        body { font-family: 'Share Tech Mono', monospace; background-color: #050505; color: #00ff00; }
+        .glitch { text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff; }
+        .kirmizi { color: #ff3333; }
+        .mavi { color: #33aaff; }
+        .sari { color: #ffff33; }
+        .mor { color: #aa33ff; }
+        .siyah { color: #aaaaaa; }
+        .pembe { color: #ff66cc; }
+        .panel { border: 1px solid #004400; background-color: rgba(0,20,0,0.8); }
+        .btn { transition: all 0.3s ease; }
+        .btn:hover { background-color: #00ff00; color: #000; box-shadow: 0 0 10px #00ff00; }
+        .btn:focus-visible { outline: 2px solid #00ff00; outline-offset: 2px; }
+        .btn-disabled { opacity: 0.5; cursor: not-allowed; }
+        .toast { position: fixed; bottom: 20px; right: 20px; z-index: 50; display: none; padding: 1rem; border-radius: 0.5rem; border: 1px solid #00ff00; background: rgba(0, 20, 0, 0.95); box-shadow: 0 0 15px rgba(0, 255, 0, 0.5); }
+    </style>
+</head>
+<body class="min-h-screen p-4 flex flex-col items-center">
+
+    <header class="w-full max-w-6xl flex justify-between items-center mb-6 border-b border-green-800 pb-4">
+        <h1 class="text-3xl font-bold glitch tracking-widest">SİMÜLASYON_11 OTONOM SENTEZ</h1>
+        <div class="flex items-center gap-4">
+            <span id="durum_metni" class="text-sm">Sistem: Aktif</span>
+            <div id="durum_indicator" class="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_8px_#00ff00] animate-pulse"></div>
+        </div>
+    </header>
+
+    <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-4 h-[80vh]">
+
+        <!-- Sol Panel: Madenci Logları (Kar Topu) -->
+        <div class="panel rounded-lg p-4 flex flex-col h-full overflow-hidden">
+            <h2 class="text-xl mb-4 border-b border-green-800 pb-2">Arka Plan Taramaları</h2>
+            <p id="anlik_islem" class="text-xs mb-4 h-12 text-yellow-300">Sistem Başlatılıyor...</p>
+            <div class="flex-grow overflow-y-auto pr-2 space-y-3" id="kartopu_liste">
+                {% for k in kartopu %}
+                <div class="text-xs border-l-2 border-green-600 pl-2">
+                    <span class="text-green-800">{{ k.tarih[11:19] }}</span>
+                    <strong class="text-blue-400 block">{{ k.kaynak }}</strong>
+                    <span class="text-gray-400">{{ k.analiz }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Orta Panel: Ana Keşifler -->
+        <div class="panel rounded-lg p-4 flex flex-col h-full overflow-hidden md:col-span-2">
+            <h2 class="text-xl mb-4 border-b border-green-800 pb-2 flex justify-between">
+                <span>Matris Doğrulamaları</span>
+                <span class="text-sm text-gray-500">Canlı Akış</span>
+            </h2>
+            <div class="flex-grow overflow-y-auto pr-2 space-y-2" id="kesif_liste">
+                {% for k in kesifler %}
+                <div class="p-2 border border-green-900 rounded bg-black/40">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs text-green-700">{{ k.tarih }}</span>
+                        <span class="text-xs font-bold border px-1 rounded border-{{ k.renk|lower }}-500 text-{{ k.renk|lower }}-400">{{ k.kategori }}</span>
+                    </div>
+                    <div class="mt-1">
+                        <strong class="text-white">{{ k.islem_turu }}</strong>
+                        <span class="text-green-400 font-bold ml-2">[{{ k.deger }}]</span>
+                    </div>
+                    <p class="text-sm mt-1 text-gray-300">{{ k.aciklama }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-green-800 flex gap-2">
+                <input type="text" id="komut_input" placeholder="Dekoder'e komut ver... (Örn: c:\Belgelerim tarama yap)"
+                       aria-label="Dekoder'e komut ver"
+                       class="flex-grow bg-black border border-green-700 rounded px-3 py-2 text-green-400 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400"
+                       onkeypress="if(event.key === 'Enter') gonderKomut()">
+                <button onclick="gonderKomut()" aria-label="Komutu İlet" class="btn border border-green-600 rounded px-6 py-2">
+                    İLET
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="toast" class="toast" role="alert" aria-live="polite">
+        <span id="toast-message"></span>
+    </div>
+
+    <script>
+        // UX: Accessible Toast Notifications
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-message');
+            msgEl.textContent = message;
+            toast.style.display = 'block';
+
+            if (isError) {
+                toast.style.borderColor = '#ff3333';
+                toast.style.boxShadow = '0 0 15px rgba(255, 51, 51, 0.5)';
+            } else {
+                toast.style.borderColor = '#00ff00';
+                toast.style.boxShadow = '0 0 15px rgba(0, 255, 0, 0.5)';
+            }
+
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        function gonderKomut() {
+            const inp = document.getElementById('komut_input');
+            const mesaj = inp.value.trim();
+            if(!mesaj) return;
+
+            const btn = document.querySelector('button[onclick="gonderKomut()"]');
+
+            // UX: Loading state
+            btn.classList.add('btn-disabled');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="animate-pulse">İLETİLİYOR...</span>';
+
+            fetch('/bot_cevap', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({mesaj: mesaj})
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === 'ok') {
+                    showToast('Komut başarıyla iletildi.');
+                    inp.value = '';
+                } else {
+                    showToast('Hata: Komut iletilemedi.', true);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                showToast('Ağ hatası: Komut iletilemedi.', true);
+            })
+            .finally(() => {
+                // UX: Restore button state
+                btn.classList.remove('btn-disabled');
+                btn.disabled = false;
+                btn.innerHTML = 'İLET';
+            });
+        }
+
+        // Canlı Güncelleme Döngüsü
+        setInterval(() => {
+            fetch('/sistem_durumu')
+                .then(r => r.json())
+                .then(d => {
+                    document.getElementById('anlik_islem').innerText = d.anlik_islem;
+                    const ind = document.getElementById('durum_indicator');
+                    if(d.calisiyor) {
+                        document.getElementById('durum_metni').innerText = "Sistem: Aktif";
+                        ind.className = "w-3 h-3 rounded-full bg-green-500 shadow-[0_0_8px_#00ff00] animate-pulse";
+                    } else {
+                        document.getElementById('durum_metni').innerText = "Sistem: Beklemede";
+                        ind.className = "w-3 h-3 rounded-full bg-yellow-500 shadow-[0_0_8px_#ffff00]";
+                    }
+                })
+                .catch(e => console.log(e));
+
+            fetch('/canli_veri')
+                .then(r => r.json())
+                .then(d => {
+                    if(d.status === 'ok') {
+                        // Kartopu Güncelle
+                        let kt_html = '';
+                        d.kartopu.forEach(k => {
+                            kt_html += `<div class="text-xs border-l-2 border-green-600 pl-2">
+                                <span class="text-green-800">${k.tarih.substring(11,19)}</span>
+                                <strong class="text-blue-400 block">${k.kaynak}</strong>
+                                <span class="text-gray-400">${k.analiz}</span>
+                            </div>`;
+                        });
+                        if (kt_html) document.getElementById('kartopu_liste').innerHTML = kt_html;
+
+                        // Keşif Güncelle
+                        let k_html = '';
+                        d.kesifler.forEach(k => {
+                            k_html += `<div class="p-2 border border-green-900 rounded bg-black/40">
+                                <div class="flex justify-between items-start">
+                                    <span class="text-xs text-green-700">${k.tarih}</span>
+                                    <span class="text-xs font-bold border px-1 rounded border-${k.renk.toLowerCase()}-500 text-${k.renk.toLowerCase()}-400">${k.kategori}</span>
+                                </div>
+                                <div class="mt-1">
+                                    <strong class="text-white">${k.islem_turu}</strong>
+                                    <span class="text-green-400 font-bold ml-2">[${k.deger}]</span>
+                                </div>
+                                <p class="text-sm mt-1 text-gray-300">${k.aciklama}</p>
+                            </div>`;
+                        });
+                        if (k_html) document.getElementById('kesif_liste').innerHTML = k_html;
+                    }
+                })
+                .catch(e => console.log(e));
+        }, 3000);
+    </script>
+</body>
+</html>
