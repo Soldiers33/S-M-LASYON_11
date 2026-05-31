@@ -11,3 +11,7 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+
+## 2026-03-02 - Vanilla HTML/JS Toast UX
+**Learning:** In vanilla HTML templates like `index.html` (which is loaded dynamically in `dashboard_11.py`), using `display: none` to completely hide toast notifications is much more accessible than visually hiding them while keeping them in the tree. Delaying reload actions or restoring button states in async `fetch().finally()` ensures users see success/error feedback clearly without becoming permanently disabled.
+**Action:** Always implement explicit `.catch()` and `.finally()` on async UX features, and use ARIA-live attributes rather than block-level alerts for micro-UX updates.
