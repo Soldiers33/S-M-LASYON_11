@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S-M-LASYON_11 Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; color: #333; }
+        h1 { color: #2c3e50; }
+        .container { max-width: 1200px; margin: auto; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .log-box { height: 300px; overflow-y: auto; background: #eef2f5; padding: 10px; border-radius: 4px; font-family: monospace; }
+        input[type="text"] { width: calc(100% - 100px); padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px 20px; border: none; background: #3498db; color: white; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #2980b9; }
+        .file-list { list-style: none; padding: 0; }
+        .file-list li { margin: 5px 0; display: flex; justify-content: space-between; align-items: center; }
+        .file-list a { color: #3498db; text-decoration: none; }
+        .file-list a:hover { text-decoration: underline; }
+        .delete-btn { background: #e74c3c; padding: 5px 10px; font-size: 0.8em; }
+        .delete-btn:hover { background: #c0392b; }
+
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 16px;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+            display: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .toast.show {
+            opacity: 1;
+            display: block;
+        }
+
+        .toast.success { background-color: #2ecc71; color: white; }
+        .toast.error { background-color: #e74c3c; color: white; }
+        .toast.info { background-color: #3498db; color: white; }
+    </style>
+</head>
+<body>
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+    <div class="container">
+        <h1>S-M-LASYON_11 Kontrol Merkezi</h1>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Otonom Keşifler (Canlı)</h2>
+                <div id="kesifler" class="log-box">
+                    {% for kesif in kesifler %}
+                        <div style="color: {% if kesif[3] == 'ALERT' %}red{% elif kesif[3] == 'BÜYÜK KEŞİF' %}purple{% else %}black{% endif %}; margin-bottom: 5px;">
+                            <strong>{{ kesif[1] }}</strong>: {{ kesif[2] }} ({{ kesif[4] }})
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>DEKODER-11 Ajanı ile İletişim</h2>
+                <div id="sohbet" class="log-box" style="margin-bottom: 10px;">
+                    {% for mesaj in sohbetler %}
+                        <div style="margin-bottom: 5px; {% if mesaj[1] == 'SİSTEM' %}color: #27ae60;{% else %}color: #34495e;{% endif %}">
+                            <strong>{{ mesaj[1] }}:</strong> {{ mesaj[2] }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="mesaj-input" aria-label="DEKODER-11'e komut ver" placeholder="DEKODER-11'e komut ver (örn: x.com linkini analiz et, c:\klasör\dosya.pdf'i oku)...">
+                    <button onclick="mesajGonder()">Gönder</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <h2>Kaynak Kütüphanesi</h2>
+            <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <input type="text" id="kaynak-input" aria-label="Kaynak Ekleme Linki veya Dosya Yolu" placeholder="Dosya yolu (C:\...) veya Web Linki (http://...) girin">
+                <button onclick="kaynakEkle()">Ekle</button>
+                <button onclick="masaustuTara()" style="background: #f39c12;">Masaüstünü Tara & Ekle</button>
+            </div>
+            <ul id="kaynak-listesi" class="file-list">
+                {% for kaynak in kaynaklar %}
+                    <li>
+                        <span>[{{ kaynak[2] }}]
+                            {% if kaynak[2] == 'DOSYA' %}
+                                <a href="/dosya_ac?yol={{ kaynak[3] }}" target="_blank" title="Dosyayı Görüntüle">{{ kaynak[3] }}</a>
+                            {% else %}
+                                <a href="{{ kaynak[3] }}" target="_blank">{{ kaynak[3] }}</a>
+                            {% endif %}
+                        </span>
+                        <button class="delete-btn" aria-label="Kaynağı Sil" onclick="kaynakSil({{ kaynak[0] }})">Sil</button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type} show`;
+            toast.textContent = message;
+            toast.setAttribute('role', type === 'error' ? 'alert' : 'status');
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300); // wait for fade out
+            }, 3000);
+        }
+
+        function mesajGonder() {
+            const input = document.getElementById("mesaj-input");
+            const btn = input.nextElementSibling;
+            const mesaj = input.value;
+            if (!mesaj) return;
+
+            const originalText = btn.innerText;
+            btn.innerText = "Gönderiliyor...";
+            btn.disabled = true;
+
+            fetch("/bot_cevap", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ mesaj: mesaj })
+            }).then(res => res.json()).then(data => {
+                if (data.status === "ok") {
+                    input.value = "";
+                    showToast("Mesaj gönderildi.", "success");
+                    setTimeout(() => location.reload(), 1500); // Basitçe sayfayı yenileyerek yeni mesajları göster
+                } else {
+                    showToast("Mesaj gönderilemedi.", "error");
+                }
+            }).catch(err => {
+                showToast("Bağlantı hatası oluştu.", "error");
+            }).finally(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            });
+        }
+
+        function kaynakEkle() {
+            const input = document.getElementById("kaynak-input");
+            const btn = input.nextElementSibling;
+            const yol = input.value;
+            if (!yol) return;
+
+            const originalText = btn.innerText;
+            btn.innerText = "Ekleniyor...";
+            btn.disabled = true;
+
+            fetch("/kaynak_ekle", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ yol: yol })
+            }).then(res => res.json()).then(data => {
+                if (data.status === "ok") {
+                    input.value = "";
+                    showToast("Kaynak başarıyla eklendi.", "success");
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    showToast("Kaynak eklenemedi.", "error");
+                }
+            }).catch(err => {
+                showToast("Bağlantı hatası oluştu.", "error");
+            }).finally(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            });
+        }
+
+        function kaynakSil(id) {
+            if (!confirm("Bu kaynağı kütüphaneden silmek istediğinize emin misiniz?")) return;
+
+            fetch("/kaynak_sil", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: id })
+            }).then(res => res.json()).then(data => {
+                if (data.status === "ok") {
+                    showToast("Kaynak başarıyla silindi.", "success");
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    showToast("Kaynak silinemedi.", "error");
+                }
+            }).catch(err => {
+                showToast("Bağlantı hatası oluştu.", "error");
+            });
+        }
+
+        function masaustuTara() {
+            const btn = document.querySelector('button[onclick="masaustuTara()"]');
+            const originalText = btn.innerText;
+            btn.innerText = "Taranıyor...";
+            btn.disabled = true;
+
+            fetch("/masaustu_tara", {
+                method: "POST"
+            }).then(res => res.json()).then(data => {
+                showToast(data.mesaj, "success");
+                setTimeout(() => location.reload(), 2000);
+            }).catch(err => {
+                showToast("Tarama sırasında bir hata oluştu.", "error");
+            }).finally(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            });
+        }
+
+        // Canlı veri çekme simülasyonu
+        setInterval(() => {
+            fetch("/canli_veri")
+                .then(res => res.json())
+                .then(data => {
+                    if(data.status === "ok" && data.kesifler.length > 0) {
+                        const kesiflerDiv = document.getElementById("kesifler");
+                        let html = "";
+                        data.kesifler.forEach(k => {
+                            let color = "black";
+                            if (k.kategori === 'ALERT') color = "red";
+                            else if (k.kategori.includes('BÜYÜK KEŞİF')) color = "purple";
+
+                            html += `<div style="color: ${color}; margin-bottom: 5px;">
+                                        <strong>${k.islem_turu}</strong>: ${k.deger} (${k.aciklama})
+                                     </div>`;
+                        });
+                        kesiflerDiv.innerHTML = html;
+                    }
+                });
+        }, 5000);
+    </script>
+</body>
+</html>
