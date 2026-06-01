@@ -11,3 +11,7 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+
+## 2026-06-01 - UX Improvements
+**Learning:** Found an opportunity to improve the UX of asynchronous interactions by adding toast notifications instead of blocking alerts and restoring UI state on failures for the Dashboard UI.
+**Action:** Add an accessible toast notification system, implement proper loading states for form buttons, and ensure proper `.catch()` and `.finally()` blocks on fetch requests to prevent stuck UI.
