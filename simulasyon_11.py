@@ -6,6 +6,12 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+try:
+    from modul_nasa_live_data import ModulNasaLiveData
+    from dogrulama_testleri import DogrulamaTestleri
+    _NASA_DOGRULAMA_READY = True
+except ImportError:
+    _NASA_DOGRULAMA_READY = False
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -1548,6 +1554,9 @@ class Simule3_Lab:
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
         super().__init__() # Call the init method of the parent class
+        if _NASA_DOGRULAMA_READY:
+            self.nasa_canli_veri = ModulNasaLiveData(self.const)
+            self.dogrulama_testleri = DogrulamaTestleri()
 
     def run_all(self):
         # First run the original flow (V.103)
@@ -1611,6 +1620,13 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # OTONOM CANLI NASA VERİSİ VE DOĞRULAMA (YENİ SENTEZ)
+        if _NASA_DOGRULAMA_READY:
+            print(f"\n{Colors.BOLD}{Colors.GOLD}*** [OTONOM] NASA CANLI VERİ VE MATRİS DOĞRULAMASI ***{Colors.ENDC}")
+            nasa_output = self.nasa_canli_veri.analiz()
+            self.dogrulama_testleri.add_to_queue("NASA_LIVE", nasa_output)
+            self.dogrulama_testleri.validate_all()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
