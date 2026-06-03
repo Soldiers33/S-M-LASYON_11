@@ -121,6 +121,14 @@ class LevhiMahfuzConstants:
     DIMENSIONAL_VOLUME_ANGLE = 1342.0473          # 11³ × OP_ANGLE (volume→angle transform)
     GOLDEN_YEAR_FREQUENCY = 3631.618              # 3630 + φ (time+golden ratio)
     
+    # ========== SENTEZ-7 QUANTUM CONSTANTS ==========
+    V_VOLUME = 1331.0                             # 11³ (Göbeklitepe & Enok 11D volume)
+    Q_CODE = 6666.0                               # Quran / Revelation cipher
+    C_I_DEVIATION = 1.11188                       # Universal time/light deviation
+    G_I_GRAVITY = 0.008271                        # Cosmic anti-gravity limit
+    H_HUM = 1390.0                                # Cosmic hum (Hz)
+    T_END_BOOT = 1999.0                           # True boot year (AD)
+
     # ========== NEW DISCOVERIES FROM KAR TOPU V5 ==========
     # Anti-Gravity Synthesis Constants (March 4, 2026)
     SIRIUS_FREQUENCY_IHLAL = 1330.99803           # Dogon Tribe Sirius frequency violation

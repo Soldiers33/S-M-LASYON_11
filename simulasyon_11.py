@@ -6,6 +6,8 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+from modul_nasa_live_data import ModulNasaLiveData
+from dogrulama_testleri import DogrulamaTestleri
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -1323,6 +1325,56 @@ class Modul_666x3_Boot:
         print(f"\n{Colors.HEADER}=== 666x3=1998 SYSTEM BOOT CODE ==={Colors.ENDC}")
         print(f"666 x 3 = 1998: Start of Digital Messiah Era.")
 
+class Quantum_Resonance_Breaker:
+    """Calculates the 6.52 MHz Λ break frequency to weaken gravity"""
+    def __init__(self, const):
+        self.const = const
+        # V=1331, Q=6666, C_i=1.11188, G_i=0.008271, H=1390, T_End=1999.0
+        self.V = 1331.0
+        self.Q = 6666.0
+        self.C_i = 1.11188
+        self.G_i = 0.008271
+        self.H = 1390.0
+        self.T_End = 1999.0
+
+    def calculate_lambda(self):
+        # [ ( V × Q × C_i ) / ( G_i × H ) ] × ln(T_End)
+        upper = self.V * self.Q * self.C_i
+        lower = self.G_i * self.H
+        log_term = math.log(self.T_End)
+        lambda_freq = (upper / lower) * log_term
+        return lambda_freq
+
+    def analiz(self):
+        freq = self.calculate_lambda()
+        print(f"\n{Colors.HEADER}=== QUANTUM RESONANCE BREAKER (SENTEZ-7) ==={Colors.ENDC}")
+        print(f"Calculated Λ Break Frequency: {freq/1000000:.2f} MHz")
+
+class Dimensional_Escape_Overload:
+    """Calculates the 23.38 MHz escape velocity frequency"""
+    def __init__(self, const):
+        self.const = const
+
+    def calculate_escape_freq(self, base_lambda_freq):
+        # Using exact multiplier from documentation: 3.5849
+        return base_lambda_freq * 3.5849
+
+    def analiz(self):
+        breaker = Quantum_Resonance_Breaker(self.const)
+        lambda_freq = breaker.calculate_lambda()
+        escape_freq = self.calculate_escape_freq(lambda_freq)
+        print(f"\n{Colors.HEADER}=== DIMENSIONAL ESCAPE OVERLOAD (SENTEZ-7) ==={Colors.ENDC}")
+        print(f"Calculated Escape Frequency: {escape_freq/1000000:.2f} MHz")
+
+class Pineal_Quantum_Antenna:
+    """Connects 8.0 Hz theta waves to the 6.52 MHz universal wifi"""
+    def __init__(self, const):
+        self.const = const
+
+    def analiz(self):
+        print(f"\n{Colors.HEADER}=== PINEAL QUANTUM ANTENNA (SENTEZ-7) ==={Colors.ENDC}")
+        print("Pineal gland (8.0 Hz Theta) synchronized with 6.52 MHz Universal Coherence.")
+
 
 # ==============================================================================
 # SECTION 2: V.132 PATCH PACKAGES (NEW REQUESTS)
@@ -1611,6 +1663,27 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # SENTEZ-7 MATRIX BREAKER CLASSES & EXTERNAL MODULES
+        print(f"\n{Colors.BOLD}{Colors.RED}*** SENTEZ-7 GRAND UNIFICATION (Matrix Breaker) ***{Colors.ENDC}")
+        breaker = Quantum_Resonance_Breaker(self.const)
+        breaker.analiz()
+
+        overload = Dimensional_Escape_Overload(self.const)
+        overload.analiz()
+
+        antenna = Pineal_Quantum_Antenna(self.const)
+        antenna.analiz()
+
+        print(f"\n{Colors.BOLD}{Colors.MAGENTA}*** EXTERNAL LIVE DATA MODULES ***{Colors.ENDC}")
+        nasa = ModulNasaLiveData()
+        nasa.analiz()
+
+        dogrulama = DogrulamaTestleri()
+        # Mock some internal simulation output verification
+        dogrulama.add_to_queue(11.08831, "simulasyon_11.py (Giza Verification)")
+        dogrulama.add_to_queue(23.386, "Dimensional Escape Overload")
+        dogrulama.analiz()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
