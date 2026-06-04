@@ -11,3 +11,7 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+
+## 2024-05-18 - CLI Loading States
+**Learning:** Terminal applications lacking visual progress indicators appear "frozen" to users. This micro-UX problem is often solved with spinners, as static text implies hanging.
+**Action:** Always utilize spinner states or progress bars instead of static "Loading..." prints to build trust that the application is actively processing tasks.
