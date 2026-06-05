@@ -1,0 +1,5 @@
+__pycache__/
+*.log
+*.db
+final_simulasyon_output.txt
+FINAL_REPORT.md
