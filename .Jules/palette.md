@@ -11,3 +11,6 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+## 2025-03-09 - Animated Braille Spinner for CLI Progress
+**Learning:** Terminal output needs dynamic visual cues. Simple static text (e.g. `Loading...`) is ambiguous as to whether the process is frozen or just slow. Using an animated Braille character spinner with carriage return (`\r`) and erase-to-end-of-line (`\033[K`) ANSI codes provides a smooth, accessible indication of asynchronous operation without cluttering the screen buffer.
+**Action:** Use animated terminal spinners across long-running Python CLI scripts to improve progress observability.

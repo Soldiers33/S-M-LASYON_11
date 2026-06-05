@@ -38,8 +38,11 @@ except ImportError:
 # ==============================================================================
 
 def loading_bar(desc):
-    print(f"\r\033[K{Colors.CYAN}{desc}...{Colors.ENDC}", end='', flush=True)
-    time.sleep(0.01)
+    spinner = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+    for i in range(10):
+        char = spinner[i % len(spinner)]
+        print(f"\r\033[K{Colors.CYAN}{char} {desc}...{Colors.ENDC}", end='', flush=True)
+        time.sleep(0.01)
     print(f"\r\033[K{Colors.GREEN}[OK]{Colors.ENDC} {Colors.CYAN}{desc}{Colors.ENDC}\n", end='')
 
 
