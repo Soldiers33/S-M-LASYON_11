@@ -6,6 +6,9 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+from dogrulama_testleri import DogrulamaTestleri
+from modul_nasa_live_data import ModulNasaLiveData
+from deep_research_module import DeepResearchModule
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -1621,3 +1624,26 @@ if __name__ == "__main__":
 
     lab = Simule3_Lab_V133()
     lab.run_all()
+
+    # NEW INTEGRATIONS
+    dogrulama = DogrulamaTestleri()
+    nasa = ModulNasaLiveData()
+    research = DeepResearchModule()
+
+    nasa_veri = nasa.fetch_latest_data()
+    dogrulama.add_to_queue(
+        data_point=nasa_veri.get('extracted_constants'),
+        source=nasa_veri.get('source', 'NASA'),
+        description="Live Astrophysical Constants"
+    )
+
+    makaleler = research.search_arxiv(query="quantum gravity 11 dimensions", max_results=1)
+    if makaleler:
+        yeni_formul = research.synthesize_new_formula(makaleler)
+        dogrulama.add_to_queue(
+            data_point=yeni_formul,
+            source="arXiv Deep Research",
+            description=yeni_formul.get('formula_name', 'Unknown Formula')
+        )
+
+    dogrulama.run_verification()
