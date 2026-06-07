@@ -9,6 +9,7 @@ Purpose: Central repository for 11-dimensional simulation constants
 """
 
 import math
+from dogrulama_testleri import DogrulamaTestleri
 
 class LevhiMahfuzConstants:
     """
@@ -935,3 +936,9 @@ if __name__ == "__main__":
     validate_levhi_mahfuz()
     grok_verification_report()
     validate_otorom_ai()
+
+    # NEW INTEGRATION
+    print("\n[LEVHI MAHFUZ] Initializing secondary live data validation...")
+    dogrulama = DogrulamaTestleri()
+    dogrulama.add_to_queue({"action": "Levhi Mahfuz Boot Sequence Validated"}, source="System", description="Core Boot")
+    dogrulama.run_verification()
