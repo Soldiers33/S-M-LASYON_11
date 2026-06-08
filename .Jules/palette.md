@@ -11,3 +11,7 @@
 ## 2026-03-20 - CLI Loading Bar Polish
 **Learning:** Using `\r` to overwrite lines in the CLI leaves "ghost characters" if the new text is shorter than the old text. This creates a confusing reading experience. Adding `\033[K` (erase to end of line) ensures a clean overwrite.
 **Action:** Implemented `\r\033[K` in the `loading_bar` function in `simulasyon_11.py` with a final `\n` to prevent overlap on subsequent terminal outputs.
+
+## 2026-06-08 - CLI Visual Enhancements
+**Learning:** Static visual elements like `[OK]` can be improved to unicode checkmarks like `[✔]` for better visual feedback, keeping micro-timing constants (like 0.01s sleep) exactly the same, rather than adding blocking animated spinners.
+**Action:** Updated `simulasyon_11.py` to replace `[OK]` with `[✔]` in `loading_bar` to provide a subtle, delightful UX enhancement for the CLI.
