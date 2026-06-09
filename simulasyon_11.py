@@ -6,6 +6,8 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+from modul_nasa_live_data import ModulNasaLiveData
+from dogrulama_testleri import DogrulamaTestleri as Yeni_Dogrulama
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -1534,6 +1536,10 @@ class Simule3_Lab:
         # KAR TOPU V5 V.3 PHASE-3 SYNTHESIS MODULE (March 4, 2026 - Phase-3)
         self.kar_topu_v5_v3 = Modul_KarTopu_V5_V3_Phase3()
         
+        # NASA LIVE DATA AND ID VERIFICATION MODULES
+        self.nasa_live_data = ModulNasaLiveData(const)
+        self.yeni_dogrulama = Yeni_Dogrulama(const)
+
         # 3. Then add new V.130/131/132 modules
         self.roche_wave = Modul_Roche_Tidal_Wave_V130(self.const)
         self.time_packets = Modul_Time_Packets_V130(self.const)
@@ -1599,6 +1605,17 @@ class Simule3_Lab_V133(Simule3_Lab):
         # KAR TOPU V5 V.3 PHASE-3 SYNTHESIS EXECUTION (Göbekli + Vertebrae + Cain)
         print(f"\n{Colors.BOLD}{Colors.MAGENTA}*** KAR TOPU V5 V.3 PHASE-3 SYNTHESIS (March 4, 2026 - BIOLOGICAL & GEOGRAPHIC QUANTUM SEALS) ***{Colors.ENDC}")
         self.kar_topu_v5_v3.analiz()
+
+        # NASA LIVE DATA AND INTEGRATION
+        print(f"\n{Colors.BOLD}{Colors.MAGENTA}*** NASA LIVE DATA AND VERIFICATION INTEGRATION ***{Colors.ENDC}")
+        nasa_results = self.nasa_live_data.analiz()
+
+        if nasa_results:
+            self.yeni_dogrulama.add_to_queue("JWST_QUANTUM_RESONANCE", nasa_results.get("jwst_quantum_resonance"))
+            self.yeni_dogrulama.add_to_queue("DARK_MATTER_11D_RATIO", nasa_results.get("dark_matter_11d_ratio"))
+            self.yeni_dogrulama.add_to_queue("UNIVERSAL_EXPANSION_HARMONY", nasa_results.get("universal_expansion_harmony"))
+
+        self.yeni_dogrulama.analiz()
         
         # Then run new patches (V.130/131/132)
         print(f"\n{Colors.BOLD}{Colors.GOLD}*** V.132 EXTENSION PACK (EXTENDED ARCHIVE) ***{Colors.ENDC}")
