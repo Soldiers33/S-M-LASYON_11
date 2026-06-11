@@ -197,7 +197,7 @@ def print_summary():
 def export_csv():
     """Export data to CSV file"""
     df = pd.DataFrame(VERIFICATION_DATA)
-    csv_path = '/workspaces/S-M-LASYON_11/verification_data.csv'
+    csv_path = 'verification_data.csv'
     df.to_csv(csv_path, index=False)
     print(f"✅ Data exported to: {csv_path}")
 
@@ -205,7 +205,7 @@ def export_csv():
 def export_json():
     """Export data to JSON file"""
     import json
-    json_path = '/workspaces/S-M-LASYON_11/verification_data.json'
+    json_path = 'verification_data.json'
     with open(json_path, 'w') as f:
         json.dump(VERIFICATION_DATA, f, indent=2)
     print(f"✅ Data exported to: {json_path}")

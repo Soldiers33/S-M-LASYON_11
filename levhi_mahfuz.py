@@ -49,6 +49,14 @@ class LevhiMahfuzConstants:
     CELALI_CYCLE = 33                             # years (leap correction)
     RAMADAN_SHIFT = 11                            # days/year
     
+    # ========== SENTEZ-7 QUANTUM CONSTANTS ==========
+    V_VOLUME = 3.14159 * 11                       # Base volume coefficient
+    Q_CODE = 1.618033988749895                    # Quantum Golden Ratio linkage
+    C_I_DEVIATION = 0.00011                       # Constant Intrinsic Deviation
+    G_I_GRAVITY = 9.81 * 1.11                     # Gravity Inflated Constant
+    H_HUM = 432.11                                # Earth background hum frequency
+    T_END_BOOT = 666 * 3                          # Boot sequence completion
+
     # ========== TIME MARKERS ==========
     FLOOD_YEAR = -9048                            # BC (start of simulation)
     SIMULATION_DURATION = 11111                   # years (ideal)

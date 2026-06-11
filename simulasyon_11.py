@@ -6,6 +6,8 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+from modul_nasa_live_data import ModulNasaLiveData
+from dogrulama_testleri import DogrulamaTestleri
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -1548,6 +1550,8 @@ class Simule3_Lab:
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
         super().__init__() # Call the init method of the parent class
+        self.nasa_live = ModulNasaLiveData(self.const)
+        self.ai_dogrulama = DogrulamaTestleri(self.const)
 
     def run_all(self):
         # First run the original flow (V.103)
@@ -1611,6 +1615,10 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        print(f"\n{Colors.BOLD}{Colors.MAGENTA}*** AUTONOMOUS DATA & AI VERIFICATION ***{Colors.ENDC}")
+        self.nasa_live.analiz()
+        self.ai_dogrulama.analiz()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
