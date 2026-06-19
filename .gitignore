@@ -1,0 +1,4 @@
+__pycache__/
+*.log
+sim_output*
+results_phase3_v3.json
