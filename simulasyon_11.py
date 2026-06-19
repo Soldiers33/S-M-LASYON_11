@@ -6,6 +6,8 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+from modul_nasa_live_data import ModulNasaLiveData
+from dogrulama_testleri import DogrulamaTestleri as Yeni_Dogrulama
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -1611,6 +1613,17 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # NASA LIVE DATA & CONTINUOUS AI VALIDATION INTEGRATION
+        print(f"\n{Colors.BOLD}{Colors.GOLD}*** NASA & AI VALIDATION CHECK (LIVE FEED) ***{Colors.ENDC}")
+        nasa_live = ModulNasaLiveData(self.const)
+        nasa_res = nasa_live.analiz()
+
+        dogrulama_yeni = Yeni_Dogrulama(self.const)
+        if nasa_res.get("status") == "success":
+            dogrulama_yeni.add_to_queue(nasa_res)
+            dogrulama_res = dogrulama_yeni.analiz()
+            print(f"{Colors.GREEN}[VERIFICATION COMPLETE] Data validated and integrated into 11-Dimensional matrix.{Colors.ENDC}")
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH

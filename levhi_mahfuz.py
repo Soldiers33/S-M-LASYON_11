@@ -16,6 +16,10 @@ class LevhiMahfuzConstants:
     All values validated against NASA, Wikipedia, Deep Search.
     """
     
+    # ========== NASA / AI VALIDATION CONSTANTS ==========
+    AI_CONFIDENCE_THRESHOLD = 99.99               # Minimum required AI validation score
+    NASA_JWST_REFRESH_RATE = 3600                 # Real-time sync interval
+
     # ========== CORE DIMENSIONALITY ==========
     BASE_SYSTEM = 11                              # Universe base (organic)
     CORRUPT_SYSTEM = 10                           # Current measurement base
