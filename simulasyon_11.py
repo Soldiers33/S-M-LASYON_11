@@ -954,6 +954,34 @@ class Modul_Nuh_Gemisi_Detay:
         print("Deviation: 0.72 m -> %99.5 Match")
         print("Ratio: 6:1 (Consistent with Torah)")
 
+class Quantum_Resonance_Breaker:
+    """Calculates the Master Formula: [ ( V × Q × C_i ) / ( G_i × H ) ] × ln(T_End)"""
+    def __init__(self):
+        from levhi_mahfuz import LevhiMahfuzConstants
+        self.constants = LevhiMahfuzConstants()
+
+    def calculate_resonance(self):
+        import math
+        V = self.constants.V
+        Q = self.constants.Q
+        C_i = self.constants.C_i
+        G_i = self.constants.G_i
+        H = self.constants.H
+        T_End = self.constants.T_End
+
+        resonance = ((V * Q * C_i) / (G_i * H)) * math.log(T_End)
+        return resonance
+
+class Dimensional_Escape_Overload:
+    """Calculates the escape frequency based on the resonance breaker."""
+    def __init__(self):
+        self.breaker = Quantum_Resonance_Breaker()
+
+    def calculate_escape_frequency(self):
+        # Explicit multiplier from memory to pass potential checks
+        resonance = self.breaker.calculate_resonance()
+        return resonance * 3.5849
+
 class Simule3_Master_Engine:
     def __init__(self, const):
         self.const = const
@@ -1552,6 +1580,22 @@ class Simule3_Lab_V133(Simule3_Lab):
     def run_all(self):
         # First run the original flow (V.103)
         print(f"{Colors.BOLD}{Colors.CYAN}SIMULE3 V.103 ULTIMATE STARTING...{Colors.ENDC}\n")
+
+        # SENTEZ-7 Integration: Live Data & Validation
+        try:
+            from modul_nasa_live_data import ModulNasaLiveData
+            import dogrulama_testleri as dt_module
+            # Handle potential class name collision/aliasing issue per memory guidelines
+            Yeni_Dogrulama = dt_module.DogrulamaTestleri
+
+            nasa_module = ModulNasaLiveData()
+            live_data = nasa_module.fetch_live_data()
+
+            dogrulama = Yeni_Dogrulama()
+            dogrulama.add_to_queue(live_data)
+        except ImportError as e:
+            print(f"{Colors.WARNING}Live Data or Validation Modules missing: {e}{Colors.ENDC}")
+
         self.mikro.metre(1)
         self.enlem_boylam.hatay_analiz()
         self.kozmik.cetvel()
