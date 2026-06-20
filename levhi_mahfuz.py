@@ -26,6 +26,14 @@ class LevhiMahfuzConstants:
     R11_FACTOR_1 = 21649                          # 22 Resonance
     R11_FACTOR_2 = 513239                         # 23 Resonance
     
+    # ========== SENTEZ-7 QUANTUM CONSTANTS ==========
+    V = 1331.0                                    # Universal Quantum Volume
+    Q = 6666.0                                    # Quantum/Vahiy coefficient
+    C_i = 1.11188                                 # Light deviation
+    G_i = 0.008271                                # Anti-Gravity base
+    H = 1390.0                                    # Cosmic Hum frequency
+    T_End = 1999.0                                # Reset Year
+
     # ========== DIMENSIONAL LOCKS ==========
     IDEAL_EARTH_RADIUS = 6666                     # km (11T system)
     REAL_EARTH_RADIUS = 6371                      # km (NASA 10T)
