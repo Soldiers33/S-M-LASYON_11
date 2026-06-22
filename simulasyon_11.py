@@ -6,6 +6,8 @@ import random
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
+from modul_nasa_live_data import ModulNasaLiveData
+import dogrulama_testleri as Yeni_Dogrulama
 
 # --- VISUAL INTERFACE COLORS ---
 class Colors:
@@ -1611,6 +1613,17 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+        # ACTIVE DATA FETCH AND VALIDATION (Live NASA/ArXiv Updates)
+        print(f"\n{Colors.BOLD}{Colors.HEADER}=== INITIATING LIVE ASTROPHYSICAL DATA SYNTHESIS ==={Colors.ENDC}")
+        self.live_data = ModulNasaLiveData()
+        fetched_data = self.live_data.analyze()
+
+        self.live_dogrulama = Yeni_Dogrulama.DogrulamaTestleri()
+        if fetched_data:
+            self.live_dogrulama.add_to_queue(fetched_data)
+
+        self.live_dogrulama.run_tests()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
