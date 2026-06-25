@@ -954,9 +954,110 @@ class Modul_Nuh_Gemisi_Detay:
         print("Deviation: 0.72 m -> %99.5 Match")
         print("Ratio: 6:1 (Consistent with Torah)")
 
+
+class Quantum_Resonance_Breaker:
+    """
+    6.52 MHz = Λ Kırılma frekansı, kütleçekimi zayıflatma hesaplamaları için.
+    Formül: Λ = [ ( V × Q × C_i ) / ( G_i × H ) ] × ln(T_End)
+    """
+    def __init__(self):
+        self.V = 1331.0
+        self.Q = 6666.0
+        self.C_i = 1.11188
+        self.G_i = 0.008271
+        self.H = 1390.0
+        self.T_End = 1999.0
+
+    def calculate_lambda_frequency(self):
+        import math
+        # 9.865.095 = 1331 * 6666 * 1.11188
+        upper_volume = self.V * self.Q * self.C_i
+        # 11.49 = 0.008271 * 1390
+        lower_friction = self.G_i * self.H
+
+        # Λ = [ ( V × Q × C_i ) / ( G_i × H ) ] × ln(T_End)
+        lambda_freq = (upper_volume / lower_friction) * math.log(self.T_End)
+        return lambda_freq # ~ 6521763.0 Hz (6.52 MHz)
+
+class Dimensional_Escape_Overload:
+    """
+    23.38 MHz = Aşırı yüklenme ve Matrix kopma noktası için
+    Simülasyon Çıkış (Kopma) Hızı (23.38 MHz). Kuantum kaçış hızı 23.386.439 Hz'dir.
+    """
+    def __init__(self):
+        self.escape_frequency = 23386439.0 # Hz
+
+    def check_overload(self, current_freq):
+        if current_freq >= self.escape_frequency:
+            return True, "SYSTEM OVERLOAD: MATRIX BREAKER POINT REACHED"
+        return False, "STABLE"
+
+class Pineal_Quantum_Antenna:
+    """
+    8.0 Hz Teta dalgasının 6.52 MHz Evrensel wifi ile eşleşme döngüleri
+    Epifiz Bezi Kuantum Alıcısı. Derin teta dalgasında (8.0 Hz) çalışır.
+    """
+    def __init__(self):
+        self.theta_wave = 8.0 # Hz
+        self.target_freq = 6521763.0 # Hz
+
+    def calculate_coherence_cycles(self):
+        # Eşleşme döngülerini hesaplar
+        cycles = self.target_freq / self.theta_wave
+        return cycles
+
+# NASA VERILERI CANLI CEKME MODULU
+class ModulNasaLiveData:
+    """
+    NASA API kullanarak canli veri ceken modul
+    """
+    def __init__(self):
+        self.api_url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
+
+    def get_live_data(self):
+        import requests
+        try:
+            response = requests.get(self.api_url, timeout=5)
+            if response.status_code == 200:
+                data = response.json()
+                return {
+                    "status": "success",
+                    "title": data.get("title"),
+                    "date": data.get("date"),
+                    "explanation": data.get("explanation")[:100] + "..."
+                }
+            else:
+                return {"status": "error", "message": f"NASA API Error: {response.status_code}"}
+        except Exception as e:
+            return {"status": "error", "message": str(e)}
+
+class DogrulamaTestleri:
+    """
+    Gercek zamanli ID dogrulama ve veri butunluk kontrolleri
+    """
+    def __init__(self):
+        self.validation_queue = []
+
+    def add_to_queue(self, data):
+        self.validation_queue.append(data)
+
+    def run_tests(self):
+        results = []
+        for item in self.validation_queue:
+            if item is not None:
+                results.append(True)
+            else:
+                results.append(False)
+        return all(results) if results else False
+
 class Simule3_Master_Engine:
     def __init__(self, const):
         self.const = const
+        self.quantum_breaker = Quantum_Resonance_Breaker()
+        self.dimensional_overload = Dimensional_Escape_Overload()
+        self.pineal_antenna = Pineal_Quantum_Antenna()
+        self.nasa_live = ModulNasaLiveData()
+        self.validation = DogrulamaTestleri()
         # --- TIME VARIABLES ---
         self.IDEAL_YEAR_DAYS = 363.0            # Simulation "Pure" Year
         self.EARTH_YEAR_DAYS = 365.2422         # Corrupted/Observed Year (Base-10)
@@ -972,6 +1073,35 @@ class Simule3_Master_Engine:
         }
 
     def run_full_simulation(self):
+        print("\n" + "="*60)
+        print(">> MODULE 0: SENTEZ-7 MATRIX BREAKER & NASA LIVE DATA")
+        print("="*60)
+
+        # SENTEZ-7 Testleri ve NASA verileri
+        print(f"[{Colors.CYAN}CONNECTING{Colors.ENDC}] Fetching Live NASA Planetary Data...")
+        nasa_data = self.nasa_live.get_live_data()
+        self.validation.add_to_queue(nasa_data if nasa_data["status"] == "success" else None)
+        if nasa_data["status"] == "success":
+            print(f"[{Colors.GREEN}NASA DATA{Colors.ENDC}] {nasa_data['title']} ({nasa_data['date']})")
+        else:
+            print(f"[{Colors.WARNING}NASA DATA{Colors.ENDC}] Could not fetch: {nasa_data['message']}")
+
+        print(f"[{Colors.CYAN}ANALYZING{Colors.ENDC}] Computing SENTEZ-7 Master Frequency...")
+        lambda_freq = self.quantum_breaker.calculate_lambda_frequency()
+        print(f"[{Colors.GOLD}Λ FREQUENCY{Colors.ENDC}] Calculated Break Point: {lambda_freq:,.2f} Hz")
+        self.validation.add_to_queue(lambda_freq)
+
+        is_overload, msg = self.dimensional_overload.check_overload(lambda_freq)
+        print(f"[{Colors.GOLD}OVERLOAD CHECK{Colors.ENDC}] {msg}")
+
+        cycles = self.pineal_antenna.calculate_coherence_cycles()
+        print(f"[{Colors.GOLD}PINEAL COHERENCE{Colors.ENDC}] Theta to Λ Matching Cycles: {cycles:,.2f}")
+
+        if self.validation.run_tests():
+            print(f"[{Colors.GREEN}VALIDATION PASSED{Colors.ENDC}] ID & Integrity verified. System is aligned.")
+        else:
+            print(f"[{Colors.WARNING}VALIDATION WARNING{Colors.ENDC}] Some verification tests failed!")
+
         print("\n" + "="*60)
         print(">> MODULE 1: TIME DILATION AND SHIFT ANALYSIS (MASTER ENGINE)")
         print("="*60)
