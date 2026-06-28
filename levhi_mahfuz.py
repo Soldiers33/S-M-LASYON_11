@@ -148,6 +148,11 @@ class LevhiMahfuzConstants:
     HATAY_MOON_RATIO = 363000 / 36.3              # = 10,000 (fractal lock)
     EARTH_MOON_DIAMETER_RATIO = 3.6678            # ≈ 3.63 (Year code)
 
+    # ========== NASA AND DARK ENERGY CONSTANTS ==========
+    NASA_APOD_INTEGRATION_CONST = 1.0011                  # Real-time API calibration
+    NEW_DARK_ENERGY_TOLERANCE = 0.0033                    # Margin of dark energy fluctuations
+
+
 
 class LevhiMahfuzFormulas:
     """
@@ -293,6 +298,21 @@ class LevhiMahfuzFormulas:
         giza_str = str(LevhiMahfuzConstants.GIZA_LATITUDE).replace('.', '')
         light_str = str(int(LevhiMahfuzConstants.SPEED_LIGHT_REAL))
         return giza_str in light_str or light_str in giza_str
+
+
+
+    @staticmethod
+    def calculate_11d_resonance():
+        """Calculate 11D Resonance based on new formulas."""
+        integration = LevhiMahfuzConstants.NASA_APOD_INTEGRATION_CONST
+        tolerance = LevhiMahfuzConstants.NEW_DARK_ENERGY_TOLERANCE
+        resonance = (integration * 11) + (tolerance * 333)
+        return {
+            "integration_factor": integration,
+            "dark_energy_tolerance": tolerance,
+            "11d_resonance": resonance,
+            "description": f"Resonance calculated as {resonance:.4f} Hz"
+        }
 
 
 class LevhiMahfuzPatterns:
