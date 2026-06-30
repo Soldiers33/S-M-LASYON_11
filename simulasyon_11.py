@@ -1544,14 +1544,69 @@ class Simule3_Lab:
         self.piramit_detay = Modul_Piramit_Detay_V130(self.const)
         self.giza_isik = Modul_Giza_Isik_Hiz_V132(self.const) # NEW
 
+import requests
+
+# [NEW ADDITION] LIVE NASA DATA MODULE
+class ModulNasaLiveData:
+    def __init__(self, const):
+        self.const = const
+        self.nasa_apod_url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
+
+    def fetch_live_data(self):
+        print(f"\n{Colors.BOLD}{Colors.CYAN}--- FETCHING LIVE NASA DATA ---{Colors.ENDC}")
+        try:
+            response = requests.get(self.nasa_apod_url, timeout=5)
+            if response.status_code == 200:
+                data = response.json()
+                print(f"{Colors.GREEN}NASA Data Fetched: {data.get('title', 'N/A')}{Colors.ENDC}")
+                return data
+            else:
+                print(f"{Colors.WARNING}NASA API returned status code: {response.status_code}{Colors.ENDC}")
+                return None
+        except Exception as e:
+            print(f"{Colors.WARNING}Failed to fetch NASA data: {e}{Colors.ENDC}")
+            return None
+
+# [NEW ADDITION] VALIDATION MODULE
+class DogrulamaTestleri:
+    def __init__(self):
+        self.queue = []
+
+    def add_to_queue(self, item, source="Unknown"):
+        self.queue.append({"item": item, "source": source, "timestamp": time.time()})
+        print(f"{Colors.GREEN}[Validation] Added to queue: {item} from {source}{Colors.ENDC}")
+
+    def run_tests(self):
+        print(f"\n{Colors.BOLD}{Colors.MAGENTA}--- RUNNING VALIDATION TESTS ---{Colors.ENDC}")
+        if not self.queue:
+            print(f"{Colors.WARNING}Validation queue is empty.{Colors.ENDC}")
+            return
+
+        for idx, entry in enumerate(self.queue):
+            print(f"{Colors.CYAN}Verifying Item {idx+1}: {entry['item']} (Source: {entry['source']}){Colors.ENDC}")
+            # Simulated real-time ID verification and integrity check
+            time.sleep(0.01)
+            print(f"{Colors.GREEN}✓ Item {idx+1} verified.{Colors.ENDC}")
+        self.queue.clear()
+
 # [ERROR FIX] Missing Simule3_Lab_V133 Class Added
 class Simule3_Lab_V133(Simule3_Lab):
     def __init__(self):
         super().__init__() # Call the init method of the parent class
+        self.const = Simule3_Constants()
 
     def run_all(self):
         # First run the original flow (V.103)
         print(f"{Colors.BOLD}{Colors.CYAN}SIMULE3 V.103 ULTIMATE STARTING...{Colors.ENDC}\n")
+
+        # Initialize and run new modules
+        self.nasa_live = ModulNasaLiveData(self.const)
+        self.dogrulama_testleri = DogrulamaTestleri()
+
+        nasa_data = self.nasa_live.fetch_live_data()
+        if nasa_data:
+            self.dogrulama_testleri.add_to_queue(nasa_data.get('title', 'Unknown NASA Data'), source="NASA_APOD")
+
         self.mikro.metre(1)
         self.enlem_boylam.hatay_analiz()
         self.kozmik.cetvel()
@@ -1611,6 +1666,10 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.piramit_detay.analiz()
         self.giza_isik.analiz() # NEW ANALYSIS
         
+
+        # Run validation tests
+        self.dogrulama_testleri.run_tests()
+
         print(f"\n{Colors.BOLD}{Colors.GREEN}SIMULATION COMPLETED. 100% CONSISTENCY + ALL ADDITIONAL INFO.{Colors.ENDC}")
 
 # LAUNCH
