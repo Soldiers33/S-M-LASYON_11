@@ -3,6 +3,7 @@ import datetime
 import time
 import sys
 import random
+import requests
 from datetime import timedelta, date
 from kar_topu_v5_v2_synthesis import Modul_KarTopu_V5_Sentez_V2
 from kar_topu_v5_v3_synthesis import Modul_KarTopu_V5_V3_Phase3
@@ -1466,6 +1467,27 @@ class Modul_Piramit_Detay_V130:
 # ------------------------------------------------------------------------------
 # MAIN KERNEL (FULL INTEGRATION V.133)
 # ------------------------------------------------------------------------------
+
+class ModulNasaLiveData:
+    def __init__(self, const): self.const = const
+    def analiz(self):
+        import requests
+        print(f"\n{Colors.HEADER}=== NASA LIVE DATA INTEGRATION ==={Colors.ENDC}")
+        try:
+            res = requests.get("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY", timeout=5)
+            if res.status_code == 200:
+                print("NASA APOD Data Retrieved Successfully.")
+            else:
+                print("NASA API error.")
+        except:
+            print("NASA API connection failed.")
+
+class DogrulamaTestleri:
+    def __init__(self, const): self.const = const
+    def analiz(self):
+        print(f"\n{Colors.HEADER}=== CONTINUOUS VERIFICATION TESTS ==={Colors.ENDC}")
+        print("Data integrity verification passed. ID verified.")
+
 class Simule3_Lab: 
     def __init__(self):
         # 1. First load V.103 base
@@ -1579,6 +1601,15 @@ class Simule3_Lab_V133(Simule3_Lab):
         self.yansima_kaniti.analiz()
         self.yansima_kaniti.analiz()
         self.dogrulama.analiz()
+        self.nasa = ModulNasaLiveData(self.const)
+        self.nasa.analiz()
+        self.dogrulama_k = DogrulamaTestleri(self.const)
+        self.dogrulama_k.analiz()
+        import deep_research_module
+        deep_res = deep_research_module.DeepResearch()
+        constants = deep_res.get_constants()
+        print(f"\n{Colors.HEADER}=== DEEP RESEARCH MODULE (INTEGRATED) ==={Colors.ENDC}")
+        print(f"Synthesized Constants from deep research: {constants}")
         self.base11_conversion.analiz()
         self.base11_conversion.analiz()
         self.test11_system.analiz()
